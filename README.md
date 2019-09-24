@@ -3,7 +3,6 @@
 Hub which hosts your recipes. Create, Edit and View recipes at your pleasure.
 
 --------------
-*auto generated*
 
 ## Available Scripts
 
