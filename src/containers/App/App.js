@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { MuiThemeProvider } from '@material-ui/core';
+import Header from '../../components/Header/Header';
+import MuiCustomTheme from '../../theme/MuiCustomTheme';
 import "typeface-roboto";
 
 function App() {
     return (
-        <Router>
-            <div>
-                <h1>our recipes</h1>
-            </div>
-        </Router>
+        <MuiThemeProvider theme={MuiCustomTheme}>
+            <Header/>
+        </MuiThemeProvider>
     );
 }
 
