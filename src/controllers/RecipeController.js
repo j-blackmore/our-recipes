@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Recipe from '../components/Recipe/Recipe';
+import RecipeGrid from '../containers/Recipe/RecipeGrid';
 
 class RecipeController extends React.Component {
 
@@ -25,9 +25,7 @@ class RecipeController extends React.Component {
 
     render() {
         return(
-            this.state.recipes.map(function(recipe, i) {
-                return <Recipe recipe={recipe} key={i} />
-            })
+            <RecipeGrid recipes={this.state.recipes}/>
         );
     };
 }

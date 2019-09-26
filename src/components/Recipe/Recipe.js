@@ -1,10 +1,8 @@
 import React from 'react';
-import { makeStyles, Card, CardHeader, CardActionArea, CardMedia, CardContent, Typography, TextareaAutosize } from '@material-ui/core';
+import { makeStyles, Card, CardHeader, CardActionArea, CardMedia, CardContent, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     card: {
-        maxWidth: 345,
-        margin: '0 auto',
     },
     media: {
         height: 140,
