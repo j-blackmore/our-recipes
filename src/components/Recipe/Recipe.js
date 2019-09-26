@@ -11,39 +11,36 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Recipe() {
+export default function Recipe(props) {
     const classes = useStyles();
+
+    const recipe = props.recipe;
+    const Ingredients = recipe.ingredients.map((item,i) => {
+        return <Typography variant="body2" key={i} style={{ display:'flex' }} component="span">{item}</Typography>
+    });
 
     return (
         <Card className={classes.card}>
             <CardActionArea>
                 <CardHeader 
-                    title="Crepes"
-                    subheader="Quick and easy crepe recipe."
+                    title={recipe.title}
+                    subheader={recipe.subtitle}
                 />
                 <CardMedia
                     className={classes.media}
-                    image="/images/crepes.jpg"
-                    title="Crepes"
+                    image={recipe.imageUrl}
+                    title=""
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h6">
                         Ingredients
                     </Typography>
-                    <Typography variant="body2" component="span">
-                        - 125g Flour <br/>
-                        - 250ml Milk <br/>
-                        - 2 Lg Eggs <br/>
-                        - Tbsp Sugar <br/>
-                        - Pinch of Salt
-                    </Typography>
+                    {Ingredients}
                     <Typography gutterBottom variant="h6">
                         Method
                     </Typography>
                     <Typography variant="body2" component="span">
-                        1. Prepare the mixture.<br/>
-                        2. Cook the crepes.<br/>
-                        3. Enjoy.
+                        {recipe.method}
                     </Typography>
                 </CardContent>
             </CardActionArea>
