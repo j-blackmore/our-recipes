@@ -5,7 +5,7 @@ import RecipeController from '../../controllers/RecipeController';
 function MainContainter() {
     return (
         <Container maxWidth={"md"}>
-            <Box my={10}>
+            <Box my={3}>
                 <RecipeController/>
             </Box>
         </Container>

@@ -20,6 +20,7 @@ class Header extends React.Component {
                     </ToolBar>
                 </AppBar>
             </HeaderScroll>
+            <ToolBar />
         </React.Fragment>
     )};
 
