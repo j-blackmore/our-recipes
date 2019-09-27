@@ -15,9 +15,9 @@ export default function RecipeGrid(props) {
     return (
         <div className={classes.root}>
             <Grid container justify="center" spacing={spacing}>
-                <Grid container justify="center" spacing={spacing} xs={12}>
+                <Grid container justify="center" spacing={spacing}>
                     { props.recipes.map(function(recipe, i) {
-                        return <RecipeGridItem recipe={recipe} key={i}/>
+                        return <RecipeGridItem recipe={recipe} key={i} handleClose={props.handleClose} handleOpen={props.handleOpen} />
                     })}
                 </Grid>
             </Grid>
