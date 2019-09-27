@@ -6,6 +6,10 @@ const useStyles = makeStyles({
     },
     media: {
         height: 140,
+    },
+    content: {
+        height: 140,
+        overflow: 'scroll'
     }
 });
 
@@ -29,7 +33,7 @@ export default function Recipe(props) {
                     image={recipe.imageUrl}
                     title=""
                 />
-                <CardContent>
+                <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h6">
                         Ingredients
                     </Typography>
