@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     },
     backdrop: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)'
+    },
+    card: {
+        width: 345,
     }
 });
 
@@ -28,7 +31,7 @@ export default function RecipeModal(props) {
             BackdropProps={{timeout: 500, className: classes.backdrop}}            
         >
             <Fade in={props.open}>
-                <RecipeCard recipe={props.recipe}/>
+                <RecipeCard recipe={props.recipe} classes={classes.card}/>
             </Fade>
         </Modal>
     );
