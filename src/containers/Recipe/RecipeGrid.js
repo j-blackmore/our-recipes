@@ -19,6 +19,7 @@ export default function RecipeGrid(props) {
                     { props.recipes.map(function(recipe, i) {
                         return <RecipeItemController recipe={recipe} key={i} />
                     })}
+                    <RecipeItemController newRecipe={true} />
                 </Grid>
             </Grid>
         </div>

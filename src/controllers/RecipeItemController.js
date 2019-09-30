@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import RecipeGridItemRecipe from '../containers/Recipe/RecipeGridItemRecipe';
+import RecipeGridItemAdd from '../containers/Recipe/RecipeGridItemAdd';
 
 export default function RecipeItemController(props) {
     const [open, setOpen] = React.useState(false);
@@ -13,9 +14,16 @@ export default function RecipeItemController(props) {
         setOpen(false);
     };
 
+    let RecipeItem;
+    if(props.recipe) {
+        RecipeItem = <RecipeGridItemRecipe recipe={props.recipe} handleOpen={handleOpen} handleClose={handleClose} open={open} />;
+    } else if(props.newRecipe) {
+        RecipeItem = <RecipeGridItemAdd handleOpen={handleOpen} handleClose={handleClose} open={open} />;
+    }
+
     return (
         <Grid item xs={11} sm={5} md={4} lg={3}>
-            <RecipeGridItemRecipe recipe={props.recipe} handleOpen={handleOpen} handleClose={handleClose} open={open}/>
+            {RecipeItem}
         </Grid>
     );
 }
