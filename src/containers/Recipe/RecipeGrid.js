@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Grid } from '@material-ui/core';
-import RecipeGridItem from './RecipeGridItem';
+import RecipeItemController from '../../controllers/RecipeItemController';
 
 const useStyles = makeStyles({
     root: {
@@ -17,7 +17,7 @@ export default function RecipeGrid(props) {
             <Grid container justify="center" spacing={spacing}>
                 <Grid container justify="center" spacing={spacing}>
                     { props.recipes.map(function(recipe, i) {
-                        return <RecipeGridItem recipe={recipe} key={i} handleClose={props.handleClose} handleOpen={props.handleOpen} />
+                        return <RecipeItemController recipe={recipe} key={i} />
                     })}
                 </Grid>
             </Grid>

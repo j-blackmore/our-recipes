@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardContent, Typography } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import RecipeIngredients from './RecipeIngredients';
 import RecipeMethod from './RecipeMethod';
