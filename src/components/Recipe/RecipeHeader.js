@@ -5,7 +5,8 @@ export default function RecipeHeader(props) {
     return (
         <CardHeader 
             title={props.title} 
-            subheader={props.subheader}
+            subheader={props.subtitle}
+            action={props.action}
         />
     );
 }

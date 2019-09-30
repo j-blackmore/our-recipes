@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Backdrop, Fade } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import RecipeCard from './RecipeCard';
+import RecipeCardDetailed from './RecipeCardDetailed';
 
 const useStyles = makeStyles({
     modal: {
@@ -31,7 +31,7 @@ export default function RecipeModal(props) {
             BackdropProps={{timeout: 500, className: classes.backdrop}}            
         >
             <Fade in={props.open}>
-                <RecipeCard recipe={props.recipe} classes={classes.card}/>
+                <RecipeCardDetailed recipe={props.recipe} classes={classes.card} handleClose={props.handleClose} />
             </Fade>
         </Modal>
     );
