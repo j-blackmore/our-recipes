@@ -10,11 +10,12 @@ const useStyles = makeStyles({
 
 export default function RecipeImage(props) {
     const classes = useStyles();
+    let imageUrl = props.imageUrl ? props.imageUrl : "/images/no-image.svg";
 
     return (
         <CardMedia 
             className={classes.media}
-            image={props.imageUrl}
+            image={imageUrl}
             title={props.imageUrl}
         />
     );
