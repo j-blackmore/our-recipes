@@ -18,7 +18,7 @@ export default function RecipeItemController(props) {
     if(props.recipe) {
         RecipeItem = <RecipeGridItemRecipe recipe={props.recipe} handleOpen={handleOpen} handleClose={handleClose} open={open} />;
     } else if(props.newRecipe) {
-        RecipeItem = <RecipeGridItemAdd handleOpen={handleOpen} handleClose={handleClose} open={open} />;
+        RecipeItem = <RecipeGridItemAdd addNewRecipe={props.addNewRecipe} handleOpen={handleOpen} handleClose={handleClose} open={open} />;
     }
 
     return (

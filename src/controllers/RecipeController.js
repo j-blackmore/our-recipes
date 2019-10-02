@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import RecipeGrid from '../containers/Recipe/RecipeGrid';
 
-class RecipeController extends React.Component {
+export default class RecipeController extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { recipes: [] };
-    }
+    };
 
     fetchAllRecipes() {
         axios.get('http://localhost:4000/recipes/')
@@ -17,7 +17,14 @@ class RecipeController extends React.Component {
             .catch(error => {
                 console.log(error);
             });
-    }
+    };
+
+    addNewRecipe(newRecipe) {
+        var recipes = this.state.recipes;
+        recipes.push(newRecipe);
+
+        this.setState(recipes);
+    };
 
     componentDidMount() {
         this.fetchAllRecipes();
@@ -25,9 +32,7 @@ class RecipeController extends React.Component {
 
     render() {
         return(
-            <RecipeGrid recipes={this.state.recipes}/>
+            <RecipeGrid recipes={this.state.recipes} addNewRecipe={this.addNewRecipe.bind(this)} />
         );
     };
 }
-
-export default RecipeController;
