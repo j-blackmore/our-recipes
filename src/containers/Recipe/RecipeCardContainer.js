@@ -17,9 +17,7 @@ export default function RecipeCardContainer(props) {
 
     return (
         <Card className={classNames} onClick={props.handleOpen}>
-            <CardActionArea className={classes.actionArea}>
-                {props.children}
-            </CardActionArea>
+            {props.children}
         </Card>
     );
 }

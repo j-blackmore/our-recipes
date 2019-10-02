@@ -4,6 +4,7 @@ import RecipeCardContainer from '../../containers/Recipe/RecipeCardContainer';
 import RecipeHeader from './RecipeHeader';
 import RecipeImage from './RecipeImage';
 import RecipeContent from './RecipeContent';
+import RecipeCardAction from '../../containers/Recipe/RecipeCardAction';
 
 const useStyles = makeStyles({
     card: {
@@ -17,9 +18,11 @@ export default function RecipeCard(props) {
 
     return (
         <RecipeCardContainer classes={classNames} handleOpen={props.handleOpen}>
-            <RecipeHeader title={recipe.title} subtitle={recipe.subtitle}/>
-            <RecipeImage imageUrl={recipe.imageUrl}/>
-            <RecipeContent recipe={recipe}/>
+            <RecipeCardAction>
+                <RecipeHeader title={recipe.title} subtitle={recipe.subtitle}/>
+                <RecipeImage imageUrl={recipe.imageUrl}/>
+                <RecipeContent recipe={recipe}/>
+            </RecipeCardAction>
         </RecipeCardContainer>
     );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import RecipeCardContainer from '../../containers/Recipe/RecipeCardContainer';
+import RecipeCardAction from '../../containers/Recipe/RecipeCardAction';
 
 const useStyles = makeStyles({
     card: {
@@ -15,9 +16,11 @@ export default function AddRecipeCard(props) {
 
     return(
         <RecipeCardContainer classes={classNames} handleOpen={props.handleOpen}>
-            <Typography variant="h2">
-                +
-            </Typography>
+            <RecipeCardAction>
+                <Typography variant="h2">
+                    +
+                </Typography>
+            </RecipeCardAction>
         </RecipeCardContainer>
     );
 }
