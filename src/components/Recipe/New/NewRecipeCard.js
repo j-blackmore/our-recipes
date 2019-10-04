@@ -29,6 +29,8 @@ export default function NewRecipeCard(props) {
                 handleInputChange={props.handleInputChange} 
                 saveRecipe={props.saveRecipe} 
                 validateForm={props.validateForm}
+                handleImageUpload={props.handleImageUpload}
+                getUploadedImageName={props.getUploadedImageName}
             />
         </RecipeCardContainer>
     );

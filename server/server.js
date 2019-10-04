@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = express.Router();
 const PORT = 4000;
+const multer = require('multer');
 
 let Recipe = require('./models/recipe.model');
 
@@ -37,6 +38,22 @@ routes.route('/add').post(function(req, res) {
         .catch(err => {
             res.status(400).send('creating a new recipe failed');
         });
+});
+
+const storage = multer.diskStorage({
+    destination: "public/images/",
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({storage: storage}).single('recipeImage');
+routes.route('/uploadImage').post(function(req, res) {
+    upload(req, res, (err) => {
+        if(!err) {
+            return res.send(200).end();
+        }
+    });
 });
 
 app.use('/recipes', routes);

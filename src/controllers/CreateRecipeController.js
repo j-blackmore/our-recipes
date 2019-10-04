@@ -13,9 +13,15 @@ export default class CreateRecipeController extends React.Component {
                 method: "",
                 imageUrl: "",
                 ingredients: ""
-            } 
+            },
+            imageData: {},
+            imageName: ""
         };
     };
+
+    getUploadedImageName() {
+        return this.state.imageName;
+    }
 
     handleInputChange(event) {
         const target = event.target;
@@ -27,15 +33,50 @@ export default class CreateRecipeController extends React.Component {
         this.setState(newRecipe);
     };
 
+    handleImageUpload(event) {
+        const files = Array.from(event.target.files);
+        const imageData = new FormData();
+        imageData.append('recipeImage', files[0]);
+        const imageName = files[0].name;
+
+        this.setState({
+            imageData: imageData,
+            newRecipe: {
+                ...this.state.newRecipe,
+                imageUrl: "/images/" + imageName
+            },
+            imageName: imageName
+        });
+    }
+
     validateNewRecipe() {
         return true;
     };
 
     postNewRecipe() {
+        const newImage = this.state.imageData;
         var newRecipe = this.state.newRecipe;
         let ingredientsStr = newRecipe.ingredients;
         let ingredients = ingredientsStr.split(/\r?\n/);
         newRecipe.ingredients = ingredients;
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        axios.post('http://localhost:4000/recipes/uploadImage', newImage, config)
+            .then(response => {
+                this.setState({
+                    ...this.state,
+                    imageData: {},
+                    imageName: ""
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
         axios.post('http://localhost:4000/recipes/add', newRecipe)
             .then(response => {
@@ -67,6 +108,8 @@ export default class CreateRecipeController extends React.Component {
                 saveRecipe={this.postNewRecipe.bind(this)}
                 handleInputChange={this.handleInputChange.bind(this)}
                 validateForm={this.validateNewRecipe.bind(this)}
+                handleImageUpload={this.handleImageUpload.bind(this)}
+                getUploadedImageName={this.getUploadedImageName.bind(this)}
             />
         );
     };
