@@ -16,7 +16,7 @@ class Header extends React.Component {
             <HeaderScroll>
                 <AppBar style={appBarStyle}>
                     <ToolBar>
-                        <Typography variant="h6">Our Recipes</Typography>
+                        <Typography variant="h4">Our Recipes</Typography>
                     </ToolBar>
                 </AppBar>
             </HeaderScroll>
