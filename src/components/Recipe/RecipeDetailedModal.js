@@ -17,7 +17,8 @@ export default function RecipeDetailedModal(props) {
             <RecipeCardDetailed 
                 classes={classes.card}
                 recipe={props.recipe} 
-                handleClose={props.handleClose} 
+                handleClose={props.handleClose}
+                handleDelete={props.handleDelete}
             />
         </RecipeModal>
     );
