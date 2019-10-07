@@ -40,6 +40,16 @@ routes.route('/add').post(function(req, res) {
         });
 });
 
+routes.route('/delete/:id').post(function(req, res) {
+    Recipe.deleteOne({_id: req.params.id}, function(err) {
+        if(!err) {
+            res.status(200).send('recipe deleted');
+        } else {
+            res.status(400).send('error deleting recipe')
+        }
+    });
+});
+
 const storage = multer.diskStorage({
     destination: "public/images/",
     filename: function(req, file, cb) {

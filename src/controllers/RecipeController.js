@@ -26,13 +26,35 @@ export default class RecipeController extends React.Component {
         this.setState(recipes);
     };
 
+    deleteRecipe(recipeId) {
+        axios.post('http://localhost:4000/recipes/delete/' + recipeId)
+            .then(response => {
+                let recipes = this.state.recipes;
+                recipes.splice(recipes.findIndex((recipe) => {
+                    return recipe._id === recipeId;
+                }), 1);
+
+                this.setState({
+                    ...this.state,
+                    recipes: recipes
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+
     componentDidMount() {
         this.fetchAllRecipes();
     };
 
     render() {
         return(
-            <RecipeGrid recipes={this.state.recipes} addNewRecipe={this.addNewRecipe.bind(this)} />
+            <RecipeGrid 
+                recipes={this.state.recipes} 
+                addNewRecipe={this.addNewRecipe.bind(this)} 
+                deleteRecipe={this.deleteRecipe.bind(this)}
+            />
         );
     };
 }

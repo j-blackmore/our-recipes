@@ -14,6 +14,11 @@ export default function RecipeItemController(props) {
         setOpen(false);
     };
 
+    const handleDelete = () => {
+        handleClose();
+        props.deleteRecipe(props.recipe._id);
+    }
+
     let RecipeItem;
     if(props.recipe) {
         RecipeItem = <RecipeGridItemRecipe recipe={props.recipe} handleOpen={handleOpen} handleClose={handleClose} open={open} />;
