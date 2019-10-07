@@ -27,7 +27,7 @@ export default function RecipeItemController(props) {
     }
 
     return (
-        <Grid item xs={11} sm={5} md={4} lg={3}>
+        <Grid item xs={11} sm={4} md={3} lg={3}>
             {RecipeItem}
         </Grid>
     );
