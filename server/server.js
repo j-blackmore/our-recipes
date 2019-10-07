@@ -6,8 +6,11 @@ const mongoose = require('mongoose');
 const routes = express.Router();
 const PORT = 4000;
 const multer = require('multer');
+const fs = require('fs');
 
 let Recipe = require('./models/recipe.model');
+
+const imagesDir = "public/images/";
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -40,9 +43,17 @@ routes.route('/add').post(function(req, res) {
         });
 });
 
-routes.route('/delete/:id').post(function(req, res) {
-    Recipe.deleteOne({_id: req.params.id}, function(err) {
+routes.route('/delete/:id').post(async function(req, res) {
+    var recipeId = req.params.id;
+    const recipeToDelete = await Recipe.findById(recipeId, 'imageUrl', {lean: true});
+    const recipeImagePath = "public" + recipeToDelete.imageUrl;
+
+    Recipe.deleteOne({_id: recipeId}, function(err) {
         if(!err) {
+            fs.unlink(recipeImagePath, (err) => {
+                if (err) console.log(err);
+                else console.log(recipeImagePath + " was deleted successfully.");
+            });
             res.status(200).send('recipe deleted');
         } else {
             res.status(400).send('error deleting recipe')
@@ -51,7 +62,7 @@ routes.route('/delete/:id').post(function(req, res) {
 });
 
 const storage = multer.diskStorage({
-    destination: "public/images/",
+    destination: imagesDir,
     filename: function(req, file, cb) {
         cb(null, file.originalname);
     }
@@ -61,7 +72,7 @@ const upload = multer({storage: storage}).single('recipeImage');
 routes.route('/uploadImage').post(function(req, res) {
     upload(req, res, (err) => {
         if(!err) {
-            return res.send(200).end();
+            return res.sendStatus(200);
         }
     });
 });
