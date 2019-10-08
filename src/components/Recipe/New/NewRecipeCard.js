@@ -8,10 +8,16 @@ import AddRecipeForm from '../../Form/AddRecipe/AddRecipeForm';
 const useStyles = makeStyles({
     card: {
         width: '90%',
-        height: '80%',
-        marginTop: 64,
+        height: 'auto',
         maxWidth: 500
     },
+    header: {
+        padding: '16px 16px 8px',
+    },
+    content: {
+        height: '60%',
+        overflow: 'scroll'
+    }
 });
 
 export default function NewRecipeCard(props) {
@@ -20,11 +26,13 @@ export default function NewRecipeCard(props) {
     return (
         <RecipeCardContainer classes={classes.card} >
             <RecipeHeader 
+                classes={classes.header}
                 title="Create New Recipe" 
-                subtitle="Fill in the field below, and submit."
+                subtitle="Enter your recipe below, add an image and save."
                 action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}
             />
             <AddRecipeForm 
+                classes={classes.content}
                 newRecipe={props.newRecipe} 
                 recipeErrors={props.recipeErrors}
                 handleInputChange={props.handleInputChange} 
