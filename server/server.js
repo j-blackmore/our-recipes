@@ -36,7 +36,7 @@ routes.route('/add').post(function(req, res) {
     let newRecipe = new Recipe(req.body);
     newRecipe.save()
         .then(recipe => {
-            res.status(200).json({'recipe' : 'recipe added successfully'});
+            res.status(200).json({'status' : 'recipe added successfully', 'objectID': newRecipe._id});
         })
         .catch(err => {
             res.status(400).send('creating a new recipe failed');

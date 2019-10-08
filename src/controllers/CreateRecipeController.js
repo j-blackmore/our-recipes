@@ -113,6 +113,7 @@ export default class CreateRecipeController extends React.Component {
 
         axios.post('http://localhost:4000/recipes/add', newRecipe)
             .then(response => {
+                newRecipe._id = response.data.objectID;
                 this.props.addNewRecipe(newRecipe);
                 this.props.handleClose();
                 this.setState({
