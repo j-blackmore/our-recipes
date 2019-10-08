@@ -99,7 +99,8 @@ export default class CreateRecipeController extends React.Component {
             }
         };
 
-        axios.post('http://localhost:4000/recipes/uploadImage', newImage, config)
+        if(Object.keys(newImage).length !== 0) {
+            axios.post('http://localhost:4000/recipes/uploadImage', newImage, config)
             .then(response => {
                 this.setState({
                     ...this.state,
@@ -110,6 +111,7 @@ export default class CreateRecipeController extends React.Component {
             .catch(error => {
                 console.log(error);
             });
+        }
 
         axios.post('http://localhost:4000/recipes/add', newRecipe)
             .then(response => {
