@@ -15,6 +15,7 @@ export default function RecipeIngredientsInput(props) {
             value={props.ingredients}
             error={props.hasError}
             onChange={props.handleInputChange}
+            onBlur={props.handleInputBlur}
         />
     );
 }

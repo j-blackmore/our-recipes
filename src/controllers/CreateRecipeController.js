@@ -39,6 +39,19 @@ export default class CreateRecipeController extends React.Component {
         this.setState(newRecipe);
     };
 
+    handleInputBlur(event) {
+        const target = event.target;
+        const name = target.name;
+
+        this.setState({
+            ...this.state,
+            recipeErrors: {
+                ...this.state.recipeErrors,
+                [name]: this.state.newRecipe[name].length <= 0
+            }
+        });
+    }
+
     handleImageUpload(event) {
         const files = Array.from(event.target.files);
         const imageData = new FormData();
@@ -134,6 +147,7 @@ export default class CreateRecipeController extends React.Component {
                 recipeErrors={this.state.recipeErrors}
                 saveRecipe={this.postNewRecipe.bind(this)}
                 handleInputChange={this.handleInputChange.bind(this)}
+                handleInputBlur={this.handleInputBlur.bind(this)}
                 validateForm={this.validateNewRecipe.bind(this)}
                 handleImageUpload={this.handleImageUpload.bind(this)}
                 getUploadedImageName={this.getUploadedImageName.bind(this)}

@@ -15,6 +15,7 @@ export default function RecipeMethodInput(props) {
             value={props.method}
             error={props.hasError}
             onChange={props.handleInputChange}
+            onBlur={props.handleInputBlur}
         />
     );
 }

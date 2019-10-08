@@ -11,6 +11,7 @@ export default function NewRecipeModal(props) {
                 recipeErrors={props.recipeErrors}
                 saveRecipe={props.saveRecipe} 
                 handleInputChange={props.handleInputChange}
+                handleInputBlur={props.handleInputBlur}
                 validateForm={props.validateForm}
                 handleImageUpload={props.handleImageUpload}
                 getUploadedImageName={props.getUploadedImageName}

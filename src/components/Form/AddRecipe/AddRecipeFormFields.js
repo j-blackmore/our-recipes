@@ -18,11 +18,38 @@ export default function AddRecipeFormFields(props) {
 
     return (
         <FormControl fullWidth>
-            <RecipeTitleInput classes={classes.input} title={props.newRecipe.title} hasError={props.recipeErrors.title} handleInputChange={props.handleInputChange}/>
-            <RecipeSubtitleInput classes={classes.input} subtitle={props.newRecipe.subtitle} hasError={props.recipeErrors.subtitle} handleInputChange={props.handleInputChange}/>
-            <RecipeMethodInput classes={classes.input} method={props.newRecipe.method} hasError={props.recipeErrors.method} handleInputChange={props.handleInputChange}/>
-            <RecipeIngredientsInput classes={classes.input} ingredients={props.newRecipe.ingredients} hasError={props.recipeErrors.ingredients} handleInputChange={props.handleInputChange}/>
-            <AddImageButton handleImageUpload={props.handleImageUpload} getUploadedImageName={props.getUploadedImageName}/>
+            <RecipeTitleInput 
+                classes={classes.input} 
+                title={props.newRecipe.title} 
+                hasError={props.recipeErrors.title} 
+                handleInputChange={props.handleInputChange}
+                handleInputBlur={props.handleInputBlur}
+            />
+            <RecipeSubtitleInput 
+                classes={classes.input} 
+                subtitle={props.newRecipe.subtitle} 
+                hasError={props.recipeErrors.subtitle} 
+                handleInputChange={props.handleInputChange}
+                handleInputBlur={props.handleInputBlur}
+            />
+            <RecipeMethodInput 
+                classes={classes.input} 
+                method={props.newRecipe.method} 
+                hasError={props.recipeErrors.method} 
+                handleInputChange={props.handleInputChange}
+                handleInputBlur={props.handleInputBlur}
+            />
+            <RecipeIngredientsInput 
+                classes={classes.input} 
+                ingredients={props.newRecipe.ingredients} 
+                hasError={props.recipeErrors.ingredients} 
+                handleInputChange={props.handleInputChange}
+                handleInputBlur={props.handleInputBlur}
+            />
+            <AddImageButton 
+                handleImageUpload={props.handleImageUpload} 
+                getUploadedImageName={props.getUploadedImageName}
+            />
         </FormControl>
     );
 }

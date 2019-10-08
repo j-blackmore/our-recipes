@@ -27,6 +27,7 @@ export default function AddRecipeForm(props) {
                         recipeErrors={props.recipeErrors}
                         newRecipe={props.newRecipe} 
                         handleInputChange={props.handleInputChange} 
+                        handleInputBlur={props.handleInputBlur}
                         handleImageUpload={props.handleImageUpload} 
                         getUploadedImageName={props.getUploadedImageName}
                     />
