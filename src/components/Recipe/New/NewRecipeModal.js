@@ -7,7 +7,8 @@ export default function NewRecipeModal(props) {
         <RecipeModal open={props.open} handleClose={props.handleClose}>
             <NewRecipeCard 
                 handleClose={props.handleClose} 
-                newRecipe={props.newRecipe} 
+                newRecipe={props.newRecipe}
+                recipeErrors={props.recipeErrors}
                 saveRecipe={props.saveRecipe} 
                 handleInputChange={props.handleInputChange}
                 validateForm={props.validateForm}

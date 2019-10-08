@@ -26,6 +26,7 @@ export default function NewRecipeCard(props) {
             />
             <AddRecipeForm 
                 newRecipe={props.newRecipe} 
+                recipeErrors={props.recipeErrors}
                 handleInputChange={props.handleInputChange} 
                 saveRecipe={props.saveRecipe} 
                 validateForm={props.validateForm}

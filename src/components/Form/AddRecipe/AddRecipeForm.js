@@ -23,7 +23,8 @@ export default function AddRecipeForm(props) {
         <Box px={2}>
             <form onSubmit={onFormSubmit} noValidate>
                 <CardContent>
-                    <AddRecipeFormFields 
+                    <AddRecipeFormFields
+                        recipeErrors={props.recipeErrors}
                         newRecipe={props.newRecipe} 
                         handleInputChange={props.handleInputChange} 
                         handleImageUpload={props.handleImageUpload} 

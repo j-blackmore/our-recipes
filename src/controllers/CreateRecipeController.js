@@ -14,6 +14,12 @@ export default class CreateRecipeController extends React.Component {
                 imageUrl: "",
                 ingredients: ""
             },
+            recipeErrors: {
+                title: false,
+                subtitle: false,
+                method: false,
+                ingredients: false
+            },
             imageData: {},
             imageName: ""
         };
@@ -50,7 +56,21 @@ export default class CreateRecipeController extends React.Component {
     }
 
     validateNewRecipe() {
-        return true;
+        const newRecipe = this.state.newRecipe;
+        const recipeErrors = {
+            title: newRecipe.title.length <= 0,
+            subtitle: newRecipe.subtitle.length <= 0,
+            method: newRecipe.method.length <= 0,
+            ingredients: newRecipe.ingredients.length <= 0
+        };
+
+        this.setState({
+            ...this.state,
+            recipeErrors: recipeErrors
+        });
+
+        const hasErrors = recipeErrors.title || recipeErrors.subtitle || recipeErrors.method || recipeErrors.ingredients;
+        return !hasErrors;
     };
 
     postNewRecipe() {
@@ -90,6 +110,12 @@ export default class CreateRecipeController extends React.Component {
                         method: "", 
                         imageUrl: "", 
                         ingredients: ""
+                    },
+                    recipeErrors: {
+                        title: false,
+                        subtitle: false,
+                        method: false,
+                        ingredients: false
                     }
                 });
             })
@@ -104,7 +130,8 @@ export default class CreateRecipeController extends React.Component {
                 open={this.props.open} 
                 handleOpen={this.props.handleOpen} 
                 handleClose={this.props.handleClose} 
-                newRecipe={this.state.newRecipe} 
+                newRecipe={this.state.newRecipe}
+                recipeErrors={this.state.recipeErrors}
                 saveRecipe={this.postNewRecipe.bind(this)}
                 handleInputChange={this.handleInputChange.bind(this)}
                 validateForm={this.validateNewRecipe.bind(this)}

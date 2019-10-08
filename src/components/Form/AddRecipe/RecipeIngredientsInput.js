@@ -7,11 +7,13 @@ export default function RecipeIngredientsInput(props) {
             className={props.classes}
             label="Ingredients"
             name="ingredients"
+            helperText={props.hasError ? "Required" : ""}
             fullWidth
             required
             multiline
             rows="6"
             value={props.ingredients}
+            error={props.hasError}
             onChange={props.handleInputChange}
         />
     );

@@ -8,8 +8,11 @@ export default function RecipeSubtitleInput(props) {
             className={props.classes}
             label="Subtitle"
             name="subtitle"
+            helperText={props.hasError ? "Required" : ""}
             fullWidth
+            required
             value={props.subtitle}
+            error={props.hasError}
             onChange={props.handleInputChange}
         />
     );
