@@ -7,6 +7,17 @@ export default class CreateRecipeController extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
+            newRecipe: {},
+            recipeErrors: {},
+            imageData: {},
+            imageName: "",
+        };
+        this.initialiseNewRecipe();
+    };
+
+    initialiseNewRecipe() {
+        this.setState({
+            ...this.setState,
             newRecipe: {
                 title: "",
                 subtitle: "",
@@ -21,15 +32,13 @@ export default class CreateRecipeController extends React.Component {
                 method: false,
                 ingredients: false,
                 prepTime: false,
-            },
-            imageData: {},
-            imageName: ""
-        };
+            }
+        });
     };
 
     getUploadedImageName() {
         return this.state.imageName;
-    }
+    };
 
     handleInputChange(event) {
         const target = event.target;
@@ -121,24 +130,7 @@ export default class CreateRecipeController extends React.Component {
                 newRecipe._id = response.data.objectID;
                 this.props.addNewRecipe(newRecipe);
                 this.props.handleClose();
-                this.setState({
-                    ...this.state,
-                    newRecipe: {
-                        title: "", 
-                        subtitle: "", 
-                        method: "", 
-                        imageUrl: "", 
-                        ingredients: "",
-                        prepTime: ""
-                    },
-                    recipeErrors: {
-                        title: false,
-                        subtitle: false,
-                        method: false,
-                        ingredients: false,
-                        prepTime: false
-                    }
-                });
+                this.initialiseNewRecipe();
             })
             .catch(error => {
                 console.log(error);
