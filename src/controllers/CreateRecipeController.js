@@ -12,13 +12,15 @@ export default class CreateRecipeController extends React.Component {
                 subtitle: "",
                 method: "",
                 imageUrl: "",
-                ingredients: ""
+                ingredients: "",
+                prepTime: ""
             },
             recipeErrors: {
                 title: false,
                 subtitle: false,
                 method: false,
-                ingredients: false
+                ingredients: false,
+                prepTime: false,
             },
             imageData: {},
             imageName: ""
@@ -74,7 +76,8 @@ export default class CreateRecipeController extends React.Component {
             title: newRecipe.title.length <= 0,
             subtitle: newRecipe.subtitle.length <= 0,
             method: newRecipe.method.length <= 0,
-            ingredients: newRecipe.ingredients.length <= 0
+            ingredients: newRecipe.ingredients.length <= 0,
+            prepTime: newRecipe.prepTime.length <= 0
         };
 
         this.setState({
@@ -82,7 +85,7 @@ export default class CreateRecipeController extends React.Component {
             recipeErrors: recipeErrors
         });
 
-        const hasErrors = recipeErrors.title || recipeErrors.subtitle || recipeErrors.method || recipeErrors.ingredients;
+        const hasErrors = recipeErrors.title || recipeErrors.subtitle || recipeErrors.method || recipeErrors.ingredients || recipeErrors.prepTime;
         return !hasErrors;
     };
 
@@ -125,13 +128,15 @@ export default class CreateRecipeController extends React.Component {
                         subtitle: "", 
                         method: "", 
                         imageUrl: "", 
-                        ingredients: ""
+                        ingredients: "",
+                        prepTime: ""
                     },
                     recipeErrors: {
                         title: false,
                         subtitle: false,
                         method: false,
-                        ingredients: false
+                        ingredients: false,
+                        prepTime: false
                     }
                 });
             })
