@@ -17,13 +17,20 @@ const useStyles = makeStyles({
 
 export default function RecipeTimings(props) {
     const classes = useStyles();
-    const totalTime = props.recipe.prepTime + props.recipe.cookTime;
+
+    const getPluralTime = (time) => {
+        const base = " min";
+        return time + (time === 1 ? base : base + "s");
+    }
 
     return(
-        <React.Fragment>
-            <div className={classes.container}>
-                <AccessTime className={classes.icon}/><div className={classes.textContainer}><Typography display="inline" variant="body1">{totalTime} mins</Typography></div>
+        <div className={classes.container}>
+            <AccessTime className={classes.icon}/>
+            <div className={classes.textContainer}>
+                <Typography display="inline" variant="body1">
+                    Prep: {getPluralTime(props.prepTime)} <b>|</b> Cook: {getPluralTime(props.cookTime)}
+                </Typography>
             </div>
-        </React.Fragment>
+        </div>
     );
 }

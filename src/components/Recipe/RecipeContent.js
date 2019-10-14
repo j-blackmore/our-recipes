@@ -24,7 +24,7 @@ export default function RecipeContent(props) {
 
     return (
         <CardContent className={classes.content}>
-            <RecipeTimings recipe={props.recipe} />
+            <RecipeTimings prepTime={recipe.prepTime} cookTime={recipe.cookTime} />
             {props.detailed ? detailContent : null}
         </CardContent>
     );
