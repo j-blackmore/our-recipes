@@ -12,19 +12,23 @@ export default class CreateRecipeController extends React.Component {
             imageData: {},
             imageName: "",
         };
+    };
+
+    componentDidMount() {
         this.initialiseNewRecipe();
     };
 
     initialiseNewRecipe() {
         this.setState({
-            ...this.setState,
+            ...this.state,
             newRecipe: {
                 title: "",
                 subtitle: "",
                 method: "",
                 imageUrl: "",
                 ingredients: "",
-                prepTime: ""
+                prepTime: "",
+                cookTime: ""
             },
             recipeErrors: {
                 title: false,
@@ -32,6 +36,7 @@ export default class CreateRecipeController extends React.Component {
                 method: false,
                 ingredients: false,
                 prepTime: false,
+                cookTime: false
             }
         });
     };
