@@ -14,7 +14,6 @@ export default function RecipeTitleInput(props) {
             value={props.title}
             error={props.hasError}
             onChange={props.handleInputChange}
-            onBlur={props.handleInputBlur}
         />
     );
 }

@@ -8,13 +8,12 @@ export default function RecipeTimeInput(props) {
             className={props.classes}
             label={props.label}
             name={props.name}
-            helperText={props.hasError ? "Required" : ""}
+            helperText={props.hasError ? (props.value.length === 0 ? "Required" : "This must be a positive whole number") : ""}
             fullWidth
             required
-            value={props.prepTime}
+            value={props.value}
             error={props.hasError}
             onChange={props.handleInputChange}
-            onBlur={props.handleInputBlur}
         />
     );
 }

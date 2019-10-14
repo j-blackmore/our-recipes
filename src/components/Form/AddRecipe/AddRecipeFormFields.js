@@ -24,46 +24,40 @@ export default function AddRecipeFormFields(props) {
                 title={props.newRecipe.title} 
                 hasError={props.recipeErrors.title} 
                 handleInputChange={props.handleInputChange}
-                handleInputBlur={props.handleInputBlur}
             />
             <RecipeSubtitleInput 
                 classes={classes.input} 
                 subtitle={props.newRecipe.subtitle} 
                 hasError={props.recipeErrors.subtitle} 
                 handleInputChange={props.handleInputChange}
-                handleInputBlur={props.handleInputBlur}
             />
             <RecipeTimeInput 
                 classes={classes.input} 
-                label="Prep Time"
+                label="Prep Time (mins)"
                 name="prepTime"
-                subtitle={props.newRecipe.prepTime} 
+                value={props.newRecipe.prepTime} 
                 hasError={props.recipeErrors.prepTime} 
                 handleInputChange={props.handleInputChange}
-                handleInputBlur={props.handleInputBlur}
             />
             <RecipeTimeInput 
                 classes={classes.input} 
-                label="Cooking Time"
+                label="Cooking Time (mins)"
                 name="cookTime"
-                subtitle={props.newRecipe.cookTime} 
+                value={props.newRecipe.cookTime} 
                 hasError={props.recipeErrors.cookTime} 
                 handleInputChange={props.handleInputChange}
-                handleInputBlur={props.handleInputBlur}
             />
             <RecipeMethodInput 
                 classes={classes.input} 
                 method={props.newRecipe.method} 
                 hasError={props.recipeErrors.method} 
                 handleInputChange={props.handleInputChange}
-                handleInputBlur={props.handleInputBlur}
             />
             <RecipeIngredientsInput 
                 classes={classes.input} 
                 ingredients={props.newRecipe.ingredients} 
                 hasError={props.recipeErrors.ingredients} 
                 handleInputChange={props.handleInputChange}
-                handleInputBlur={props.handleInputBlur}
             />
             <AddImageButton 
                 handleImageUpload={props.handleImageUpload} 
