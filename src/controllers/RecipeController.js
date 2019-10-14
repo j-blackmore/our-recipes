@@ -12,6 +12,12 @@ export default class RecipeController extends React.Component {
     fetchAllRecipes() {
         axios.get('http://localhost:4000/recipes/')
             .then(response => {
+                const newRecipes = response.data;
+                newRecipes.map(recipe => {
+                    recipe.cookTime = parseInt(recipe.cookTime);
+                    recipe.prepTime = parseInt(recipe.prepTime);
+                    return recipe;
+                });
                 this.setState({ recipes: response.data });
             })
             .catch(error => {
