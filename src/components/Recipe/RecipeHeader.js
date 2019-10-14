@@ -6,7 +6,7 @@ export default function RecipeHeader(props) {
         <CardHeader 
             className={props.classes}
             title={props.title} 
-            subheader={props.subtitle}
+            subheader={props.subtitle || "-"}
             action={props.action}
         />
     );
