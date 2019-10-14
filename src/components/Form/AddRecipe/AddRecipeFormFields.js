@@ -4,7 +4,7 @@ import RecipeTitleInput from './RecipeTitleInput';
 import RecipeSubtitleInput from './RecipeSubtitleInput';
 import RecipeMethodInput from './RecipeMethodInput';
 import RecipeIngredientsInput from './RecipeIngredientsInput';
-import RecipePrepTimeInput from './RecipePrepTimeInput';
+import RecipeTimeInput from './RecipeTimeInput';
 import AddImageButton from './AddImageButton';
 
 const useStyles = makeStyles({
@@ -33,10 +33,21 @@ export default function AddRecipeFormFields(props) {
                 handleInputChange={props.handleInputChange}
                 handleInputBlur={props.handleInputBlur}
             />
-            <RecipePrepTimeInput 
+            <RecipeTimeInput 
                 classes={classes.input} 
+                label="Prep Time"
+                name="prepTime"
                 subtitle={props.newRecipe.prepTime} 
                 hasError={props.recipeErrors.prepTime} 
+                handleInputChange={props.handleInputChange}
+                handleInputBlur={props.handleInputBlur}
+            />
+            <RecipeTimeInput 
+                classes={classes.input} 
+                label="Cooking Time"
+                name="cookTime"
+                subtitle={props.newRecipe.cookTime} 
+                hasError={props.recipeErrors.cookTime} 
                 handleInputChange={props.handleInputChange}
                 handleInputBlur={props.handleInputBlur}
             />

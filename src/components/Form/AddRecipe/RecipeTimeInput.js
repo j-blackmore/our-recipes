@@ -1,13 +1,13 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 
-export default function RecipePrepTimeInput(props) {
+export default function RecipeTimeInput(props) {
 
     return (
         <TextField
             className={props.classes}
-            label="Prep Time"
-            name="prepTime"
+            label={props.label}
+            name={props.name}
             helperText={props.hasError ? "Required" : ""}
             fullWidth
             required
