@@ -5,10 +5,11 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
     icon: {
-        paddingRight: 5,
+        paddingRight: 7,
     },
     container: {
-        display: 'flex'
+        display: 'flex',
+        marginBottom: '0.35em'
     },
     textContainer: {
         margin: 'auto 0'
