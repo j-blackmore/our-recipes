@@ -3,78 +3,14 @@ import axios from 'axios';
 import NewRecipeModal from '../components/Recipe/New/NewRecipeModal';
 
 export default class RecipeController extends React.Component {
-    
+
+    // Default mode is 'create' - modes: 'create' | 'edit'
     constructor(props) {
         super(props);
         this.state = {
-            newRecipe: {},
-            recipeErrors: {},
-            imageData: {},
-            imageName: "",
+            mode: "create"
         };
     };
-
-    componentDidMount() {
-        this.initialiseNewRecipe();
-    };
-
-    initialiseNewRecipe() {
-        this.setState({
-            ...this.state,
-            newRecipe: {
-                title: "",
-                subtitle: "",
-                method: "",
-                imageUrl: "",
-                ingredients: "",
-                prepTime: "",
-                cookTime: ""
-            },
-            recipeErrors: {
-                title: false,
-                subtitle: false,
-                method: false,
-                ingredients: false,
-                prepTime: false,
-                cookTime: false
-            }
-        });
-    };
-
-    getUploadedImageName() {
-        return this.state.imageName;
-    };
-
-    isValidInteger(input) {
-        const intInput = parseInt(input);
-        return !isNaN(intInput) && intInput >= 0;
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        let newRecipe = this.state.newRecipe;
-        newRecipe[name] = value;
-        this.setState(newRecipe);
-        this.validateInputField(name);
-    };
-
-    validateInputField(name) {
-        var extraError = false;
-        if(name === "prepTime" || name === "cookTime") {
-            extraError = !this.isValidInteger(this.state.newRecipe[name]);
-        }
-
-        this.setState({
-            ...this.state,
-            recipeErrors: {
-                ...this.state.recipeErrors,
-                [name]: this.state.newRecipe[name].length <= 0 || extraError
-            }
-        });
-    }
 
     handleImageUpload(event) {
         const files = Array.from(event.target.files);
@@ -92,29 +28,7 @@ export default class RecipeController extends React.Component {
         });
     }
 
-    validateNewRecipe() {
-        const newRecipe = this.state.newRecipe;
-        const recipeErrors = {
-            title: newRecipe.title.length <= 0,
-            subtitle: newRecipe.subtitle.length <= 0,
-            method: newRecipe.method.length <= 0,
-            ingredients: newRecipe.ingredients.length <= 0,
-            cookTime: newRecipe.cookTime.length <= 0 || !this.isValidInteger(newRecipe.cookTime),
-            prepTime: newRecipe.prepTime.length <= 0 || !this.isValidInteger(newRecipe.prepTime),
-        };
-
-        this.setState({
-            ...this.state,
-            recipeErrors: recipeErrors
-        });
-
-        const hasErrors = recipeErrors.title || recipeErrors.subtitle || recipeErrors.method || recipeErrors.ingredients || recipeErrors.prepTime || recipeErrors.cookTime;
-        return !hasErrors;
-    };
-
-    postNewRecipe() {
-        const newImage = this.state.imageData;
-        var newRecipe = this.state.newRecipe;
+    postNewRecipe(newRecipe, newImage) {
         let ingredientsStr = newRecipe.ingredients;
         let ingredients = ingredientsStr.split(/\r?\n/);
         newRecipe.ingredients = ingredients;
@@ -128,11 +42,7 @@ export default class RecipeController extends React.Component {
         if(Object.keys(newImage).length !== 0) {
             axios.post('http://localhost:4000/recipes/uploadImage', newImage, config)
             .then(response => {
-                this.setState({
-                    ...this.state,
-                    imageData: {},
-                    imageName: ""
-                });
+                
             })
             .catch(error => {
                 console.log(error);
@@ -144,7 +54,6 @@ export default class RecipeController extends React.Component {
                 newRecipe._id = response.data.objectID;
                 this.props.addNewRecipe(newRecipe);
                 this.props.handleClose();
-                this.initialiseNewRecipe();
             })
             .catch(error => {
                 console.log(error);
@@ -157,13 +66,8 @@ export default class RecipeController extends React.Component {
                 open={this.props.open} 
                 handleOpen={this.props.handleOpen} 
                 handleClose={this.props.handleClose} 
-                newRecipe={this.state.newRecipe}
-                recipeErrors={this.state.recipeErrors}
                 saveRecipe={this.postNewRecipe.bind(this)}
-                handleInputChange={this.handleInputChange.bind(this)}
-                validateForm={this.validateNewRecipe.bind(this)}
                 handleImageUpload={this.handleImageUpload.bind(this)}
-                getUploadedImageName={this.getUploadedImageName.bind(this)}
             />
         );
     };

@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 export default function AddImageButton(props) {
     const classes = useStyles();
 
-    const uploadedImageName = props.getUploadedImageName();
+    const uploadedImageName = props.uploadedImageName;
     const fileUploadFeedback = uploadedImageName ? "Uploaded -- " + uploadedImageName : "";
 
     return(
