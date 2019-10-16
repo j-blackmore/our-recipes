@@ -3,7 +3,7 @@ import { IconButton, makeStyles } from '@material-ui/core';
 import Clear from '@material-ui/icons/Clear'
 import RecipeCardContainer from '../../../containers/Recipe/RecipeCardContainer';
 import RecipeHeader from '../RecipeHeader';
-import AddRecipeForm from '../../Form/AddRecipe/AddRecipeForm';
+import RecipeForm from '../../Form/Recipe/RecipeForm';
 
 const useStyles = makeStyles({
     card: {
@@ -31,7 +31,7 @@ export default function NewRecipeCard(props) {
                 subtitle="Enter your recipe below, add an image and save."
                 action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}
             />
-            <AddRecipeForm 
+            <RecipeForm 
                 classes={classes.content}
                 saveRecipe={props.saveRecipe} 
                 handleImageUpload={props.handleImageUpload}

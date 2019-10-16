@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardContent, CardActions } from '@material-ui/core';
-import AddRecipeFormFields from './AddRecipeFormFields';
-import AddRecipeButton from './AddRecipeButton';
+import RecipeFormInputs from './RecipeFormInputs';
+import SaveRecipeButton from './SaveRecipeButton';
 
 const classes = {
     content: {
@@ -13,7 +13,7 @@ const classes = {
     },
 };
 
-export default class AddRecipeForm extends React.Component {
+export default class RecipeForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -66,8 +66,7 @@ export default class AddRecipeForm extends React.Component {
         return !isNaN(intInput) && intInput >= 0;
     };
 
-    errorsExist() {
-        const errors = this.state.errors;
+    errorsExist(errors) {
         return errors.title || errors.subtitle || errors.prepTime || errors.cookTime || errors.method || errors.ingredients;
     };
 
@@ -106,7 +105,7 @@ export default class AddRecipeForm extends React.Component {
         };
 
         this.setState({errors: errors});
-        return !this.errorsExist();
+        return !this.errorsExist(errors);
     }
 
     onFormSubmit = () => {
@@ -121,7 +120,7 @@ export default class AddRecipeForm extends React.Component {
         return (
             <form onSubmit={this.onFormSubmit} noValidate>
             <CardContent className={classes.content}>
-                <AddRecipeFormFields
+                <RecipeFormInputs
                     errors={state.errors}
                     recipe={state.recipe} 
                     handleInputChange={this.handleInputChange.bind(this)} 
@@ -130,7 +129,7 @@ export default class AddRecipeForm extends React.Component {
                 />
             </CardContent>
             <CardActions className={classes.actions}>
-                <AddRecipeButton onFormSubmit={this.onFormSubmit.bind(this)} />
+                <SaveRecipeButton onFormSubmit={this.onFormSubmit.bind(this)} />
             </CardActions>
         </form>
         );

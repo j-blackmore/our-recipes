@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function AddRecipeFormFields(props) {
+export default function RecipeFormInputs(props) {
     const classes = useStyles();
 
     return (
