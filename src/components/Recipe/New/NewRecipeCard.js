@@ -34,7 +34,6 @@ export default function NewRecipeCard(props) {
             <RecipeForm 
                 classes={classes.content}
                 saveRecipe={props.saveRecipe} 
-                handleImageUpload={props.handleImageUpload}
             />
         </RecipeCardContainer>
     );

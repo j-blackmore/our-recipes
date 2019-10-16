@@ -94,6 +94,22 @@ export default class RecipeForm extends React.Component {
         });
     };
 
+    handleImageUpload(event) {
+        const files = Array.from(event.target.files);
+        const imageData = new FormData();
+        imageData.append('recipeImage', files[0]);
+        const imageName = files[0].name;
+
+        this.setState({
+            imageData: imageData,
+            recipe: {
+                ...this.state.recipe,
+                imageUrl: "/images/" + imageName
+            },
+            imageName: imageName
+        });
+    };
+
     validateForm() {
         const errors = {
             title: this.inputHasErrors('title'),
@@ -124,7 +140,7 @@ export default class RecipeForm extends React.Component {
                     errors={state.errors}
                     recipe={state.recipe} 
                     handleInputChange={this.handleInputChange.bind(this)} 
-                    handleImageUpload={this.props.handleImageUpload} 
+                    handleImageUpload={this.handleImageUpload.bind(this)} 
                     uploadedImageName={state.imageName}
                 />
             </CardContent>

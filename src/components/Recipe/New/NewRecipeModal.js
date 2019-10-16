@@ -8,7 +8,6 @@ export default function NewRecipeModal(props) {
             <NewRecipeCard 
                 handleClose={props.handleClose} 
                 saveRecipe={props.saveRecipe} 
-                handleImageUpload={props.handleImageUpload}
             />
         </RecipeModal>
     );

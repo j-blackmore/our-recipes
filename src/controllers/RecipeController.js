@@ -12,22 +12,6 @@ export default class RecipeController extends React.Component {
         };
     };
 
-    handleImageUpload(event) {
-        const files = Array.from(event.target.files);
-        const imageData = new FormData();
-        imageData.append('recipeImage', files[0]);
-        const imageName = files[0].name;
-
-        this.setState({
-            imageData: imageData,
-            newRecipe: {
-                ...this.state.newRecipe,
-                imageUrl: "/images/" + imageName
-            },
-            imageName: imageName
-        });
-    }
-
     postNewRecipe(newRecipe, newImage) {
         let ingredientsStr = newRecipe.ingredients;
         let ingredients = ingredientsStr.split(/\r?\n/);
@@ -67,7 +51,6 @@ export default class RecipeController extends React.Component {
                 handleOpen={this.props.handleOpen} 
                 handleClose={this.props.handleClose} 
                 saveRecipe={this.postNewRecipe.bind(this)}
-                handleImageUpload={this.handleImageUpload.bind(this)}
             />
         );
     };
