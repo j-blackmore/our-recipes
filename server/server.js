@@ -61,6 +61,30 @@ routes.route('/delete/:id').post(async function(req, res) {
     });
 });
 
+routes.route('/update/:id').post(function(req, res) {
+    Recipe.findById(req.params.id, function(err, recipe) {
+        if(err || !recipe) {
+            res.status(404).send("Recipe not found");
+        } else {
+            newRecipe = req.body;
+            recipe.title = newRecipe.title;
+            recipe.subtitle = newRecipe.subtitle;
+            recipe.method = newRecipe.method;
+            recipe.ingredients = newRecipe.ingredients;
+            recipe.prepTime = newRecipe.prepTime;
+            recipe.cookTime = newRecipe.cookTime;
+
+            recipe.save().then(recipe => {
+                res.json({'status': 'recipe updated successfully', 'recipe': recipe});
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).send("Failed to update recipe");
+            });
+        }
+    });
+});
+
 const storage = multer.diskStorage({
     destination: imagesDir,
     filename: function(req, file, cb) {
