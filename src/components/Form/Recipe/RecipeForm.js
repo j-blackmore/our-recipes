@@ -63,7 +63,7 @@ export default class RecipeForm extends React.Component {
 
     isValidInteger(input) {
         const intInput = parseInt(input);
-        return !isNaN(intInput) && intInput >= 0;
+        return !isNaN(intInput) && input == intInput && intInput >= 0;
     };
 
     errorsExist(errors) {
@@ -76,7 +76,7 @@ export default class RecipeForm extends React.Component {
             extraError = !this.isValidInteger(this.state.recipe[name]);
         }
 
-        return this.state.recipe[name].length <= 0 || extraError;
+        return this.state.recipe[name].trim().length <= 0 || extraError;
     };
 
     handleInputChange(event) {
