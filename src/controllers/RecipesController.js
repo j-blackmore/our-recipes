@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import RecipeGrid from '../containers/Recipe/RecipeGrid';
 
-export default class RecipeController extends React.Component {
+export default class RecipesController extends React.Component {
 
     constructor(props) {
         super(props);
