@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import NewRecipeModal from '../components/Recipe/New/NewRecipeModal';
 
-export default class CreateRecipeController extends React.Component {
+export default class RecipeController extends React.Component {
     
     constructor(props) {
         super(props);
