@@ -5,12 +5,12 @@ import RecipeController from '../../controllers/RecipeController';
 export default function RecipeGridItemAdd(props) {
     return (
         <React.Fragment>
-            <AddRecipeCard classes={props.classes} handleOpen={props.handleOpen} />
+            <AddRecipeCard classes={props.classes} handleViewOpen={props.handleViewOpen} />
             <RecipeController 
-                addNewRecipe={props.addNewRecipe} 
-                open={props.open} 
-                handleOpen={props.handleOpen} 
-                handleClose={props.handleClose} 
+                addNewRecipe={props.addNewRecipe}
+                open={props.viewOpen}
+                handleOpen={props.handleViewOpen} 
+                handleClose={props.handleViewClose}
             />
         </React.Fragment>
     );

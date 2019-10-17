@@ -135,7 +135,7 @@ export default class RecipeForm extends React.Component {
 
         return (
             <form onSubmit={this.onFormSubmit} noValidate>
-            <CardContent className={classes.content}>
+            <CardContent style={classes.content}>
                 <RecipeFormInputs
                     errors={state.errors}
                     recipe={state.recipe} 
@@ -144,7 +144,7 @@ export default class RecipeForm extends React.Component {
                     uploadedImageName={state.imageName}
                 />
             </CardContent>
-            <CardActions className={classes.actions}>
+            <CardActions style={classes.actions}>
                 <SaveRecipeButton onFormSubmit={this.onFormSubmit.bind(this)} />
             </CardActions>
         </form>

@@ -17,7 +17,7 @@ export default function RecipeCard(props) {
     const recipe = props.recipe;
 
     return (
-        <RecipeCardContainer classes={classNames} handleOpen={props.handleOpen}>
+        <RecipeCardContainer classes={classNames} onClick={props.onClick}>
             <RecipeCardAction>
                 <RecipeHeader title={recipe.title} subtitle={recipe.subtitle}/>
                 <RecipeImage imageUrl={recipe.imageUrl}/>

@@ -5,8 +5,8 @@ import RecipeDetailedModal from '../../components/Recipe/RecipeDetailedModal';
 export default function RecipeGridItemRecipe(props) {
     return (
         <React.Fragment>
-            <RecipeCard recipe={props.recipe} handleOpen={props.handleOpen} />
-            <RecipeDetailedModal open={props.open} handleClose={props.handleClose} recipe={props.recipe} handleDelete={props.handleDelete} />
+            <RecipeCard recipe={props.recipe} onClick={props.handleViewOpen} />
+            <RecipeDetailedModal viewOpen={props.viewOpen} handleViewClose={props.handleViewClose} recipe={props.recipe} handleDelete={props.handleDelete} />
         </React.Fragment>
     );
 }

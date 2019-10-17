@@ -19,7 +19,7 @@ export default function RecipeCardDetailed(props) {
     const classList = [props.classes, classes.card].join(" ")
 
     return (
-        <RecipeCardContainer classes={classList} handleOpen={props.handleOpen}>
+        <RecipeCardContainer classes={classList} >
             <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}/>
             <RecipeImage imageUrl={recipe.imageUrl}/>
             <RecipeContent recipe={recipe} detailed={true} />

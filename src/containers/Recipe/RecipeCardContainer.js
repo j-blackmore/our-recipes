@@ -16,7 +16,7 @@ export default function RecipeCardContainer(props) {
     let classNames = [classes.card, props.classes].join(" ")
 
     return (
-        <Card className={classNames} onClick={props.handleOpen}>
+        <Card className={classNames} onClick={props.onClick}>
             {props.children}
         </Card>
     );

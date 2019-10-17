@@ -4,26 +4,51 @@ import RecipeGridItemRecipe from '../containers/Recipe/RecipeGridItemRecipe';
 import RecipeGridItemAdd from '../containers/Recipe/RecipeGridItemAdd';
 
 export default function RecipeItemController(props) {
-    const [open, setOpen] = React.useState(false);
+    const [viewOpen, setViewOpen] = React.useState(false);
+    const [editOpen, setEditOpen] = React.useState(false);
 
-    const handleOpen = () => {
-        setOpen(true);
+    const handleViewOpen = () => {
+        setViewOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleViewClose = () => {
+        setViewOpen(false);
     };
+
+    const handleEditOpen = () => {
+        setEditOpen(true);
+    }
+
+    const handleEditClose = () => {
+        setEditOpen(false);
+    }
 
     const handleDelete = () => {
-        handleClose();
+        handleViewClose();
         props.deleteRecipe(props.recipe._id);
     }
 
     let RecipeItem;
     if(props.recipe) {
-        RecipeItem = <RecipeGridItemRecipe recipe={props.recipe} handleOpen={handleOpen} handleClose={handleClose} open={open} handleDelete={handleDelete} />;
+        RecipeItem = 
+            <RecipeGridItemRecipe 
+                recipe={props.recipe} 
+                handleViewOpen={handleViewOpen} 
+                handleViewClose={handleViewClose} 
+                viewOpen={viewOpen} 
+                handleDelete={handleDelete}
+                handleEditOpen={handleEditOpen}
+                handleEditClose={handleEditClose}
+                editOpen={editOpen}
+            />;
     } else if(props.newRecipe) {
-        RecipeItem = <RecipeGridItemAdd addNewRecipe={props.addNewRecipe} handleOpen={handleOpen} handleClose={handleClose} open={open} />;
+        RecipeItem = 
+            <RecipeGridItemAdd 
+                addNewRecipe={props.addNewRecipe} 
+                handleViewOpen={handleViewOpen} 
+                handleViewClose={handleViewClose} 
+                viewOpen={viewOpen} 
+            />;
     }
 
     return (

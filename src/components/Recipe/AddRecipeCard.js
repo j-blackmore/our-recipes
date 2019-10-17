@@ -15,7 +15,7 @@ export default function AddRecipeCard(props) {
     let classNames= [classes.card, props.classes].join(" ");
 
     return(
-        <RecipeCardContainer classes={classNames} handleOpen={props.handleOpen}>
+        <RecipeCardContainer classes={classNames} onClick={props.handleViewOpen}>
             <RecipeCardAction>
                 <Typography variant="h2">
                     +
