@@ -28,6 +28,11 @@ export default function RecipeItemController(props) {
         props.deleteRecipe(props.recipe._id);
     }
 
+    const handleEdit = () => {
+        handleViewClose();
+        handleEditOpen();
+    }
+
     let RecipeItem;
     if(props.recipe) {
         RecipeItem = 
@@ -40,6 +45,8 @@ export default function RecipeItemController(props) {
                 handleEditOpen={handleEditOpen}
                 handleEditClose={handleEditClose}
                 editOpen={editOpen}
+                handleEdit={handleEdit}
+                updateRecipe={props.updateRecipe}
             />;
     } else if(props.newRecipe) {
         RecipeItem = 

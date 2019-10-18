@@ -20,20 +20,22 @@ const useStyles = makeStyles({
     }
 });
 
-export default function NewRecipeCard(props) {
+export default function EditRecipeCard(props) {
     const classes = useStyles();
     
     return (
         <RecipeCardContainer classes={classes.card} >
             <RecipeHeader 
                 classes={classes.header}
-                title="Create New Recipe" 
-                subtitle="Enter your recipe below, add an image and save."
+                title="Edit Recipe" 
+                subtitle="Update contents and save"
                 action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}
             />
             <RecipeForm 
                 classes={classes.content}
-                onSubmit={props.saveRecipe} 
+                recipe={props.recipe}
+                onSubmit={props.updateRecipe}
+                noImage
             />
         </RecipeCardContainer>
     );

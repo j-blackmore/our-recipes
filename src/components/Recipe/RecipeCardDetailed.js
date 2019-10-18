@@ -23,7 +23,7 @@ export default function RecipeCardDetailed(props) {
             <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}/>
             <RecipeImage imageUrl={recipe.imageUrl}/>
             <RecipeContent recipe={recipe} detailed={true} />
-            <RecipeActions handleDelete={props.handleDelete} />
+            <RecipeActions handleDelete={props.handleDelete} handleEdit={props.handleEdit} />
         </RecipeCardContainer>
     );
 }

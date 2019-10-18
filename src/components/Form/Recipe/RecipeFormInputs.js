@@ -59,10 +59,12 @@ export default function RecipeFormInputs(props) {
                 hasError={props.errors.ingredients} 
                 handleInputChange={props.handleInputChange}
             />
+            {!props.noImage &&
             <AddImageButton 
                 handleImageUpload={props.handleImageUpload} 
                 uploadedImageName={props.uploadedImageName}
             />
+            }
         </FormControl>
     );
 }

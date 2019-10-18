@@ -19,6 +19,7 @@ export default function RecipeDetailedModal(props) {
                 recipe={props.recipe} 
                 handleClose={props.handleViewClose}
                 handleDelete={props.handleDelete}
+                handleEdit={props.handleEdit}
             />
         </RecipeModal>
     );

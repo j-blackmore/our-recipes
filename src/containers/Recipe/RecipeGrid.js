@@ -17,7 +17,7 @@ export default function RecipeGrid(props) {
             <Grid container justify="center" spacing={spacing}>
                 <Grid container justify="center" spacing={spacing}>
                     { props.recipes.map(function(recipe, i) {
-                        return <RecipeItemController recipe={recipe} key={i} deleteRecipe={props.deleteRecipe}/>
+                        return <RecipeItemController recipe={recipe} key={i} deleteRecipe={props.deleteRecipe} updateRecipe={props.updateRecipe}/>
                     })}
                     <RecipeItemController newRecipe={true} addNewRecipe={props.addNewRecipe} />
                 </Grid>

@@ -23,6 +23,15 @@ export default class RecipeForm extends React.Component {
             imageData: {},
             imageName: ""
         };
+
+        // convert ingredients array to a string,
+        // cast timings to strings for editing so .length() validation works
+        if(props.recipe) {
+            Object.assign(this.state.recipe, props.recipe);
+            this.state.recipe.ingredients = this.state.recipe.ingredients.join('\n')
+            this.state.recipe.prepTime = this.state.recipe.prepTime.toString();
+            this.state.recipe.cookTime = this.state.recipe.cookTime.toString();
+        }
     };
 
     initialiseErrorChecking() {
@@ -39,9 +48,7 @@ export default class RecipeForm extends React.Component {
     };
 
     initialiseRecipe() {
-        if(this.props.recipe) {
-            this.setState({ recipe: this.props.recipe });
-        } else {
+        if(!this.props.recipe) {
             this.setState({
                 recipe: {
                     title: "",
@@ -57,8 +64,8 @@ export default class RecipeForm extends React.Component {
     };
 
     componentDidMount() {
-        this.initialiseErrorChecking();
         this.initialiseRecipe();
+        this.initialiseErrorChecking();
     };
 
     isValidInteger(input) {
@@ -126,7 +133,11 @@ export default class RecipeForm extends React.Component {
 
     onFormSubmit = () => {
         if(this.validateForm()) {
-            this.props.saveRecipe(this.state.recipe, this.state.imageData);
+            if(this.props.noImage) {
+                this.props.onSubmit(this.state.recipe);
+            } else {
+                this.props.onSubmit(this.state.recipe, this.state.imageData);
+            }
         }
     };
 
@@ -137,6 +148,7 @@ export default class RecipeForm extends React.Component {
             <form onSubmit={this.onFormSubmit} noValidate>
             <CardContent style={classes.content}>
                 <RecipeFormInputs
+                    noImage={this.props.noImage}
                     errors={state.errors}
                     recipe={state.recipe} 
                     handleInputChange={this.handleInputChange.bind(this)} 

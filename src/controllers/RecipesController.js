@@ -32,6 +32,17 @@ export default class RecipesController extends React.Component {
         this.setState(recipes);
     };
 
+    updateRecipe(recipe) {
+        let recipeId = recipe._id;
+        let recipes = this.state.recipes;
+
+        recipes[recipes.findIndex((recipe) => {
+            return recipe._id === recipeId;
+        })] = recipe;
+
+        this.setState(recipes);
+    }
+
     deleteRecipe(recipeId) {
         axios.post('http://localhost:4000/recipes/delete/' + recipeId)
             .then(response => {
@@ -60,6 +71,7 @@ export default class RecipesController extends React.Component {
                 recipes={this.state.recipes} 
                 addNewRecipe={this.addNewRecipe.bind(this)} 
                 deleteRecipe={this.deleteRecipe.bind(this)}
+                updateRecipe={this.updateRecipe.bind(this)}
             />
         );
     };

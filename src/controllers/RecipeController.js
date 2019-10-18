@@ -1,23 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import NewRecipeModal from '../components/Recipe/New/NewRecipeModal';
+import EditRecipeModal from '../components/Recipe/Edit/EditRecipeModal';
 
 export default class RecipeController extends React.Component {
 
-    // Default mode is 'create' - modes: 'create' | 'edit'
-    constructor(props) {
-        super(props);
-        this.state = {
-            mode: "create"
-        };
-    };
+    getIngredientsArray(ingredientsStr) {
+        return ingredientsStr.split(/\r?\n/);
+    }
 
     postNewRecipe(newRecipe, newImage) {
-        let ingredientsStr = newRecipe.ingredients;
-        let ingredients = ingredientsStr.split(/\r?\n/);
-        newRecipe.ingredients = ingredients;
+        newRecipe.ingredients = this.getIngredientsArray(newRecipe.ingredients);
 
-        const config = {
+        const config = { 
             headers: {
                 'content-type': 'multipart/form-data'
             }
@@ -44,14 +39,44 @@ export default class RecipeController extends React.Component {
             });
     };
 
+    updateRecipe(recipe) {
+        recipe.ingredients = this.getIngredientsArray(recipe.ingredients);
+
+        axios.post('http://localhost:4000/recipes/update/' + recipe._id, recipe)
+            .then(response => {
+                this.props.handleClose();
+                this.props.updateRecipe(recipe);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     render() {
+        let Modal;
+        if(this.props.mode === "edit") {
+            Modal = 
+                <EditRecipeModal
+                    recipe={this.props.recipe}
+                    editOpen={this.props.editOpen}
+                    handleEditClose={this.props.handleClose}
+                    handleEditOpen={this.props.handleOpen}
+                    updateRecipe={this.updateRecipe.bind(this)}
+                />
+        } else {
+            Modal = 
+                <NewRecipeModal 
+                    open={this.props.open} 
+                    handleOpen={this.props.handleOpen} 
+                    handleClose={this.props.handleClose} 
+                    saveRecipe={this.postNewRecipe.bind(this)}
+                />
+        }
+
         return (
-            <NewRecipeModal 
-                open={this.props.open} 
-                handleOpen={this.props.handleOpen} 
-                handleClose={this.props.handleClose} 
-                saveRecipe={this.postNewRecipe.bind(this)}
-            />
+            <React.Fragment>
+                {Modal}
+            </React.Fragment>
         );
     };
 }
