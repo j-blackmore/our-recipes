@@ -15,8 +15,18 @@ const imagesDir = "public/images/";
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/our_recipes', { useNewUrlParser: true });
+const dbConnect = () => {
+    mongoose.connect('mongodb://mongodb:27017/our_recipes', { useNewUrlParser: true });
+};
+
+dbConnect();
 const connection = mongoose.connection;
+
+connection.on('error', err => {
+    console.log('There was a problem trying to connect to mongo');
+    console.log('Retrying');
+    setTimeout(() => dbConnect(), 5000);
+});
 
 connection.once('open', function() {
     console.log('MongoDB database connection established successfully!');
