@@ -19,7 +19,7 @@ export default class RecipeController extends React.Component {
         };
 
         if(Object.keys(newImage).length !== 0) {
-            axios.post('http://localhost:4000/recipes/uploadImage', newImage, config)
+            axios.post('/recipes/uploadImage', newImage, config)
             .then(response => {
                 
             })
@@ -28,7 +28,7 @@ export default class RecipeController extends React.Component {
             });
         }
 
-        axios.post('http://localhost:4000/recipes/add', newRecipe)
+        axios.post('/recipes/add', newRecipe)
             .then(response => {
                 newRecipe._id = response.data.objectID;
                 this.props.addNewRecipe(newRecipe);
@@ -42,7 +42,7 @@ export default class RecipeController extends React.Component {
     updateRecipe(recipe) {
         recipe.ingredients = this.getIngredientsArray(recipe.ingredients);
 
-        axios.post('http://localhost:4000/recipes/update/' + recipe._id, recipe)
+        axios.post('/recipes/update/' + recipe._id, recipe)
             .then(response => {
                 this.props.handleClose();
                 this.props.updateRecipe(recipe);

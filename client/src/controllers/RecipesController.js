@@ -10,7 +10,7 @@ export default class RecipesController extends React.Component {
     };
 
     fetchAllRecipes() {
-        axios.get('http://localhost:4000/recipes/')
+        axios.get('/recipes')
             .then(response => {
                 const newRecipes = response.data;
                 newRecipes.map(recipe => {
@@ -44,7 +44,7 @@ export default class RecipesController extends React.Component {
     }
 
     deleteRecipe(recipeId) {
-        axios.post('http://localhost:4000/recipes/delete/' + recipeId)
+        axios.post('/recipes/delete/' + recipeId)
             .then(response => {
                 let recipes = this.state.recipes;
                 recipes.splice(recipes.findIndex((recipe) => {
