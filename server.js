@@ -38,12 +38,12 @@ connection.once('open', function() {
     console.log('MongoDB database connection established successfully!');
 });
 
-routes.route('/').get(function(req, res) {
+routes.route('').get(function(req, res) {
     Recipe.find(function(err, recipes) {
         if (err) {
             console.log(err);
         } else {
-            res.json(recipes);
+            res.status(200).json(recipes);
         }
     });
 });
