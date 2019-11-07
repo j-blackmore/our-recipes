@@ -4,9 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = express.Router();
-const PORT = 4000;
+require("dotenv").config();
+const PORT = process.env.PORT || 4000;
 const multer = require('multer');
 const fs = require('fs');
+const path = require("path")
+
+const DB_URI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/our_recipes';
 
 let Recipe = require('./models/recipe.model');
 
@@ -15,8 +19,10 @@ const imagesDir = "public/images/";
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, "client", "build")))
+
 const dbConnect = () => {
-    mongoose.connect('mongodb://mongodb:27017/our_recipes', { useNewUrlParser: true });
+    mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 };
 
 dbConnect();
@@ -112,6 +118,10 @@ routes.route('/uploadImage').post(function(req, res) {
 });
 
 app.use('/recipes', routes);
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
