@@ -14,7 +14,8 @@ const DB_URI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/our_recipes';
 
 let Recipe = require('./models/recipe.model');
 
-const imagesDir = "public/images/";
+const PUBLIC_DIR = "client/public";
+const IMAGES_DIR = PUBLIC_DIR + "/images/";
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -62,7 +63,7 @@ routes.route('/add').post(function(req, res) {
 routes.route('/delete/:id').post(async function(req, res) {
     var recipeId = req.params.id;
     const recipeToDelete = await Recipe.findById(recipeId, 'imageUrl', {lean: true});
-    const recipeImagePath = "public" + recipeToDelete.imageUrl;
+    const recipeImagePath = PUBLIC_DIR + recipeToDelete.imageUrl;
 
     Recipe.deleteOne({_id: recipeId}, function(err) {
         if(!err) {
@@ -102,7 +103,7 @@ routes.route('/update/:id').post(function(req, res) {
 });
 
 const storage = multer.diskStorage({
-    destination: imagesDir,
+    destination: IMAGES_DIR,
     filename: function(req, file, cb) {
         cb(null, file.originalname);
     }

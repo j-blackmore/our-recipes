@@ -18,7 +18,7 @@ export default class RecipeController extends React.Component {
             }
         };
 
-        if(Object.keys(newImage).length !== 0) {
+        if(newImage !== null) {
             axios.post('/recipes/uploadImage', newImage, config)
             .then(response => {
                 

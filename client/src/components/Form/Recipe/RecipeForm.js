@@ -20,7 +20,7 @@ export default class RecipeForm extends React.Component {
         this.state = {
             recipe: {},
             errors: {},
-            imageData: {},
+            imageData: null,
             imageName: ""
         };
 
