@@ -27,4 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # images
-public/images
+client/public/images
