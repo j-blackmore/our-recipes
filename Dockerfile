@@ -1,11 +1,12 @@
 FROM node:12-alpine
 
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /app/server
+WORKDIR /app/server
 
 COPY . .
 
-RUN npm install 
+RUN npm install
+RUN npm install -g nodemon
 
-EXPOSE 3000
+EXPOSE 4000
 CMD [ "npm", "start" ]
