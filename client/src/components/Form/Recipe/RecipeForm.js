@@ -71,7 +71,7 @@ export default class RecipeForm extends React.Component {
 
     isValidInteger(input) {
         const intInput = parseInt(input);
-        return !isNaN(intInput) && input == intInput && intInput >= 0;
+        return !isNaN(intInput) && !isNaN(input - 0) && intInput >= 0;
     };
 
     errorsExist(errors) {

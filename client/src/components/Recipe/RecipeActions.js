@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardActions, IconButton, Icon } from '@material-ui/core';
+import { CardActions, IconButton } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
 import Edit from '@material-ui/icons/Edit';
 
