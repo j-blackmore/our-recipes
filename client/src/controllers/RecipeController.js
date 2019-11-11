@@ -9,7 +9,7 @@ export default class RecipeController extends React.Component {
         return ingredientsStr.split(/\r?\n/);
     }
 
-    postNewRecipe(newRecipe, newImage) {
+    async postNewRecipe(newRecipe, newImage) {
         newRecipe.ingredients = this.getIngredientsArray(newRecipe.ingredients);
 
         const config = { 
@@ -19,16 +19,17 @@ export default class RecipeController extends React.Component {
         };
 
         if(newImage !== null) {
-            axios.post('/recipes/uploadImage', newImage, config)
+            await axios.post('/recipes/uploadImage', newImage, config)
             .then(response => {
-                
+                newRecipe.imageUrl = response.data.imageUrl;
+                newRecipe.imageId = response.data.imageId;
             })
             .catch(error => {
                 console.log(error);
             });
         }
 
-        axios.post('/recipes/add', newRecipe)
+        await axios.post('/recipes/add', newRecipe)
             .then(response => {
                 newRecipe._id = response.data.objectID;
                 this.props.addNewRecipe(newRecipe);

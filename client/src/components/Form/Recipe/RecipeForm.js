@@ -55,6 +55,7 @@ export default class RecipeForm extends React.Component {
                     subtitle: "",
                     method: "",
                     imageUrl: "",
+                    iamgeId: "",
                     ingredients: "",
                     prepTime: "",
                     cookTime: ""

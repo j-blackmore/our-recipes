@@ -7,6 +7,7 @@ let Recipe = new Schema({
     ingredients: { type: [String] },
     method: { type: String },
     imageUrl: { type: String },
+    imageId: { type: String },
     prepTime: { type: Number },
     cookTime: { type: Number }
 });
