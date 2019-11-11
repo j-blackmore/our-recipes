@@ -127,8 +127,7 @@ routes.route('/uploadImage').post(function(req, res) {
     // upload file to cloudinary
     IncomingForm().parse(req, (err, fields, files) => {
         if (err) {
-            console.log('error');
-            throw err;
+            console.log(err);
         }
 
         cloudinary.uploader.upload(
@@ -144,9 +143,6 @@ routes.route('/uploadImage').post(function(req, res) {
                     imageUrl: image.url,
                     imageId: image.public_id
                 });
-                console.log("=== success ===");
-                console.log(image);
-                console.log("=== success ===");
             }
         );
     });
