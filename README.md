@@ -15,13 +15,6 @@ And now install the pacakges using either
 ```
 $ npm run setup
 ```
-or
-```
-$ npm install
-$ cd client
-$ npm install
-```
-
 Now you have installed, you need to get the server running using
 ```
 $ npm run dev
@@ -35,9 +28,7 @@ For running in devlopment mode, simply the following from the project root
 ```
 $ npm run dev
 ```
-
 To run the server and client separately, use the following
-
 ```
 # for the server
 $ npm start
@@ -46,14 +37,11 @@ $ npm start
 $ cd client
 $ npm start
 ```
-
 To convert the react app into a build product, run this
-
 ```
 $ cd client
 $ npm run build
 ```
-
 You will find the resultant build in `client/build/`
 
 # Structure
