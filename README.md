@@ -4,7 +4,7 @@ Hub which hosts your recipes. Create, Edit and View recipes at your pleasure.
 Upload an image, the ingredients and it's method, alongwith the timings. Give 
 it a name and description and you are good to go!
 
-![](https://github.com/j-blackmore/our-recipes/workflows/Build%20%26%20Tests/badge.svg)
+![](https://github.com/j-blackmore/our-recipes/workflows/Build%20&%20Tests/badge.svg)
 
 # Setup
 To get started developing on this project, you need to clone the repo (Note: this is cloning using SSH)
