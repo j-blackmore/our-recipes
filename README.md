@@ -5,6 +5,7 @@ Upload an image, the ingredients and it's method, alongwith the timings. Give
 it a name and description and you are good to go!
 
 ![](https://github.com/j-blackmore/our-recipes/workflows/Build%20&%20Tests/badge.svg)
+[![](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/j-blackmore/our-recipes/releases/latest)
 
 # Setup
 To get started developing on this project, you need to clone the repo (Note: this is cloning using SSH)
