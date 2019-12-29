@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-const DB_URI = process.env.MONGODB_URI || "mongodb://mongodb:27017/our_recipes";
+const DB_URI = process.env.ENV === 'DEV' 
+    ? "mongodb://localhost:27017/our_recipes" 
+    : process.env.MONGODB_URI;
 
 const connect = () => {
     mongoose.connect(DB_URI, {
