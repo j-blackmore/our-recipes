@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function RecipeCardDetailed(props) {
+const RecipeCardDetailed = React.forwardRef((props, ref) => {
     const classes = useStyles();
     const recipe = props.recipe;
     const classList = [props.classes, classes.card].join(" ")
@@ -26,4 +26,6 @@ export default function RecipeCardDetailed(props) {
             <RecipeActions handleDelete={props.handleDelete} handleEdit={props.handleEdit} />
         </RecipeCardContainer>
     );
-}
+});
+
+export default RecipeCardDetailed;

@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function NewRecipeCard(props) {
+const NewRecipeCard = React.forwardRef((props, ref) => {
     const classes = useStyles();
     
     return (
@@ -37,4 +37,6 @@ export default function NewRecipeCard(props) {
             />
         </RecipeCardContainer>
     );
-}
+});
+
+export default NewRecipeCard;
