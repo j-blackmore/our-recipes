@@ -1,5 +1,5 @@
 import React from 'react';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 function HeaderScroll(props) {
     const { children, window } = props;
@@ -11,7 +11,7 @@ function HeaderScroll(props) {
     });
 
     return React.cloneElement(children, {
-        elevation: trigger ? 4 : 0,
+        elevation: trigger ? 4 : 0
     });
 }
 
