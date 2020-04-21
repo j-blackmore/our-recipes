@@ -4,11 +4,13 @@
   "description": "Main package for our recipes. Contains the server",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
     "start": "node server.js",
     "setup": "npm i && cd client && npm i",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
-    "dev": "concurrently mongod \"nodemon server.js\" \"cd client && npm start\""
+    "dev": "concurrently mongod \"nodemon server.js\" \"cd client && npm start\"",
+    "test": "jest",
+    "coverage:test": "jest --coverage",
+    "watch:test": "jest --watch"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +29,17 @@
     "node": "10.13.0"
   },
   "devDependencies": {
+    "jest-cli": "^25.4.0",
     "multer": "^1.4.2",
     "nodemon": "^2.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "./client"
+    ],
+    "collectCoverageFrom": [
+      "*.js"
+    ]
   }
 }
