@@ -1,7 +1,7 @@
 {
-  "name": "recipes-app",
-  "version": "1.0.1",
-  "description": "Our recipes React client app.",
+  "name": "our-recipes-client",
+  "version": "1.1.0",
+  "description": "Our recipes react client app.",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.11",
