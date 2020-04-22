@@ -9,13 +9,55 @@ it a name and description and you are good to go!
 
 _This is currently a work in progress and needs updating_
 
-# Structure
-
-_TODO_
-
 # Setup
 
 _TODO_
+
+# Structure
+
+```
+.
+├── server
+│   ├── controllers
+│   │   ├── mongoDB.js
+│   │   ├── recipe.route.js
+│   │   ├── router.js
+│   │   └── ...
+│   ├── models
+│   │   ├── recipe.model.js
+│   │   └── ...
+│   ├── server.js
+│   ├── server.test.js
+│   └── ...
+├── client
+│   ├── public
+│   │   ├── images
+│   │   │   └── ...
+│   │   ├── index.html
+│   │   └── ...
+│   ├── src
+│   │   ├── components
+│   │   │   ├── MyComponent
+│   │   │   │   ├── __tests__
+│   │   │   │   │   ├── MyComponent.test.js
+│   │   │   │   │   └── ...
+│   │   │   │   ├── MyComponent.js
+│   │   │   │   └── ...
+│   │   │   └── ...
+│   │   ├── containers
+│   │   │   └── ...
+│   │   ├── controllers
+│   │   │   └── ...
+│   │   ├── theme
+│   │   │   ├── MuiCustomTheme.js
+│   │   │   └── ...
+│   │   ├── index.js
+│   │   ├── serviceWorker.js
+│   │   └── ...
+│   └── ...
+├── .env
+└── ...
+```
 
 # Tests
 
