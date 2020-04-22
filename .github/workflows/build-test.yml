@@ -21,6 +21,6 @@ jobs:
       - name: Run client tests & build
         run: |
           cd client
-          npm run install
+          npm install
           npm run test
           npm run build
