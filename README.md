@@ -5,7 +5,7 @@ Upload an image, the ingredients and it's method, alongwith the timings. Give
 it a name and description and you are good to go!
 
 ![Tests and Build](https://github.com/j-blackmore/our-recipes/workflows/Tests%20and%20Build/badge.svg)
-[![](https://img.shields.io/badge/Version-1.0.0-blue)](https://github.com/j-blackmore/our-recipes/releases/latest)
+[![](https://img.shields.io/badge/Version-1.1.0-blue)](https://github.com/j-blackmore/our-recipes/releases/latest)
 
 # Setup
 
