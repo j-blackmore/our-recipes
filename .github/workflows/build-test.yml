@@ -1,27 +1,24 @@
-name: Build & Tests
-
+name: Run Tests and Build
 on: [push]
-
 jobs:
   build:
-    name: Build & Test
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
-
+        node-version: ['12', '10', '8']
+    name: Node v${{ matrix.node-version }}
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Run tests & build
-        run: npm install
-        run: npm test
+      - name: Run server tests
         run: |
-          npm run build --if-present
-          npm run heroku-postbuild
-        env:
-          CI: true
+          npm install
+          npm test
+      - name: Run client tests & build
+        run: |
+          npm run client:install
+          npm run client:test
+          npm run client:build
