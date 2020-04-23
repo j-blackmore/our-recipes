@@ -1,8 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const DB_URI = process.env.ENV === 'DEV' 
-    ? "mongodb://localhost:27017/our_recipes" 
-    : process.env.MONGODB_URI;
+const DB_URI =
+    process.env.ENV === 'DEV'
+        ? 'mongodb://127.0.0.1:27017/our_recipes'
+        : process.env.MONGODB_URI;
 
 const connect = () => {
     mongoose.connect(DB_URI, {
@@ -12,12 +13,12 @@ const connect = () => {
 
     const connection = mongoose.connection;
 
-    connection.on("error", () => {
-        console.log("There was a problem trying to connect to the DB");
+    connection.on('error', () => {
+        console.log('There was a problem trying to connect to the DB');
     });
 
-    connection.on("open", () => {
-        console.log("MongoDB database connection established");
+    connection.on('open', () => {
+        console.log('MongoDB database connection established');
     });
 };
 

@@ -9,9 +9,96 @@ it a name and description and you are good to go!
 
 _This is currently a work in progress and needs updating_
 
-# Setup
+# First-time Setup
 
-_TODO_
+_Follow these steps to setup a local dev environment_
+
+## MongoDB
+
+Firstly we need to download and install a database. We are using MongoDB, a
+document database which works perfectly for us - download the latest community
+edition, instructions can be found
+[here](https://docs.mongodb.com/manual/installation/).
+We are currently using `v4.2.6` but any `v4.2.x` should work fine.
+
+For mac users using homebrew, you can use this
+
+```bash
+$ brew tap mongodb/brew
+$ brew install mongodb
+```
+
+Once mongoDB is installed, we need to start the database
+
+```bash
+$ cd server
+$ mongod
+```
+
+Or if you want to run it as a background process, run this instead
+
+```bash
+$ cd server
+$ mongod --config /usr/local/etc/mongod.conf --fork
+```
+
+Now we have mongoDB up and running, for first time installation we need to
+create our database (if you have already done this step before, skip to the
+'server' section).
+
+Open a new shell and start by opening a connection to the database from the
+terminal, and then create the database.
+
+```bash
+$ mongo
+> use our_recipes
+> exit
+```
+
+## Server
+
+Now the datbase is up and running and has been created, we need to install
+and start the server. We are using an ExpressJS server run on node.
+
+```bash
+$ cd server
+$ npm install
+$ npm run dev
+```
+
+## Client
+
+The final step is to install and run the client, which is React. Navigate to
+the project root directory and run the following
+
+```bash
+$ cd client
+$ npm install
+$ npm start
+```
+
+# Restarting Dev Environment
+
+When returning to development, and restarting up the dev environment - you
+simply need to start the database, server and client - in that order.
+
+Each in a separate shell, always starting from the project root directory run
+
+```bash
+# Start mongoDB
+$ cd server
+$ mongod
+
+
+# Start the server
+$ cd server
+$ npm run dev
+
+
+# Start the client
+$ cd client
+$ npm start
+```
 
 # Structure
 

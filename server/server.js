@@ -18,13 +18,13 @@ app.use(cors());
 app.use(router);
 mongoDB.connect();
 
-if(ENV === 'PROD') {
+if (ENV === 'PROD') {
     app.use(express.static(path.join(__dirname, 'client', 'build')));
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     });
 }
 
-app.listen(PORT, function() {
+app.listen(PORT, () => {
     console.log('Server is running on Port: ' + PORT);
 });
