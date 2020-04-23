@@ -17,45 +17,47 @@ export default function RecipeItemController(props) {
 
     const handleEditOpen = () => {
         setEditOpen(true);
-    }
+    };
 
     const handleEditClose = () => {
         setEditOpen(false);
-    }
+    };
 
     const handleDelete = () => {
         handleViewClose();
         props.deleteRecipe(props.recipe._id);
-    }
+    };
 
     const handleEdit = () => {
         handleViewClose();
         handleEditOpen();
-    }
+    };
 
     let RecipeItem;
-    if(props.recipe) {
-        RecipeItem = 
-            <RecipeGridItemRecipe 
-                recipe={props.recipe} 
-                handleViewOpen={handleViewOpen} 
-                handleViewClose={handleViewClose} 
-                viewOpen={viewOpen} 
+    if (props.recipe) {
+        RecipeItem = (
+            <RecipeGridItemRecipe
+                recipe={props.recipe}
+                handleViewOpen={handleViewOpen}
+                handleViewClose={handleViewClose}
+                viewOpen={viewOpen}
                 handleDelete={handleDelete}
                 handleEditOpen={handleEditOpen}
                 handleEditClose={handleEditClose}
                 editOpen={editOpen}
                 handleEdit={handleEdit}
                 updateRecipe={props.updateRecipe}
-            />;
-    } else if(props.newRecipe) {
-        RecipeItem = 
-            <RecipeGridItemAdd 
-                addNewRecipe={props.addNewRecipe} 
-                handleViewOpen={handleViewOpen} 
-                handleViewClose={handleViewClose} 
-                viewOpen={viewOpen} 
-            />;
+            />
+        );
+    } else if (props.newRecipe) {
+        RecipeItem = (
+            <RecipeGridItemAdd
+                addNewRecipe={props.addNewRecipe}
+                handleViewOpen={handleViewOpen}
+                handleViewClose={handleViewClose}
+                viewOpen={viewOpen}
+            />
+        );
     }
 
     return (

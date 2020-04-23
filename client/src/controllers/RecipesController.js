@@ -3,14 +3,14 @@ import axios from 'axios';
 import RecipeGrid from '../containers/Recipe/RecipeGrid';
 
 export default class RecipesController extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { recipes: [] };
-    };
+    }
 
     fetchAllRecipes() {
-        axios.get('/recipes')
+        axios
+            .get('/recipes')
             .then(response => {
                 const newRecipes = response.data;
                 newRecipes.map(recipe => {
@@ -23,33 +23,39 @@ export default class RecipesController extends React.Component {
             .catch(error => {
                 console.log(error);
             });
-    };
+    }
 
     addNewRecipe(newRecipe) {
         var recipes = this.state.recipes;
         recipes.push(newRecipe);
 
         this.setState(recipes);
-    };
+    }
 
     updateRecipe(recipe) {
         let recipeId = recipe._id;
         let recipes = this.state.recipes;
 
-        recipes[recipes.findIndex((recipe) => {
-            return recipe._id === recipeId;
-        })] = recipe;
+        recipes[
+            recipes.findIndex(recipe => {
+                return recipe._id === recipeId;
+            })
+        ] = recipe;
 
         this.setState(recipes);
     }
 
     deleteRecipe(recipeId) {
-        axios.post('/recipes/delete/' + recipeId)
+        axios
+            .post('/recipes/delete/' + recipeId)
             .then(response => {
                 let recipes = this.state.recipes;
-                recipes.splice(recipes.findIndex((recipe) => {
-                    return recipe._id === recipeId;
-                }), 1);
+                recipes.splice(
+                    recipes.findIndex(recipe => {
+                        return recipe._id === recipeId;
+                    }),
+                    1
+                );
 
                 this.setState({
                     ...this.state,
@@ -59,20 +65,20 @@ export default class RecipesController extends React.Component {
             .catch(error => {
                 console.log(error);
             });
-    };
+    }
 
     componentDidMount() {
         this.fetchAllRecipes();
-    };
+    }
 
     render() {
-        return(
-            <RecipeGrid 
-                recipes={this.state.recipes} 
-                addNewRecipe={this.addNewRecipe.bind(this)} 
+        return (
+            <RecipeGrid
+                recipes={this.state.recipes}
+                addNewRecipe={this.addNewRecipe.bind(this)}
                 deleteRecipe={this.deleteRecipe.bind(this)}
                 updateRecipe={this.updateRecipe.bind(this)}
             />
         );
-    };
+    }
 }
