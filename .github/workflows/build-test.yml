@@ -15,10 +15,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Run server tests
         run: |
+          cd server
           npm install
           npm test
       - name: Run client tests & build
         run: |
-          npm run client:install
-          npm run client:test
-          npm run client:build
+          cd client
+          npm install
+          npm run test
+          npm run build
