@@ -1,28 +1,28 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/Toolbar';
-import { Typography } from '@material-ui/core';
-import HeaderScroll from './HeaderScroll';
+import { Typography, useScrollTrigger } from '@material-ui/core';
 
 const appBarStyle = {
     alignItems: 'center'
 };
 
-class Header extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                <HeaderScroll>
-                    <AppBar style={appBarStyle}>
-                        <ToolBar>
-                            <Typography variant="h4">Our Recipes</Typography>
-                        </ToolBar>
-                    </AppBar>
-                </HeaderScroll>
-                <ToolBar />
-            </React.Fragment>
-        );
-    }
-}
+const Header = () => {
+    const scrolling = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0
+    });
+
+    return (
+        <>
+            <AppBar style={appBarStyle} elevation={scrolling ? 4 : 0}>
+                <ToolBar>
+                    <Typography variant="h4">Our Recipes</Typography>
+                </ToolBar>
+            </AppBar>
+            <ToolBar />
+        </>
+    );
+};
 
 export default Header;
