@@ -1,4 +1,5 @@
 import React from 'react';
+import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { MuiThemeProvider } from '@material-ui/core';
 import MuiCustomTheme from './theme/MuiCustomTheme';

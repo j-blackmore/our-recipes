@@ -1,6 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen } from '@testing-library/react';
-import { toBeInTheDocument } from '@testing-library/jest-dom';
+import { cleanup, render, screen } from 'test-utils';
 import Header from '../Header';
 
 afterEach(cleanup);
