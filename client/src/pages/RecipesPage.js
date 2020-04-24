@@ -5,14 +5,12 @@ import RecipesController from '../controllers/RecipesController';
 
 const RecipesPage = () => {
     return (
-        <>
+        <Container maxWidth={'lg'}>
             <Header />
-            <Container maxWidth={'lg'}>
-                <Box my={3}>
-                    <RecipesController />
-                </Box>
-            </Container>
-        </>
+            <Box my={3}>
+                <RecipesController />
+            </Box>
+        </Container>
     );
 };
 
