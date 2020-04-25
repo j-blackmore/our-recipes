@@ -37,7 +37,7 @@ const RecipeGrid = () => {
 
     return (
         <Grid container justify="center" spacing={spacing}>
-            {recipes.map(function (recipe, i) {
+            {recipes.map((recipe, i) => {
                 return (
                     <RecipeItemController
                         recipe={recipe}
