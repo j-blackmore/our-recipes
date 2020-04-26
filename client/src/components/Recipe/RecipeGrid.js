@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import RecipeItemController from '../../controllers/RecipeItemController';
+import AddRecipeCard from './AddRecipeCard';
 
 const RecipeGrid = () => {
     const [recipes, setRecipes] = useState([]);
@@ -39,15 +40,18 @@ const RecipeGrid = () => {
         <Grid container justify="center" spacing={spacing}>
             {recipes.map((recipe, i) => {
                 return (
-                    <RecipeItemController
-                        recipe={recipe}
-                        key={i}
-                        deleteRecipe={deleteRecipe}
-                        updateRecipe={getRecipes}
-                    />
+                    <Grid item key={i} xs={6} sm={4} md={4} lg={3}>
+                        <RecipeItemController
+                            recipe={recipe}
+                            deleteRecipe={deleteRecipe}
+                            updateRecipe={getRecipes}
+                        />
+                    </Grid>
                 );
             })}
-            <RecipeItemController newRecipe addNewRecipe={getRecipes} />
+            <Grid item xs={6} sm={4} md={4} lg={3}>
+                <AddRecipeCard addNewRecipe={getRecipes} />
+            </Grid>
         </Grid>
     );
 };
