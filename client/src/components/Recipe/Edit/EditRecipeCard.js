@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, makeStyles } from '@material-ui/core';
 import Clear from '@material-ui/icons/Clear';
-import RecipeCardContainer from '../../../containers/Recipe/RecipeCardContainer';
+import RecipeCardContainer from '../../Wrappers/RecipeCardContainer';
 import RecipeHeader from '../RecipeHeader';
 import RecipeForm from '../../Form/RecipeForm';
 

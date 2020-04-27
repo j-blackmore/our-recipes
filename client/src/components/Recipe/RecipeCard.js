@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import RecipeCardContainer from '../../containers/Recipe/RecipeCardContainer';
+import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
 import RecipeHeader from './RecipeHeader';
 import RecipeImage from './RecipeImage';
 import RecipeContent from './RecipeContent';
-import RecipeCardAction from '../../containers/Recipe/RecipeCardAction';
+import RecipeCardAction from '../Wrappers/RecipeCardAction';
 
 const useStyles = makeStyles({
     card: {}
