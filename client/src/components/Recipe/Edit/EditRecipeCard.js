@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconButton, makeStyles } from '@material-ui/core';
-import Clear from '@material-ui/icons/Clear'
+import Clear from '@material-ui/icons/Clear';
 import RecipeCardContainer from '../../../containers/Recipe/RecipeCardContainer';
 import RecipeHeader from '../RecipeHeader';
-import RecipeForm from '../../Form/Recipe/RecipeForm';
+import RecipeForm from '../../Form/RecipeForm';
 
 const useStyles = makeStyles({
     card: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         maxWidth: 500
     },
     header: {
-        padding: '16px 16px 8px',
+        padding: '16px 16px 8px'
     },
     content: {
         height: '60%',
@@ -22,16 +22,20 @@ const useStyles = makeStyles({
 
 export default function EditRecipeCard(props) {
     const classes = useStyles();
-    
+
     return (
-        <RecipeCardContainer classes={classes.card} >
-            <RecipeHeader 
+        <RecipeCardContainer classes={classes.card}>
+            <RecipeHeader
                 classes={classes.header}
-                title="Edit Recipe" 
+                title="Edit Recipe"
                 subtitle="Update contents and save"
-                action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}
+                action={
+                    <IconButton onClick={props.handleClose}>
+                        <Clear />
+                    </IconButton>
+                }
             />
-            <RecipeForm 
+            <RecipeForm
                 classes={classes.content}
                 recipe={props.recipe}
                 onSubmit={props.updateRecipe}
