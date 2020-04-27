@@ -9,21 +9,32 @@ import RecipeActions from './RecipeActions';
 
 const useStyles = makeStyles({
     card: {
-        height: 443
+        height: 443,
+        width: 345
     }
 });
 
 const RecipeCardDetailed = React.forwardRef((props, ref) => {
     const classes = useStyles();
     const recipe = props.recipe;
-    const classList = [props.classes, classes.card].join(" ")
 
     return (
-        <RecipeCardContainer classes={classList} >
-            <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} action={<IconButton onClick={props.handleClose}><Clear/></IconButton>}/>
-            <RecipeImage imageUrl={recipe.imageUrl}/>
+        <RecipeCardContainer classes={classes.card}>
+            <RecipeHeader
+                title={recipe.title}
+                subtitle={recipe.subtitle}
+                action={
+                    <IconButton onClick={props.handleClose}>
+                        <Clear />
+                    </IconButton>
+                }
+            />
+            <RecipeImage imageUrl={recipe.imageUrl} />
             <RecipeContent recipe={recipe} detailed={true} />
-            <RecipeActions handleDelete={props.handleDelete} handleEdit={props.handleEdit} />
+            <RecipeActions
+                handleDelete={props.handleDelete}
+                handleEdit={props.handleEdit}
+            />
         </RecipeCardContainer>
     );
 });

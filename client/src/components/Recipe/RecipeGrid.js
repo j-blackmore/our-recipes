@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
-import RecipeItemController from '../../controllers/RecipeItemController';
 import AddRecipeCard from './AddRecipeCard';
+import RecipeCard from './RecipeCard';
+import Recipe from './Recipe';
 
 const RecipeGrid = () => {
     const [recipes, setRecipes] = useState([]);
+    const [view, setView] = useState({ mode: 'grid', recipe: null });
     const spacing = 2;
 
     const getRecipes = async () => {
@@ -18,33 +20,26 @@ const RecipeGrid = () => {
         setRecipes(recipes);
     };
 
-    const deleteRecipe = recipeId => {
-        const postRequestOpts = {
-            method: 'POST'
-        };
+    const openItemView = recipe => {
+        setView({ mode: 'item', recipe: recipe });
+    };
 
-        fetch('/recipes/delete/' + recipeId, postRequestOpts).then(
-            res => {
-                console.log('-- deleted recipe --');
-                getRecipes();
-            },
-            err => console.error(err)
-        );
+    const closeItemView = () => {
+        setView({ ...view, mode: 'grid' });
     };
 
     useEffect(() => {
         getRecipes();
-    }, []);
+    }, [view]);
 
     return (
         <Grid container justify="center" spacing={spacing}>
             {recipes.map((recipe, i) => {
                 return (
                     <Grid item key={i} xs={6} sm={4} md={4} lg={3}>
-                        <RecipeItemController
+                        <RecipeCard
                             recipe={recipe}
-                            deleteRecipe={deleteRecipe}
-                            updateRecipe={getRecipes}
+                            onClick={() => openItemView(recipe)}
                         />
                     </Grid>
                 );
@@ -52,6 +47,12 @@ const RecipeGrid = () => {
             <Grid item xs={6} sm={4} md={4} lg={3}>
                 <AddRecipeCard addNewRecipe={getRecipes} />
             </Grid>
+            <Recipe
+                show={view.mode === 'item'}
+                recipe={view.recipe}
+                handleClose={closeItemView}
+                handleUpdate={openItemView}
+            />
         </Grid>
     );
 };

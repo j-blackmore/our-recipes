@@ -6,28 +6,28 @@ const useStyles = makeStyles({
     modal: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     backdrop: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)'
     }
 });
 
-export default function RecipeModal(props) {
+const RecipeModal = ({ open, handleClose, children }) => {
     const classes = useStyles();
 
     return (
         <Modal
             className={classes.modal}
-            open={props.open}
-            onClose={props.handleClose}
+            open={open}
+            onClose={handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
-            BackdropProps={{timeout: 500, className: classes.backdrop}}            
+            BackdropProps={{ timeout: 500, className: classes.backdrop }}
         >
-            <Fade in={props.open}>
-                {props.children}
-            </Fade>
+            <Fade in={open}>{children}</Fade>
         </Modal>
     );
-}
+};
+
+export default RecipeModal;
