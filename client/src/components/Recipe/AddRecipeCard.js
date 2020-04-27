@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Typography, makeStyles } from '@material-ui/core';
 import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
 import RecipeCardAction from '../Wrappers/RecipeCardAction';
-import NewRecipeCard from './New/NewRecipeCard';
+import NewRecipeCard from './NewRecipeCard';
 import RecipeModal from './RecipeModal';
 
 const useStyles = makeStyles({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RecipeModal from './RecipeModal';
 import RecipeCardDetailed from './RecipeCardDetailed';
-import EditRecipeCard from './Edit/EditRecipeCard';
+import EditRecipeCard from './EditRecipeCard';
 
 const Recipe = ({ show, recipe, handleClose, handleUpdate }) => {
     const [mode, setMode] = useState('view');
