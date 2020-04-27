@@ -1,70 +1,62 @@
 import React from 'react';
-import { FormControl, makeStyles } from '@material-ui/core';
-import RecipeTitleInput from './RecipeTitleInput';
-import RecipeSubtitleInput from './RecipeSubtitleInput';
-import RecipeMethodInput from './RecipeMethodInput';
-import RecipeIngredientsInput from './RecipeIngredientsInput';
-import RecipeTimeInput from './RecipeTimeInput';
+import { FormControl } from '@material-ui/core';
 import AddImageButton from './AddImageButton';
-
-const useStyles = makeStyles({
-    input: {
-        marginTop: 5,
-        marginBottom: 5
-    },
-});
+import InputField from './InputField';
 
 export default function RecipeFormInputs(props) {
-    const classes = useStyles();
+    const { recipe, errors, handleInputChange, noImage = false } = props;
 
     return (
         <FormControl fullWidth>
-            <RecipeTitleInput 
-                classes={classes.input} 
-                title={props.recipe.title} 
-                hasError={props.errors.title} 
-                handleInputChange={props.handleInputChange}
+            <InputField
+                name="title"
+                value={recipe.title}
+                error={errors.title}
+                onChange={handleInputChange}
             />
-            <RecipeSubtitleInput 
-                classes={classes.input} 
-                subtitle={props.recipe.subtitle} 
-                hasError={props.errors.subtitle} 
-                handleInputChange={props.handleInputChange}
+            <InputField
+                name="subtitle"
+                value={recipe.subtitle}
+                error={errors.subtitle}
+                onChange={handleInputChange}
             />
-            <RecipeTimeInput 
-                classes={classes.input} 
-                label="Prep Time (mins)"
+            <InputField
                 name="prepTime"
-                value={props.recipe.prepTime} 
-                hasError={props.errors.prepTime} 
-                handleInputChange={props.handleInputChange}
+                label="Preparation Time (mins)"
+                value={recipe.prepTime}
+                error={errors.prepTime}
+                onChange={handleInputChange}
+                integer
             />
-            <RecipeTimeInput 
-                classes={classes.input} 
-                label="Cooking Time (mins)"
+            <InputField
                 name="cookTime"
-                value={props.recipe.cookTime} 
-                hasError={props.errors.cookTime} 
-                handleInputChange={props.handleInputChange}
+                label="Cooking Time (mins)"
+                value={recipe.cookTime}
+                error={errors.cookTime}
+                onChange={handleInputChange}
+                integer
             />
-            <RecipeMethodInput 
-                classes={classes.input} 
-                method={props.recipe.method} 
-                hasError={props.errors.method} 
-                handleInputChange={props.handleInputChange}
+            <InputField
+                name="method"
+                value={recipe.method}
+                error={errors.method}
+                handleInputChange={handleInputChange}
+                multiline
             />
-            <RecipeIngredientsInput 
-                classes={classes.input} 
-                ingredients={props.recipe.ingredients} 
-                hasError={props.errors.ingredients} 
-                handleInputChange={props.handleInputChange}
+            <InputField
+                name="ingredients"
+                value={recipe.ingredients}
+                error={errors.ingredients}
+                handleInputChange={handleInputChange}
+                multiline
+                rows="6"
             />
-            {!props.noImage &&
-            <AddImageButton 
-                handleImageUpload={props.handleImageUpload} 
-                uploadedImageName={props.uploadedImageName}
-            />
-            }
+            {!noImage && (
+                <AddImageButton
+                    handleImageUpload={props.handleImageUpload}
+                    uploadedImageName={props.uploadedImageName}
+                />
+            )}
         </FormControl>
     );
 }
