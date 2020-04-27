@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 
-export default function SaveRecipeButton(props) {
+const SaveRecipeButton = ({ onFormSubmit }) => {
     return (
-        <Button variant="contained" color="primary" onClick={props.onFormSubmit}>
+        <Button variant="contained" color="primary" onClick={onFormSubmit}>
             Save
         </Button>
     );
-}
+};
+
+export default SaveRecipeButton;

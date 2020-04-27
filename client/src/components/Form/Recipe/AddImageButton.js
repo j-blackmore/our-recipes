@@ -13,13 +13,15 @@ const useStyles = makeStyles({
     }
 });
 
-export default function AddImageButton(props) {
+const AddImageButton = props => {
     const classes = useStyles();
 
     const uploadedImageName = props.uploadedImageName;
-    const fileUploadFeedback = uploadedImageName ? "Uploaded -- " + uploadedImageName : "";
+    const fileUploadFeedback = uploadedImageName
+        ? 'Uploaded -- ' + uploadedImageName
+        : '';
 
-    return(
+    return (
         <React.Fragment>
             <input
                 className={classes.input}
@@ -37,4 +39,6 @@ export default function AddImageButton(props) {
             <span className={classes.fileUploaded}>{fileUploadFeedback}</span>
         </React.Fragment>
     );
-}
+};
+
+export default AddImageButton;
