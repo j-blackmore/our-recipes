@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     }
 });
 
-export default function EditRecipeCard(props) {
+const EditRecipeCard = ({ recipe, handleClose, updateRecipe }) => {
     const classes = useStyles();
 
     return (
@@ -30,17 +30,19 @@ export default function EditRecipeCard(props) {
                 title="Edit Recipe"
                 subtitle="Update contents and save"
                 action={
-                    <IconButton onClick={props.handleClose}>
+                    <IconButton onClick={handleClose}>
                         <Clear />
                     </IconButton>
                 }
             />
             <RecipeForm
                 classes={classes.content}
-                recipe={props.recipe}
-                onSubmit={props.updateRecipe}
+                recipe={recipe}
+                onSubmit={updateRecipe}
                 noImage
             />
         </RecipeCardContainer>
     );
-}
+};
+
+export default EditRecipeCard;

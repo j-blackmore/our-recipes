@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     }
 });
 
-const NewRecipeCard = React.forwardRef((props, ref) => {
+const NewRecipeCard = React.forwardRef(({ handleClose, saveRecipe }, ref) => {
     const classes = useStyles();
 
     return (
@@ -30,12 +30,12 @@ const NewRecipeCard = React.forwardRef((props, ref) => {
                 title="Create New Recipe"
                 subtitle="Enter your recipe below, add an image and save."
                 action={
-                    <IconButton onClick={props.handleClose}>
+                    <IconButton onClick={handleClose}>
                         <Clear />
                     </IconButton>
                 }
             />
-            <RecipeForm classes={classes.content} onSubmit={props.saveRecipe} />
+            <RecipeForm classes={classes.content} onSubmit={saveRecipe} />
         </RecipeCardContainer>
     );
 });
