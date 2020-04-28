@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import AddRecipeCard from './AddRecipeCard';
 import RecipeCard from './RecipeCard';
 import Recipe from './Recipe';
+import ViewContext from '../../contexts/ViewContext';
 
 const RecipeGrid = () => {
+    const { state, dispatch } = useContext(ViewContext);
     const [recipes, setRecipes] = useState([]);
-    const [view, setView] = useState({ mode: 'grid', recipe: null });
     const spacing = 2;
 
     const getRecipes = async () => {
+        console.log('-- fetch recipes --');
         var recipes = [];
         await fetch('/recipes')
             .then(response => response.json())
@@ -21,16 +23,16 @@ const RecipeGrid = () => {
     };
 
     const openItemView = recipe => {
-        setView({ mode: 'item', recipe: recipe });
+        dispatch({ view: 'item', recipe: recipe });
     };
 
     const closeItemView = () => {
-        setView({ ...view, mode: 'grid' });
+        dispatch({ view: 'grid' });
     };
 
     useEffect(() => {
         getRecipes();
-    }, [view]);
+    }, [state.view]);
 
     return (
         <Grid container justify="center" spacing={spacing}>
@@ -48,8 +50,8 @@ const RecipeGrid = () => {
                 <AddRecipeCard updateRecipes={getRecipes} />
             </Grid>
             <Recipe
-                show={view.mode === 'item'}
-                recipe={view.recipe}
+                show={state.view === 'item'}
+                recipe={state.recipe}
                 handleClose={closeItemView}
                 handleUpdate={openItemView}
             />
