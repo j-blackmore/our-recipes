@@ -139,18 +139,19 @@ export default class RecipeForm extends React.Component {
     };
 
     render() {
-        const { state } = this;
+        const { errors, recipe, imageName } = this.state;
+        const { noImage } = this.props;
 
         return (
             <form onSubmit={this.onFormSubmit} noValidate>
                 <CardContent style={classes.content}>
                     <RecipeFormInputs
-                        noImage={this.props.noImage}
-                        errors={state.errors}
-                        recipe={state.recipe}
+                        noImage={noImage}
+                        errors={errors}
+                        recipe={recipe}
                         handleInputChange={this.handleInputChange.bind(this)}
                         handleImageUpload={this.handleImageUpload.bind(this)}
-                        uploadedImageName={state.imageName}
+                        uploadedImageName={imageName}
                     />
                 </CardContent>
                 <CardActions style={classes.actions}>
