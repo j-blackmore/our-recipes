@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
+import ViewContext from '../../contexts/ViewContext';
 import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
 import RecipeCardAction from '../Wrappers/RecipeCardAction';
 
@@ -10,11 +11,17 @@ const useStyles = makeStyles({
     }
 });
 
-const AddRecipeCard = ({ onClick }) => {
+const AddRecipeCard = () => {
+    const { dispatch } = useContext(ViewContext);
     const classes = useStyles();
 
+    const showAddModal = () => dispatch({ modalView: 'add', prevView: 'none' });
+
     return (
-        <RecipeCardContainer classes={classes.card} onClick={onClick}>
+        <RecipeCardContainer
+            classes={classes.card}
+            onClick={() => showAddModal()}
+        >
             <RecipeCardAction>
                 <Typography variant="h2">+</Typography>
             </RecipeCardAction>

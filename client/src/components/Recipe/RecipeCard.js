@@ -9,11 +9,11 @@ import RecipeCardAction from '../Wrappers/RecipeCardAction';
 const RecipeCard = ({ recipe }) => {
     const { dispatch } = useContext(ViewContext);
 
-    const showDetailedCard = () =>
+    const showDetailedModal = () =>
         dispatch({ modalView: 'recipe', prevView: 'none', recipe: recipe });
 
     return (
-        <RecipeCardContainer onClick={() => showDetailedCard()}>
+        <RecipeCardContainer onClick={() => showDetailedModal()}>
             <RecipeCardAction>
                 <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} />
                 <RecipeImage imageUrl={recipe.imageUrl} />

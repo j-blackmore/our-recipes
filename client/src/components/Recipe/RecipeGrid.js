@@ -5,7 +5,7 @@ import AddRecipeCard from './AddRecipeCard';
 import RecipeCard from './RecipeCard';
 
 const RecipeGrid = () => {
-    const { state, dispatch } = useContext(ViewContext);
+    const { state } = useContext(ViewContext);
     const [recipes, setRecipes] = useState([]);
     const spacing = 2;
 
@@ -20,12 +20,9 @@ const RecipeGrid = () => {
             );
         setRecipes(recipes);
     };
-    const handleAddClick = () =>
-        dispatch({ modalView: 'add', prevView: 'none' });
-
     useEffect(() => {
         getRecipes();
-    }, [state.modalView]);
+    }, [state.prevView]);
 
     return (
         <Grid container justify="center" spacing={spacing}>
@@ -37,10 +34,7 @@ const RecipeGrid = () => {
                 );
             })}
             <Grid item xs={6} sm={4} md={4} lg={3}>
-                <AddRecipeCard
-                    updateRecipes={getRecipes}
-                    onClick={() => handleAddClick}
-                />
+                <AddRecipeCard />
             </Grid>
         </Grid>
     );
