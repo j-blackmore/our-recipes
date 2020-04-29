@@ -1,13 +1,15 @@
 import React from 'react';
 import { CardHeader } from '@material-ui/core';
 
-export default function RecipeHeader(props) {
+const RecipeHeader = ({ classes, title, subtitle, action }) => {
     return (
-        <CardHeader 
-            className={props.classes}
-            title={props.title} 
-            subheader={props.subtitle || "-"}
-            action={props.action}
+        <CardHeader
+            className={classes}
+            title={title}
+            subheader={subtitle || '-'}
+            action={action}
         />
     );
-}
+};
+
+export default RecipeHeader;
