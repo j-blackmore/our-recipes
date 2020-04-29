@@ -3,24 +3,16 @@ import React, { createContext, useReducer } from 'react';
 const ViewContext = createContext({});
 
 const initState = {
+    updateRecipes: false,
     modalView: '',
     prevView: '',
     recipe: null
 };
 
 const reducer = (state, action) => {
-    const { modalView, prevView, recipe } = action;
-
-    if (modalView === 'recipe') {
-        return {
-            ...state,
-            modalView: modalView,
-            prevView: prevView,
-            recipe: recipe
-        };
-    } else {
-        return { ...state, modalView: modalView, prevView: prevView };
-    }
+    const { updateRecipes } = action;
+    const overrideUpdate = !updateRecipes ? { updateRecipes: false } : {};
+    return { ...state, ...action, ...overrideUpdate };
 };
 
 export const ViewProvider = ({ children }) => {

@@ -10,7 +10,6 @@ const RecipeGrid = () => {
     const spacing = 2;
 
     const getRecipes = async () => {
-        console.log('-- fetch recipes --');
         var recipes = [];
         await fetch('/recipes')
             .then(response => response.json())
@@ -20,9 +19,10 @@ const RecipeGrid = () => {
             );
         setRecipes(recipes);
     };
+
     useEffect(() => {
         getRecipes();
-    }, [state.prevView]);
+    }, [state.updateRecipes]);
 
     return (
         <Grid container justify="center" spacing={spacing}>

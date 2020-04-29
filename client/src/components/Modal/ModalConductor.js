@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
-import RecipeModal from '../Recipe/RecipeModal';
+import ModalWrapper from './ModalWrapper';
 import RecipeCardDetailed from '../Recipe/RecipeCardDetailed';
 import EditRecipeCard from '../Recipe/EditRecipeCard';
 import ViewContext from '../../contexts/ViewContext';
@@ -20,7 +20,7 @@ const ModalConductor = () => {
 
         fetch('/recipes/delete/' + _id, postRequestOpts).then(
             res => {
-                handleClose();
+                handleClose(true);
             },
             err => console.error(err)
         );
@@ -38,7 +38,7 @@ const ModalConductor = () => {
 
         fetch('/recipes/update/' + _id, config).then(
             res => {
-                handleClose(newRecipe);
+                handleClose(true, newRecipe);
             },
             err => console.error(err)
         );
@@ -70,22 +70,27 @@ const ModalConductor = () => {
             .post('/recipes/add', newRecipe)
             .then(response => {
                 newRecipe._id = response.data.objectID;
-                handleClose();
+                handleClose(true);
             })
             .catch(error => {
                 console.log(error);
             });
     };
 
-    const handleClose = (newRecipe = false) => {
+    const handleClose = (updateRecipes = false, newRecipe = false) => {
         if (modalView === 'edit') {
             dispatch({
+                updateRecipes: updateRecipes,
                 modalView: 'recipe',
                 prevView: 'edit',
                 recipe: newRecipe ? newRecipe : recipe
             });
         } else {
-            dispatch({ prevView: modalView, modalView: '' });
+            dispatch({
+                prevView: modalView,
+                modalView: '',
+                updateRecipes: updateRecipes
+            });
         }
     };
 
