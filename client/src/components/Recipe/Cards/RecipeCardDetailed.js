@@ -34,7 +34,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
                 }
             />
             <RecipeImage url={recipe.imageUrl} title={recipe.title} />
-            <RecipeContent recipe={recipe} detailed={true} />
+            <RecipeContent detailed recipe={recipe} />
             <RecipeActions
                 deleteClick={deleteRecipe}
                 editClick={showEditView}
