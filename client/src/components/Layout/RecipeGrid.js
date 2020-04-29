@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import ViewContext from '../../contexts/ViewContext';
-import AddRecipeCard from './AddRecipeCard';
-import RecipeCard from './RecipeCard';
+import AddRecipeCard from '../Recipe/Cards/AddRecipeCard';
+import RecipeCard from '../Recipe/Cards/RecipeCard';
 
 const RecipeGrid = () => {
     const { state } = useContext(ViewContext);

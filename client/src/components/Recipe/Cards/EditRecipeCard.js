@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconButton, makeStyles } from '@material-ui/core';
 import Clear from '@material-ui/icons/Clear';
-import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
-import RecipeHeader from './RecipeHeader';
-import RecipeForm from '../Form/RecipeForm';
+import RecipeCardContainer from '../../Wrappers/RecipeCardContainer';
+import RecipeHeader from '../RecipeHeader';
+import RecipeForm from '../../Form/RecipeForm';
 
 const useStyles = makeStyles({
     card: {
@@ -20,24 +20,29 @@ const useStyles = makeStyles({
     }
 });
 
-const NewRecipeCard = React.forwardRef(({ handleClose, saveRecipe }, ref) => {
+const EditRecipeCard = ({ recipe, handleClose, updateRecipe }) => {
     const classes = useStyles();
 
     return (
         <RecipeCardContainer classes={classes.card}>
             <RecipeHeader
                 classes={classes.header}
-                title="Create New Recipe"
-                subtitle="Enter your recipe below, add an image and save."
+                title="Edit Recipe"
+                subtitle="Update contents and save"
                 action={
                     <IconButton onClick={handleClose}>
                         <Clear />
                     </IconButton>
                 }
             />
-            <RecipeForm classes={classes.content} onSubmit={saveRecipe} />
+            <RecipeForm
+                classes={classes.content}
+                recipe={recipe}
+                onSubmit={updateRecipe}
+                noImage
+            />
         </RecipeCardContainer>
     );
-});
+};
 
-export default NewRecipeCard;
+export default EditRecipeCard;

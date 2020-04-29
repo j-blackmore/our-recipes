@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
 import ModalWrapper from './ModalWrapper';
-import RecipeCardDetailed from '../Recipe/RecipeCardDetailed';
-import EditRecipeCard from '../Recipe/EditRecipeCard';
+import RecipeCardDetailed from '../Recipe/Cards/RecipeCardDetailed';
+import EditRecipeCard from '../Recipe/Cards/EditRecipeCard';
 import ViewContext from '../../contexts/ViewContext';
-import NewRecipeCard from '../Recipe/NewRecipeCard';
+import NewRecipeCard from '../Recipe/Cards/NewRecipeCard';
 
 const ModalConductor = () => {
     const {

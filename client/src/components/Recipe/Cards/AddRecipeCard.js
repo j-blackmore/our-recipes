@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
-import ViewContext from '../../contexts/ViewContext';
-import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
-import RecipeCardAction from '../Wrappers/RecipeCardAction';
+import ViewContext from '../../../contexts/ViewContext';
+import RecipeCardContainer from '../../Wrappers/RecipeCardContainer';
+import RecipeCardAction from '../../Wrappers/RecipeCardAction';
 
 const useStyles = makeStyles({
     card: {
