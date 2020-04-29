@@ -1,6 +1,5 @@
 import React from 'react';
-import { Modal, Backdrop, Fade } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Modal, Backdrop, Fade, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
     modal: {
@@ -13,7 +12,7 @@ const useStyles = makeStyles({
     }
 });
 
-const RecipeModal = ({ open, handleClose, children }) => {
+const ModalWrapper = ({ open, handleClose, children }) => {
     const classes = useStyles();
 
     return (
@@ -30,4 +29,4 @@ const RecipeModal = ({ open, handleClose, children }) => {
     );
 };
 
-export default RecipeModal;
+export default ModalWrapper;
