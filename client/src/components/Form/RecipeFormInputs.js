@@ -3,9 +3,14 @@ import { FormControl } from '@material-ui/core';
 import AddImageButton from './AddImageButton';
 import InputField from './InputField';
 
-export default function RecipeFormInputs(props) {
-    const { recipe, errors, handleInputChange, noImage = false } = props;
-
+const RecipeFormInputs = ({
+    recipe,
+    errors,
+    handleInputChange,
+    handleImageUpload,
+    uploadedImageName,
+    noImage = false
+}) => {
     return (
         <FormControl fullWidth>
             <InputField
@@ -53,10 +58,10 @@ export default function RecipeFormInputs(props) {
             />
             {!noImage && (
                 <AddImageButton
-                    handleImageUpload={props.handleImageUpload}
-                    uploadedImageName={props.uploadedImageName}
+                    handleImageUpload={handleImageUpload}
+                    uploadedImageName={uploadedImageName}
                 />
             )}
         </FormControl>
     );
-}
+};
