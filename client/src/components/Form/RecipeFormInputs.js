@@ -65,3 +65,5 @@ const RecipeFormInputs = ({
         </FormControl>
     );
 };
+
+export default RecipeFormInputs;
