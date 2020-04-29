@@ -3,16 +3,17 @@ import React, { createContext, useReducer } from 'react';
 const ViewContext = createContext({});
 
 const initState = {
-    view: 'grid',
+    modalView: 'none',
     recipe: null
 };
 
 const reducer = (state, action) => {
-    const { view, recipe } = action;
-    if (view === 'grid') {
-        return { ...state, view: view };
-    } else if (view === 'item') {
-        return { ...state, view: view, recipe: recipe };
+    const { modalView, recipe } = action;
+
+    if (modalView === 'recipe') {
+        return { ...state, modalView: modalView, recipe: recipe };
+    } else {
+        return { ...state, modalView: modalView };
     }
 };
 

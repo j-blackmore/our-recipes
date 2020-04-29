@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Grid } from '@material-ui/core';
+import ViewContext from '../../contexts/ViewContext';
 import AddRecipeCard from './AddRecipeCard';
 import RecipeCard from './RecipeCard';
-import Recipe from './Recipe';
-import ViewContext from '../../contexts/ViewContext';
 
 const RecipeGrid = () => {
     const { state, dispatch } = useContext(ViewContext);
@@ -22,17 +21,12 @@ const RecipeGrid = () => {
         setRecipes(recipes);
     };
 
-    const openItemView = recipe => {
-        dispatch({ view: 'item', recipe: recipe });
-    };
-
-    const closeItemView = () => {
-        dispatch({ view: 'grid' });
-    };
+    const handleRecipeClick = recipe => () =>
+        dispatch({ modalView: 'recipe', recipe: recipe });
 
     useEffect(() => {
         getRecipes();
-    }, [state.view]);
+    }, [state.modalView]);
 
     return (
         <Grid container justify="center" spacing={spacing}>
@@ -41,7 +35,7 @@ const RecipeGrid = () => {
                     <Grid item key={i} xs={6} sm={4} md={4} lg={3}>
                         <RecipeCard
                             recipe={recipe}
-                            onClick={() => openItemView(recipe)}
+                            onClick={handleRecipeClick(recipe)}
                         />
                     </Grid>
                 );
@@ -49,12 +43,6 @@ const RecipeGrid = () => {
             <Grid item xs={6} sm={4} md={4} lg={3}>
                 <AddRecipeCard updateRecipes={getRecipes} />
             </Grid>
-            <Recipe
-                show={state.view === 'item'}
-                recipe={state.recipe}
-                handleClose={closeItemView}
-                handleUpdate={openItemView}
-            />
         </Grid>
     );
 };
