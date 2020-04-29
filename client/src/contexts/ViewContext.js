@@ -4,16 +4,22 @@ const ViewContext = createContext({});
 
 const initState = {
     modalView: 'none',
+    prevView: 'none',
     recipe: null
 };
 
 const reducer = (state, action) => {
-    const { modalView, recipe } = action;
+    const { modalView, prevView, recipe } = action;
 
     if (modalView === 'recipe') {
-        return { ...state, modalView: modalView, recipe: recipe };
+        return {
+            ...state,
+            modalView: modalView,
+            prevView: prevView,
+            recipe: recipe
+        };
     } else {
-        return { ...state, modalView: modalView };
+        return { ...state, modalView: modalView, prevView: prevView };
     }
 };
 
