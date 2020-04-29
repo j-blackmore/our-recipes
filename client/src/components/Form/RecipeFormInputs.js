@@ -40,14 +40,14 @@ export default function RecipeFormInputs(props) {
                 name="method"
                 value={recipe.method}
                 error={errors.method}
-                handleInputChange={handleInputChange}
+                onChange={handleInputChange}
                 multiline
             />
             <InputField
                 name="ingredients"
                 value={recipe.ingredients}
                 error={errors.ingredients}
-                handleInputChange={handleInputChange}
+                onChange={handleInputChange}
                 multiline
                 rows="6"
             />
