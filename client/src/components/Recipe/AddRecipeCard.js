@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Typography, makeStyles } from '@material-ui/core';
 import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
 import RecipeCardAction from '../Wrappers/RecipeCardAction';
-import NewRecipeCard from './NewRecipeCard';
-import RecipeModal from './RecipeModal';
 
 const useStyles = makeStyles({
     card: {
@@ -13,61 +10,15 @@ const useStyles = makeStyles({
     }
 });
 
-const AddRecipeCard = ({ updateRecipes, classes }) => {
-    const classNames = useStyles();
-    const [open, setOpen] = useState(false);
-
-    const addRecipe = async (newRecipe, newImage) => {
-        const { ingredients } = newRecipe;
-        newRecipe.ingredients = ingredients.split(/\r?\n/);
-
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-
-        if (newImage !== null) {
-            await axios
-                .post('/recipes/uploadImage', newImage, config)
-                .then(response => {
-                    newRecipe.imageUrl = response.data.imageUrl;
-                    newRecipe.imageId = response.data.imageId;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
-        await axios
-            .post('/recipes/add', newRecipe)
-            .then(response => {
-                newRecipe._id = response.data.objectID;
-                updateRecipes();
-                setOpen(false);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
+const AddRecipeCard = ({ onClick }) => {
+    const classes = useStyles();
 
     return (
-        <>
-            <RecipeCardContainer
-                classes={[classNames.card, classes].join(' ')}
-                onClick={() => setOpen(true)}
-            >
-                <RecipeCardAction>
-                    <Typography variant="h2">+</Typography>
-                </RecipeCardAction>
-            </RecipeCardContainer>
-            <RecipeModal open={open} handleClose={() => setOpen(false)}>
-                <NewRecipeCard
-                    handleClose={() => setOpen(false)}
-                    saveRecipe={addRecipe}
-                />
-            </RecipeModal>
-        </>
+        <RecipeCardContainer classes={classes.card} onClick={onClick}>
+            <RecipeCardAction>
+                <Typography variant="h2">+</Typography>
+            </RecipeCardAction>
+        </RecipeCardContainer>
     );
 };
 

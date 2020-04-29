@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
+import axios from 'axios';
 import RecipeModal from '../Recipe/RecipeModal';
 import RecipeCardDetailed from '../Recipe/RecipeCardDetailed';
 import EditRecipeCard from '../Recipe/EditRecipeCard';
 import ViewContext from '../../contexts/ViewContext';
+import NewRecipeCard from '../Recipe/NewRecipeCard';
 
 const ModalConductor = props => {
     const { state, dispatch } = useContext(ViewContext);
+    const { modalView, prevView, recipe } = state;
 
     const deleteRecipe = () => {
         const { _id } = state.recipe;
@@ -39,42 +42,89 @@ const ModalConductor = props => {
         );
     };
 
-    const handleClose = (newRecipe = false) => {
-        const { modalView, recipe } = state;
+    const addRecipe = async (newRecipe, newImage) => {
+        const { ingredients } = newRecipe;
+        newRecipe.ingredients = ingredients.split(/\r?\n/);
 
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        if (newImage !== null) {
+            await axios
+                .post('/recipes/uploadImage', newImage, config)
+                .then(response => {
+                    newRecipe.imageUrl = response.data.imageUrl;
+                    newRecipe.imageId = response.data.imageId;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+
+        await axios
+            .post('/recipes/add', newRecipe)
+            .then(response => {
+                newRecipe._id = response.data.objectID;
+                handleClose();
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+
+    const handleClose = (newRecipe = false) => {
         if (modalView === 'edit') {
             dispatch({
                 modalView: 'recipe',
+                prevView: 'edit',
                 recipe: newRecipe ? newRecipe : recipe
             });
         } else {
-            dispatch({ modalView: 'none' });
+            dispatch({ prevView: modalView, modalView: 'none' });
         }
     };
 
-    const defaultView =
-        state.modalView === 'none' || state.modalView === 'recipe';
+    const recipeView =
+        modalView === 'recipe' ||
+        (modalView === 'none' && prevView === 'recipe');
+
+    const editView = modalView === 'edit';
+
+    const addView =
+        modalView === 'add' || (modalView === 'none' && prevView === 'add');
 
     return (
         <RecipeModal
-            open={state.modalView !== 'none'}
-            handleClose={e => handleClose()}
+            open={modalView !== 'none'}
+            handleClose={() => handleClose()}
         >
             <>
-                {defaultView && (
+                {recipeView && (
                     <RecipeCardDetailed
-                        recipe={state.recipe}
-                        handleClose={e => handleClose()}
+                        recipe={recipe}
+                        handleClose={() => handleClose()}
                         handleDelete={deleteRecipe}
-                        handleEdit={() => dispatch({ modalView: 'edit' })}
+                        handleEdit={() =>
+                            dispatch({ prevView: 'recipe', modalView: 'edit' })
+                        }
                     />
                 )}
 
-                {state.modalView === 'edit' && (
+                {editView && (
                     <EditRecipeCard
-                        recipe={state.recipe}
-                        handleClose={e => handleClose()}
+                        recipe={recipe}
+                        handleClose={() => handleClose()}
                         updateRecipe={updateRecipe}
+                    />
+                )}
+
+                {addView && (
+                    <NewRecipeCard
+                        handleClose={() => handleClose()}
+                        saveRecipe={addRecipe}
                     />
                 )}
             </>

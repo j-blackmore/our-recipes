@@ -24,6 +24,9 @@ const RecipeGrid = () => {
     const handleRecipeClick = recipe =>
         dispatch({ modalView: 'recipe', recipe: recipe });
 
+    const handleAddClick = () =>
+        dispatch({ modalView: 'add', prevView: 'none' });
+
     useEffect(() => {
         getRecipes();
     }, [state.modalView]);
@@ -41,7 +44,10 @@ const RecipeGrid = () => {
                 );
             })}
             <Grid item xs={6} sm={4} md={4} lg={3}>
-                <AddRecipeCard updateRecipes={getRecipes} />
+                <AddRecipeCard
+                    updateRecipes={getRecipes}
+                    onClick={() => handleAddClick}
+                />
             </Grid>
         </Grid>
     );
