@@ -39,8 +39,8 @@ export default class RecipeForm extends React.Component {
         this.state = {
             recipe: props.recipe
                 ? this.prepRecipeForEdit(props.recipe)
-                : initRecipe,
-            errors: initErrors,
+                : { ...initRecipe },
+            errors: { ...initErrors },
             imageData: null,
             imageName: ''
         };
@@ -58,8 +58,8 @@ export default class RecipeForm extends React.Component {
 
     init = () => {
         this.setState({
-            recipe: this.props.recipe ? this.state.recipe : initRecipe,
-            errors: initErrors
+            recipe: { ...initRecipe },
+            errors: { ...initErrors }
         });
     };
 
