@@ -1,15 +1,17 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 
-export default function RecipeMethod(props) {
+const RecipeMethod = ({ method }) => {
     return (
-        <React.Fragment>
+        <>
             <Typography gutterBottom variant="h6">
                 Method
             </Typography>
             <Typography variant="body2" component="span">
-                {props.method}
+                {method}
             </Typography>
-        </React.Fragment>
+        </>
     );
-}
+};
+
+export default RecipeMethod;

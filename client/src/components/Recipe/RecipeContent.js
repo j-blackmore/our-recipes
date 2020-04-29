@@ -1,6 +1,5 @@
 import React from 'react';
-import { CardContent } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { CardContent, makeStyles } from '@material-ui/core';
 import RecipeIngredients from './RecipeIngredients';
 import RecipeMethod from './RecipeMethod';
 import RecipeTimings from './RecipeTimings';
@@ -8,24 +7,27 @@ import RecipeTimings from './RecipeTimings';
 const useStyles = makeStyles({
     content: {
         height: 140,
-        overflow: 'scroll',
+        overflow: 'scroll'
     }
 });
 
-export default function RecipeContent(props) {
+const RecipeContent = ({
+    recipe: { ingredients, method, prepTime, cookTime },
+    detailed = false
+}) => {
     const classes = useStyles();
-    const recipe = props.recipe;
-
-    const detailContent =
-        <React.Fragment>
-            <RecipeIngredients ingredients={recipe.ingredients}/>
-            <RecipeMethod method={recipe.method}/>
-        </React.Fragment>;
 
     return (
         <CardContent className={classes.content}>
-            <RecipeTimings prepTime={recipe.prepTime} cookTime={recipe.cookTime} />
-            {props.detailed ? detailContent : null}
+            <RecipeTimings prepTime={prepTime} cookTime={cookTime} />
+            {detailed && (
+                <>
+                    <RecipeIngredients ingredients={ingredients} />
+                    <RecipeMethod method={method} />
+                </>
+            )}
         </CardContent>
     );
-}
+};
+
+export default RecipeContent;

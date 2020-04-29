@@ -13,21 +13,22 @@ const useStyles = makeStyles({
     }
 });
 
-export default function AddImageButton(props) {
+const AddImageButton = ({ uploadedImageName, handleImageUpload }) => {
     const classes = useStyles();
 
-    const uploadedImageName = props.uploadedImageName;
-    const fileUploadFeedback = uploadedImageName ? "Uploaded -- " + uploadedImageName : "";
+    const fileUploadFeedback = uploadedImageName
+        ? `Uploaded -- ${uploadedImageName}`
+        : '';
 
-    return(
-        <React.Fragment>
+    return (
+        <>
             <input
                 className={classes.input}
                 name="recipeImage"
                 accept="image/*"
                 id="imageUpload"
                 type="file"
-                onChange={props.handleImageUpload}
+                onChange={handleImageUpload}
             />
             <label htmlFor="imageUpload" className={classes.label}>
                 <Button variant="contained" color="secondary" component="span">
@@ -35,6 +36,8 @@ export default function AddImageButton(props) {
                 </Button>
             </label>
             <span className={classes.fileUploaded}>{fileUploadFeedback}</span>
-        </React.Fragment>
+        </>
     );
-}
+};
+
+export default AddImageButton;

@@ -1,16 +1,34 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import RecipeIngredient from './RecipeIngredient';
+import { Typography, makeStyles } from '@material-ui/core';
 
-export default function RecipeIngredients(props) {
+const useStyles = makeStyles({
+    ingredientClass: {
+        display: 'flex'
+    }
+});
+
+const RecipeIngredients = ({ ingredients = [] }) => {
+    const { ingredientClass } = useStyles();
+
     return (
-        <React.Fragment>
+        <>
             <Typography gutterBottom variant="h6">
                 Ingredients
             </Typography>
-            {props.ingredients.map((ingredient, i) => {
-                return <RecipeIngredient key={i} ingredient={ingredient}/>
+            {ingredients.map((ingredient, i) => {
+                return (
+                    <Typography
+                        key={i}
+                        variant="body2"
+                        component="span"
+                        className={ingredientClass}
+                    >
+                        {ingredient}
+                    </Typography>
+                );
             })}
-        </React.Fragment>
+        </>
     );
-}
+};
+
+export default RecipeIngredients;

@@ -1,11 +1,10 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 import Timelapse from '@material-ui/icons/Timelapse';
-import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
     icon: {
-        paddingRight: 5,
+        paddingRight: 5
     },
     container: {
         display: 'flex',
@@ -13,39 +12,41 @@ const useStyles = makeStyles({
         justifyContent: 'space-between'
     },
     timeContainer: {
-        display: 'flex',
+        display: 'flex'
     },
     textContainer: {
-        margin: 'auto 0',
+        margin: 'auto 0'
     }
 });
 
-export default function RecipeTimings(props) {
+const RecipeTimings = ({ prepTime, cookTime }) => {
     const classes = useStyles();
 
-    const getPluralTime = (time) => {
-        const base = " min";
-        return time + (time === 1 ? base : base + "s");
-    }
+    const getPluralTime = time => {
+        const base = ' min';
+        return time + (time === 1 ? base : base + 's');
+    };
 
-    return(
+    return (
         <div className={classes.container}>
             <div className={classes.timeContainer}>
-                <Timelapse className={classes.icon}/>
+                <Timelapse className={classes.icon} />
                 <div className={classes.textContainer}>
                     <Typography display="inline" variant="body1">
-                        Prep: {getPluralTime(props.prepTime)}
+                        Prep: {getPluralTime(prepTime)}
                     </Typography>
                 </div>
             </div>
             <div className={classes.timeContainer}>
-                <Timelapse className={classes.icon}/>
+                <Timelapse className={classes.icon} />
                 <div className={classes.textContainer}>
                     <Typography display="inline" variant="body1">
-                        Cook: {getPluralTime(props.cookTime)}
+                        Cook: {getPluralTime(cookTime)}
                     </Typography>
                 </div>
             </div>
         </div>
     );
-}
+};
+
+export default RecipeTimings;
