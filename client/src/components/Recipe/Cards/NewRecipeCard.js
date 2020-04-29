@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     }
 });
 
-const NewRecipeCard = React.forwardRef(({ handleClose, saveRecipe }, ref) => {
+const NewRecipeCard = ({ handleClose, saveRecipe }) => {
     const classes = useStyles();
 
     return (
@@ -38,6 +38,5 @@ const NewRecipeCard = React.forwardRef(({ handleClose, saveRecipe }, ref) => {
             <RecipeForm classes={classes.content} onSubmit={saveRecipe} />
         </CardWrapper>
     );
-});
-
+};
 export default NewRecipeCard;
