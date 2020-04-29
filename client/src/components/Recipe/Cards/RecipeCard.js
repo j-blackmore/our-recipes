@@ -14,7 +14,7 @@ const RecipeCard = ({ recipe }) => {
     return (
         <CardWrapper action onClick={() => showDetailedModal()}>
             <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} />
-            <RecipeImage imageUrl={recipe.imageUrl} />
+            <RecipeImage url={recipe.imageUrl} title={recipe.title} />
             <RecipeContent recipe={recipe} />
         </CardWrapper>
     );

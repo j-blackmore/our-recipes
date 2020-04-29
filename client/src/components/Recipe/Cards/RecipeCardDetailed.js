@@ -33,7 +33,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
                     </IconButton>
                 }
             />
-            <RecipeImage imageUrl={recipe.imageUrl} />
+            <RecipeImage url={recipe.imageUrl} title={recipe.title} />
             <RecipeContent recipe={recipe} detailed={true} />
             <RecipeActions
                 deleteClick={deleteRecipe}

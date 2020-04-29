@@ -4,19 +4,22 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
     media: {
-        height: 140,
+        height: 140
     }
 });
 
-export default function RecipeImage(props) {
+const defaultUrl = '/images/no-image.svg';
+
+const RecipeImage = ({ url = defaultUrl, title = 'No Image' }) => {
     const classes = useStyles();
-    let imageUrl = props.imageUrl ? props.imageUrl : "/images/no-image.svg";
 
     return (
-        <CardMedia 
+        <CardMedia
             className={classes.media}
-            image={imageUrl}
-            title={props.imageUrl}
+            image={url || defaultUrl}
+            title={title}
         />
     );
-}
+};
+
+export default RecipeImage;
