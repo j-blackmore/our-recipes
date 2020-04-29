@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     }
 });
 
-const RecipeCardDetailed = ({ recipe, handleClose, handleDelete }) => {
+const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
     const { dispatch } = useContext(ViewContext);
     const classes = useStyles();
 
@@ -36,8 +36,8 @@ const RecipeCardDetailed = ({ recipe, handleClose, handleDelete }) => {
             <RecipeImage imageUrl={recipe.imageUrl} />
             <RecipeContent recipe={recipe} detailed={true} />
             <RecipeActions
-                handleDelete={handleDelete}
-                handleEdit={showEditView}
+                deleteClick={deleteRecipe}
+                editClick={showEditView}
             />
         </RecipeCardContainer>
     );

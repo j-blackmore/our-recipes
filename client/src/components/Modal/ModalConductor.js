@@ -105,7 +105,7 @@ const ModalConductor = () => {
                     <RecipeCardDetailed
                         recipe={recipe}
                         handleClose={() => handleClose()}
-                        handleDelete={deleteRecipe}
+                        deleteRecipe={deleteRecipe}
                     />
                 )}
 
