@@ -98,7 +98,7 @@ const ModalConductor = () => {
         modalView === 'add' || (modalView === '' && prevView === 'add');
 
     return (
-        <RecipeModal open={modalView} handleClose={() => handleClose()}>
+        <RecipeModal open={!!modalView} handleClose={() => handleClose()}>
             <>
                 {recipeView && (
                     <RecipeCardDetailed
