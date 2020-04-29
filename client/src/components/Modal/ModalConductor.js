@@ -44,7 +44,7 @@ const ModalConductor = () => {
         );
     };
 
-    const addRecipe = async (newRecipe, newImage) => {
+    const addRecipe = async (newRecipe, newImage = null) => {
         const { ingredients } = newRecipe;
         newRecipe.ingredients = ingredients.split(/\r?\n/);
 

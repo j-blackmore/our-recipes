@@ -13,62 +13,55 @@ const classes = {
     }
 };
 
+const initRecipe = {
+    title: '',
+    subtitle: '',
+    method: '',
+    imageUrl: '',
+    imageId: '',
+    ingredients: '',
+    prepTime: '',
+    cookTime: ''
+};
+
+const initErrors = {
+    title: false,
+    subtitle: false,
+    method: false,
+    ingredients: false,
+    prepTime: false,
+    cookTime: false
+};
+
 export default class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipe: {},
-            errors: {},
+            recipe: props.recipe
+                ? this.prepRecipeForEdit(props.recipe)
+                : initRecipe,
+            errors: initErrors,
             imageData: null,
             imageName: ''
         };
-
-        // convert ingredients array to a string,
-        // cast timings to strings for editing so .length() validation works
-        if (props.recipe) {
-            Object.assign(this.state.recipe, props.recipe);
-            this.state.recipe.ingredients = this.state.recipe.ingredients.join(
-                '\n'
-            );
-            this.state.recipe.prepTime = this.state.recipe.prepTime.toString();
-            this.state.recipe.cookTime = this.state.recipe.cookTime.toString();
-        }
     }
 
-    initialiseErrorChecking() {
+    prepRecipeForEdit = recipe => {
+        const { ingredients, prepTime, cookTime } = recipe;
+        return {
+            ...recipe,
+            ingredients: ingredients.join('\n'),
+            prepTime: prepTime.toString(),
+            cookTime: cookTime.toString()
+        };
+    };
+
+    init = () => {
         this.setState({
-            errors: {
-                title: false,
-                subtitle: false,
-                method: false,
-                ingredients: false,
-                prepTime: false,
-                cookTime: false
-            }
+            recipe: this.props.recipe ? this.state.recipe : initRecipe,
+            errors: initErrors
         });
-    }
-
-    initialiseRecipe() {
-        if (!this.props.recipe) {
-            this.setState({
-                recipe: {
-                    title: '',
-                    subtitle: '',
-                    method: '',
-                    imageUrl: '',
-                    iamgeId: '',
-                    ingredients: '',
-                    prepTime: '',
-                    cookTime: ''
-                }
-            });
-        }
-    }
-
-    componentDidMount() {
-        this.initialiseRecipe();
-        this.initialiseErrorChecking();
-    }
+    };
 
     isValidInteger(input) {
         const intInput = parseInt(input);
@@ -96,12 +89,10 @@ export default class RecipeForm extends React.Component {
     }
 
     handleInputChange(event) {
-        const value = event.target.value;
-        const name = event.target.name;
+        const { value, name } = event.target;
+        const { recipe, errors } = this.state;
 
-        let recipe = this.state.recipe;
         recipe[name] = value;
-        let errors = this.state.errors;
         errors[name] = this.inputHasErrors(name);
 
         this.setState({
@@ -142,16 +133,13 @@ export default class RecipeForm extends React.Component {
 
     onFormSubmit = () => {
         if (this.validateForm()) {
-            if (this.props.noImage) {
-                this.props.onSubmit(this.state.recipe);
-            } else {
-                this.props.onSubmit(this.state.recipe, this.state.imageData);
-            }
+            this.props.onSubmit(this.state.recipe, this.state.imageData);
+            this.init();
         }
     };
 
     render() {
-        const state = this.state;
+        const { state } = this;
 
         return (
             <form onSubmit={this.onFormSubmit} noValidate>

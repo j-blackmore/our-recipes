@@ -26,7 +26,7 @@ export default function RecipeFormInputs(props) {
                 value={recipe.prepTime}
                 error={errors.prepTime}
                 onChange={handleInputChange}
-                integer
+                integer="true"
             />
             <InputField
                 name="cookTime"
@@ -34,7 +34,7 @@ export default function RecipeFormInputs(props) {
                 value={recipe.cookTime}
                 error={errors.cookTime}
                 onChange={handleInputChange}
-                integer
+                integer="true"
             />
             <InputField
                 name="method"

@@ -4,7 +4,8 @@ import { TextField, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
     input: {
         marginTop: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        textTransform: 'capitalize'
     }
 });
 
@@ -22,7 +23,7 @@ const InputField = props => {
 
     return (
         <TextField
-            className={classes}
+            className={classes.input}
             helperText={helperText}
             label={props.name}
             fullWidth
