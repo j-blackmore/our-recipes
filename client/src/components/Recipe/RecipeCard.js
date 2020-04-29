@@ -1,22 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import React, { useContext } from 'react';
+import ViewContext from '../../contexts/ViewContext';
 import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
 import RecipeHeader from './RecipeHeader';
 import RecipeImage from './RecipeImage';
 import RecipeContent from './RecipeContent';
 import RecipeCardAction from '../Wrappers/RecipeCardAction';
 
-const useStyles = makeStyles({
-    card: {}
-});
+const RecipeCard = ({ recipe }) => {
+    const { dispatch } = useContext(ViewContext);
 
-export default function RecipeCard(props) {
-    const classes = useStyles();
-    let classNames = [classes.card, props.classes].join(' ');
-    const recipe = props.recipe;
+    const showDetailedCard = () =>
+        dispatch({ modalView: 'recipe', prevView: 'none', recipe: recipe });
 
     return (
-        <RecipeCardContainer classes={classNames} onClick={props.onClick}>
+        <RecipeCardContainer onClick={() => showDetailedCard()}>
             <RecipeCardAction>
                 <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} />
                 <RecipeImage imageUrl={recipe.imageUrl} />
@@ -24,4 +21,6 @@ export default function RecipeCard(props) {
             </RecipeCardAction>
         </RecipeCardContainer>
     );
-}
+};
+
+export default RecipeCard;

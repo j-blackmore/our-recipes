@@ -20,10 +20,6 @@ const RecipeGrid = () => {
             );
         setRecipes(recipes);
     };
-
-    const handleRecipeClick = recipe =>
-        dispatch({ modalView: 'recipe', recipe: recipe });
-
     const handleAddClick = () =>
         dispatch({ modalView: 'add', prevView: 'none' });
 
@@ -36,10 +32,7 @@ const RecipeGrid = () => {
             {recipes.map((recipe, i) => {
                 return (
                     <Grid item key={i} xs={6} sm={4} md={4} lg={3}>
-                        <RecipeCard
-                            recipe={recipe}
-                            onClick={() => handleRecipeClick(recipe)}
-                        />
+                        <RecipeCard recipe={recipe} />
                     </Grid>
                 );
             })}
