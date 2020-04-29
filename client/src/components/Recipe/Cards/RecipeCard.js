@@ -5,7 +5,7 @@ import RecipeHeader from '../RecipeHeader';
 import RecipeImage from '../RecipeImage';
 import RecipeContent from '../RecipeContent';
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, recipe: { title, subtitle, imageUrl } }) => {
     const { dispatch } = useContext(ViewContext);
 
     const showDetailedModal = () =>
@@ -13,8 +13,8 @@ const RecipeCard = ({ recipe }) => {
 
     return (
         <CardWrapper action onClick={() => showDetailedModal()}>
-            <RecipeHeader title={recipe.title} subtitle={recipe.subtitle} />
-            <RecipeImage url={recipe.imageUrl} title={recipe.title} />
+            <RecipeHeader title={title} subtitle={subtitle} />
+            <RecipeImage url={imageUrl} title={title} />
             <RecipeContent recipe={recipe} />
         </CardWrapper>
     );
