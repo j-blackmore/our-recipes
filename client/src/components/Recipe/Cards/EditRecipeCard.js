@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, makeStyles } from '@material-ui/core';
 import Clear from '@material-ui/icons/Clear';
-import RecipeCardContainer from '../../Wrappers/RecipeCardContainer';
+import CardWrapper from '../../Wrappers/CardWrapper';
 import RecipeHeader from '../RecipeHeader';
 import RecipeForm from '../../Form/RecipeForm';
 
@@ -24,7 +24,7 @@ const EditRecipeCard = ({ recipe, handleClose, updateRecipe }) => {
     const classes = useStyles();
 
     return (
-        <RecipeCardContainer classes={classes.card}>
+        <CardWrapper className={classes.card}>
             <RecipeHeader
                 classes={classes.header}
                 title="Edit Recipe"
@@ -41,7 +41,7 @@ const EditRecipeCard = ({ recipe, handleClose, updateRecipe }) => {
                 onSubmit={updateRecipe}
                 noImage
             />
-        </RecipeCardContainer>
+        </CardWrapper>
     );
 };
 

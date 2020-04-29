@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { IconButton, makeStyles } from '@material-ui/core';
 import Clear from '@material-ui/icons/Clear';
 import ViewContext from '../../../contexts/ViewContext';
-import RecipeCardContainer from '../../Wrappers/RecipeCardContainer';
+import CardWrapper from '../../Wrappers/CardWrapper';
 import RecipeHeader from '../RecipeHeader';
 import RecipeImage from '../RecipeImage';
 import RecipeContent from '../RecipeContent';
@@ -23,7 +23,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
         dispatch({ prevView: 'recipe', modalView: 'edit' });
 
     return (
-        <RecipeCardContainer classes={classes.card}>
+        <CardWrapper className={classes.card}>
             <RecipeHeader
                 title={recipe.title}
                 subtitle={recipe.subtitle}
@@ -39,7 +39,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
                 deleteClick={deleteRecipe}
                 editClick={showEditView}
             />
-        </RecipeCardContainer>
+        </CardWrapper>
     );
 };
 
