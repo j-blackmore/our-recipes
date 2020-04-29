@@ -6,7 +6,7 @@ import EditRecipeCard from '../Recipe/EditRecipeCard';
 import ViewContext from '../../contexts/ViewContext';
 import NewRecipeCard from '../Recipe/NewRecipeCard';
 
-const ModalConductor = props => {
+const ModalConductor = () => {
     const { state, dispatch } = useContext(ViewContext);
     const { modalView, prevView, recipe } = state;
 
@@ -96,20 +96,16 @@ const ModalConductor = props => {
     const addView =
         modalView === 'add' || (modalView === 'none' && prevView === 'add');
 
+    const modalOpen = modalView !== 'none';
+
     return (
-        <RecipeModal
-            open={modalView !== 'none'}
-            handleClose={() => handleClose()}
-        >
+        <RecipeModal open={modalOpen} handleClose={() => handleClose()}>
             <>
                 {recipeView && (
                     <RecipeCardDetailed
                         recipe={recipe}
                         handleClose={() => handleClose()}
                         handleDelete={deleteRecipe}
-                        handleEdit={() =>
-                            dispatch({ prevView: 'recipe', modalView: 'edit' })
-                        }
                     />
                 )}
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IconButton, makeStyles } from '@material-ui/core';
 import Clear from '@material-ui/icons/Clear';
+import ViewContext from '../../contexts/ViewContext';
 import RecipeCardContainer from '../Wrappers/RecipeCardContainer';
 import RecipeHeader from './RecipeHeader';
 import RecipeImage from './RecipeImage';
@@ -14,9 +15,12 @@ const useStyles = makeStyles({
     }
 });
 
-const RecipeCardDetailed = React.forwardRef((props, ref) => {
+const RecipeCardDetailed = ({ recipe, handleClose, handleDelete }) => {
+    const { dispatch } = useContext(ViewContext);
     const classes = useStyles();
-    const recipe = props.recipe;
+
+    const showEditView = () =>
+        dispatch({ prevView: 'recipe', modalView: 'edit' });
 
     return (
         <RecipeCardContainer classes={classes.card}>
@@ -24,7 +28,7 @@ const RecipeCardDetailed = React.forwardRef((props, ref) => {
                 title={recipe.title}
                 subtitle={recipe.subtitle}
                 action={
-                    <IconButton onClick={props.handleClose}>
+                    <IconButton onClick={handleClose}>
                         <Clear />
                     </IconButton>
                 }
@@ -32,11 +36,11 @@ const RecipeCardDetailed = React.forwardRef((props, ref) => {
             <RecipeImage imageUrl={recipe.imageUrl} />
             <RecipeContent recipe={recipe} detailed={true} />
             <RecipeActions
-                handleDelete={props.handleDelete}
-                handleEdit={props.handleEdit}
+                handleDelete={handleDelete}
+                handleEdit={showEditView}
             />
         </RecipeCardContainer>
     );
-});
+};
 
 export default RecipeCardDetailed;
