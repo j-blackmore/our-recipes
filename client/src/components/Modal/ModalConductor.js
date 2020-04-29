@@ -7,11 +7,13 @@ import ViewContext from '../../contexts/ViewContext';
 import NewRecipeCard from '../Recipe/NewRecipeCard';
 
 const ModalConductor = () => {
-    const { state, dispatch } = useContext(ViewContext);
-    const { modalView, prevView, recipe } = state;
+    const {
+        state: { modalView, prevView, recipe },
+        dispatch
+    } = useContext(ViewContext);
 
     const deleteRecipe = () => {
-        const { _id } = state.recipe;
+        const { _id } = recipe;
         const postRequestOpts = {
             method: 'POST'
         };
@@ -83,23 +85,20 @@ const ModalConductor = () => {
                 recipe: newRecipe ? newRecipe : recipe
             });
         } else {
-            dispatch({ prevView: modalView, modalView: 'none' });
+            dispatch({ prevView: modalView, modalView: '' });
         }
     };
 
     const recipeView =
-        modalView === 'recipe' ||
-        (modalView === 'none' && prevView === 'recipe');
+        modalView === 'recipe' || (modalView === '' && prevView === 'recipe');
 
     const editView = modalView === 'edit';
 
     const addView =
-        modalView === 'add' || (modalView === 'none' && prevView === 'add');
-
-    const modalOpen = modalView !== 'none';
+        modalView === 'add' || (modalView === '' && prevView === 'add');
 
     return (
-        <RecipeModal open={modalOpen} handleClose={() => handleClose()}>
+        <RecipeModal open={modalView} handleClose={() => handleClose()}>
             <>
                 {recipeView && (
                     <RecipeCardDetailed

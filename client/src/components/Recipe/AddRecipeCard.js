@@ -15,7 +15,7 @@ const AddRecipeCard = () => {
     const { dispatch } = useContext(ViewContext);
     const classes = useStyles();
 
-    const showAddModal = () => dispatch({ modalView: 'add', prevView: 'none' });
+    const showAddModal = () => dispatch({ modalView: 'add', prevView: '' });
 
     return (
         <RecipeCardContainer

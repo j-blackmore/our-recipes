@@ -10,7 +10,7 @@ const RecipeCard = ({ recipe }) => {
     const { dispatch } = useContext(ViewContext);
 
     const showDetailedModal = () =>
-        dispatch({ modalView: 'recipe', prevView: 'none', recipe: recipe });
+        dispatch({ modalView: 'recipe', prevView: '', recipe: recipe });
 
     return (
         <RecipeCardContainer onClick={() => showDetailedModal()}>

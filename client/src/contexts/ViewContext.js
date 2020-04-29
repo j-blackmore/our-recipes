@@ -3,8 +3,8 @@ import React, { createContext, useReducer } from 'react';
 const ViewContext = createContext({});
 
 const initState = {
-    modalView: 'none',
-    prevView: 'none',
+    modalView: '',
+    prevView: '',
     recipe: null
 };
 
