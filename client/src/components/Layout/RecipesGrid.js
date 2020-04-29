@@ -4,7 +4,7 @@ import ViewContext from '../../contexts/ViewContext';
 import AddRecipeCard from '../Recipe/Cards/AddRecipeCard';
 import RecipeCard from '../Recipe/Cards/RecipeCard';
 
-const RecipeGrid = () => {
+const RecipesGrid = () => {
     const { state } = useContext(ViewContext);
     const [recipes, setRecipes] = useState([]);
     const spacing = 2;
@@ -40,4 +40,4 @@ const RecipeGrid = () => {
     );
 };
 
-export default RecipeGrid;
+export default RecipesGrid;
