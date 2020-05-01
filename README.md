@@ -69,10 +69,12 @@ $ npm run dev
 ## Client
 
 The final step is to install and run the client, which is React. Navigate to
-the project root directory and run the following
+the project root directory and run the following (note: this will also add an
+environment vairable `NODE_PATH` in a `client/.env` file)
 
 ```bash
 $ cd client
+$ echo "NODE_PATH=src/" >> .env
 $ npm install
 $ npm start
 ```

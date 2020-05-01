@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import axios from 'axios';
+import recipesAPI from '../../recipesAPI';
 import ModalWrapper from './ModalWrapper';
 import RecipeCardDetailed from '../Recipe/Cards/RecipeCardDetailed';
 import EditRecipeCard from '../Recipe/Cards/EditRecipeCard';
@@ -13,15 +13,8 @@ const ModalConductor = () => {
     } = useContext(ViewContext);
 
     const deleteRecipe = () => {
-        const { _id } = recipe;
-        const postRequestOpts = {
-            method: 'POST'
-        };
-
-        fetch('/recipes/delete/' + _id, postRequestOpts).then(
-            res => {
-                handleClose(true);
-            },
+        recipesAPI.deleteRecipe(recipe._id).then(
+            res => handleClose(true),
             err => console.error(err)
         );
     };
@@ -30,16 +23,8 @@ const ModalConductor = () => {
         const { _id, ingredients } = newRecipe;
         newRecipe.ingredients = ingredients.split(/\r?\n/);
 
-        const config = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newRecipe)
-        };
-
-        fetch('/recipes/update/' + _id, config).then(
-            res => {
-                handleClose(true, newRecipe);
-            },
+        recipesAPI.updateRecipe(_id, newRecipe).then(
+            res => handleClose(true, newRecipe),
             err => console.error(err)
         );
     };
@@ -48,33 +33,20 @@ const ModalConductor = () => {
         const { ingredients } = newRecipe;
         newRecipe.ingredients = ingredients.split(/\r?\n/);
 
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-
         if (newImage !== null) {
-            await axios
-                .post('/recipes/uploadImage', newImage, config)
-                .then(response => {
-                    newRecipe.imageUrl = response.data.imageUrl;
-                    newRecipe.imageId = response.data.imageId;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            await recipesAPI.uploadImage(newImage).then(
+                ({ data: { imageUrl, imageId } = {} }) => {
+                    newRecipe.imageUrl = imageUrl;
+                    newRecipe.imageId = imageId;
+                },
+                err => console.error(err)
+            );
         }
 
-        await axios
-            .post('/recipes/add', newRecipe)
-            .then(response => {
-                newRecipe._id = response.data.objectID;
-                handleClose(true);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        await recipesAPI.addRecipe(newRecipe).then(
+            res => handleClose(true),
+            err => console.log(err)
+        );
     };
 
     const handleClose = (updateRecipes = false, newRecipe = false) => {

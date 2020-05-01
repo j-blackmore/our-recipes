@@ -3,25 +3,18 @@ import { Grid } from '@material-ui/core';
 import ViewContext from '../../contexts/ViewContext';
 import AddRecipeCard from '../Recipe/Cards/AddRecipeCard';
 import RecipeCard from '../Recipe/Cards/RecipeCard';
+import recipesAPI from 'recipesAPI';
 
 const RecipesGrid = () => {
     const { state } = useContext(ViewContext);
     const [recipes, setRecipes] = useState([]);
     const spacing = 2;
 
-    const getRecipes = async () => {
-        var recipes = [];
-        await fetch('/recipes')
-            .then(response => response.json())
-            .then(
-                res => (recipes = res),
-                err => console.error(err)
-            );
-        setRecipes(recipes);
-    };
-
     useEffect(() => {
-        getRecipes();
+        recipesAPI.getRecipes().then(
+            res => setRecipes(res),
+            err => console.error(err)
+        );
     }, [state.updateRecipes]);
 
     return (
