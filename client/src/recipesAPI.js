@@ -23,7 +23,7 @@ const DELETE_RECIPE = '/recipes/delete/';
 const UPDATE_RECIPE = '/recipes/update/';
 const UPLOAD_IMAGE = '/recipes/uploadImage';
 
-const recipesApi = {
+const recipesAPI = {
     getRecipes: () => apiFetch(GET_RECIPES),
     addRecipe: newRecipe => apiFetch(ADD_RECIPE, { body: newRecipe }),
     updateRecipe: (id, newRecipe) =>
@@ -36,4 +36,4 @@ const recipesApi = {
         })
 };
 
-export default recipesApi;
+export default recipesAPI;
