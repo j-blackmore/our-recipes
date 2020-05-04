@@ -6,7 +6,10 @@ import CardWrapper from '../../Wrappers/CardWrapper';
 const useStyles = makeStyles({
     card: {
         textAlign: 'center',
-        backgroundColor: 'rgb(230, 230, 230)'
+        backgroundColor: 'rgb(230, 230, 230)',
+        height: 'calc(100% - 16px)',
+        minHeight: 282,
+        marginTop: 0
     }
 });
 

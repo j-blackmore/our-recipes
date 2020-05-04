@@ -10,8 +10,9 @@ import RecipeActions from '../RecipeActions';
 
 const useStyles = makeStyles({
     card: {
-        height: 443,
-        width: 345
+        width: '100%',
+        maxWidth: 385,
+        margin: 16
     }
 });
 
@@ -24,6 +25,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
 
     return (
         <CardWrapper className={classes.card}>
+            <RecipeImage large url={recipe.imageUrl} title={recipe.title} />
             <RecipeHeader
                 title={recipe.title}
                 subtitle={recipe.subtitle}
@@ -33,7 +35,6 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
                     </IconButton>
                 }
             />
-            <RecipeImage url={recipe.imageUrl} title={recipe.title} />
             <RecipeContent detailed recipe={recipe} />
             <RecipeActions
                 deleteClick={deleteRecipe}

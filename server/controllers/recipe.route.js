@@ -5,22 +5,22 @@ const Recipe = require('../models/recipe.model');
 const cloudinary = require('./cloudinary');
 const IncomingForm = require('formidable').IncomingForm;
 
-const PUBLIC_DIR = 'client/public';
+const PUBLIC_DIR = '../client/public';
 const IMAGES_DIR = PUBLIC_DIR + '/images/';
 const multer = require('multer');
 const fs = require('fs');
 
-router.route('').get(function(req, res) {
-    Recipe.find(function(err, recipes) {
+router.route('').get((req, res) => {
+    Recipe.find((err, recipes) => {
         if (err) {
             console.log(err);
-        } else {
-            res.status(200).json(recipes);
+            res.status(400).json({ status: 'Error fetching recipes' });
         }
+        res.status(200).json(recipes);
     });
 });
 
-router.route('/add').post(function(req, res) {
+router.route('/add').post((req, res) => {
     let newRecipe = new Recipe(req.body);
     newRecipe
         .save()
@@ -31,73 +31,79 @@ router.route('/add').post(function(req, res) {
             });
         })
         .catch(err => {
-            res.status(400).send('creating a new recipe failed');
+            res.status(400).json({ status: 'creating a new recipe failed' });
         });
 });
 
-router.route('/update/:id').post(function(req, res) {
-    Recipe.findById(req.params.id, function(err, recipe) {
+router.route('/update/:id').post((req, res) => {
+    Recipe.findById(req.params.id, (err, recipe) => {
         if (err || !recipe) {
-            res.status(404).send('Recipe not found');
-        } else {
-            newRecipe = req.body;
-            recipe.title = newRecipe.title;
-            recipe.subtitle = newRecipe.subtitle;
-            recipe.method = newRecipe.method;
-            recipe.ingredients = newRecipe.ingredients;
-            recipe.prepTime = newRecipe.prepTime;
-            recipe.cookTime = newRecipe.cookTime;
-
-            recipe
-                .save()
-                .then(recipe => {
-                    res.status(200).json({
-                        status: 'recipe updated successfully',
-                        recipe: recipe
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(400).send('Failed to update recipe');
-                });
+            res.status(404).json({ status: 'Recipe not found' });
         }
+
+        newRecipe = req.body;
+        recipe.title = newRecipe.title;
+        recipe.subtitle = newRecipe.subtitle;
+        recipe.method = newRecipe.method;
+        recipe.ingredients = newRecipe.ingredients;
+        recipe.prepTime = newRecipe.prepTime;
+        recipe.cookTime = newRecipe.cookTime;
+
+        recipe
+            .save()
+            .then(recipe => {
+                res.status(200).json({
+                    status: 'recipe updated successfully',
+                    recipe: recipe
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).json({ status: 'Failed to update recipe' });
+            });
     });
 });
 
 const storage = multer.diskStorage({
     destination: IMAGES_DIR,
-    filename: function(req, file, cb) {
+    filename: (req, file, cb) => {
         cb(null, file.originalname);
     }
 });
 
-const upload = multer({storage: storage}).single('recipeImage');
-router.route('/uploadImage').post(function(req, res) {
-    // upload file to cloudinary
-    if(process.env.ENV === 'DEV') {
-        upload(req, res, (err) => {
-            if(!err) {
-                const fileName = req.file.originalname;
-                res.status(200).json({
-                    status: 'image upload success',
-                    imageUrl: '/images/' + fileName,
-                    imageId: fileName
-                });
+const upload = multer({ storage: storage }).single('recipeImage');
+router.route('/uploadImage').post((req, res) => {
+    if (process.env.ENV === 'DEV') {
+        // save file locally
+        upload(req, res, err => {
+            if (err) {
+                res.status(400).json({ status: 'image upload failed' });
             }
-            res.status(400);
+
+            const fileName = req.file.originalname;
+            res.status(200).json({
+                ok: 'true',
+                status: 'image upload success',
+                imageUrl: '/images/' + fileName,
+                imageId: fileName
+            });
         });
     } else {
+        // upload file to cloudinary
         IncomingForm().parse(req, (err, fields, files) => {
             if (err) {
                 console.log(err);
+                res.status(400).json({
+                    status: 'Parsing error when saving image'
+                });
             }
-    
+
             cloudinary.uploader.upload(
                 files['recipeImage'].path,
                 { unique_filename: true, folder: 'recipes' },
-                (err, image) => {
-                    if (err) {
-                        console.log(err);
+                (error, image) => {
+                    if (error) {
+                        console.log(error);
                         res.status(400).json({ status: 'upload failed' });
                     }
                     res.status(200).json({
@@ -109,11 +115,9 @@ router.route('/uploadImage').post(function(req, res) {
             );
         });
     }
-
-    // return filename
 });
 
-router.route('/delete/:id').post(async function(req, res) {
+router.route('/delete/:id').post(async (req, res) => {
     var recipeId = req.params.id;
     const recipeToDelete = await Recipe.findById(recipeId, 'imageUrl imageId', {
         lean: true
@@ -121,27 +125,34 @@ router.route('/delete/:id').post(async function(req, res) {
     const recipeImageId = recipeToDelete.imageId;
     const recipeImagePath = PUBLIC_DIR + recipeToDelete.imageUrl;
 
-    Recipe.deleteOne({ _id: recipeId }, function(err) {
-        if (!err) {
-            // send delete image request to cloudinary
-            if(recipeImageId) {
-                if(process.env.ENV === 'DEV') {
-                    fs.unlink(recipeImagePath, (err) => {
-                        if(err) res.status(400).send('error deleting recipe image');
-                        else console.log('recipe image deleted successfully');
-                    });
-                } else {
-                    cloudinary.uploader.destroy(recipeImageId, (error, result) => {
-                        if(error) {
-                            res.status(400).send('image not deleted');
-                        }
-                    });
-                }
-            }
-            res.status(200).send('recipe deleted successfully');
-        } else {
-            res.status(400).send('error deleting recipe');
+    Recipe.deleteOne({ _id: recipeId }, err => {
+        if (err) {
+            res.status(400).json({ status: 'error deleting recipe' });
         }
+
+        if (recipeImageId) {
+            if (process.env.ENV === 'DEV') {
+                // delete locally stored file
+                fs.unlink(recipeImagePath, error => {
+                    if (error) {
+                        res.status(400).json({
+                            status: 'error deleting recipe image'
+                        });
+                    }
+                });
+            } else {
+                // send delete image request to cloudinary
+                cloudinary.uploader.destroy(recipeImageId, (error, result) => {
+                    if (error) {
+                        res.status(400).json({
+                            status: 'image not deleted'
+                        });
+                    }
+                });
+            }
+        }
+
+        res.status(200).json({ status: 'recipe deleted successfully' });
     });
 });
 

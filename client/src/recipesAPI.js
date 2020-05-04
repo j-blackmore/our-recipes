@@ -1,6 +1,7 @@
 async function apiFetch(endpoint, { body, ...customConfig } = {}) {
     const config = {
         method: body ? 'POST' : 'GET',
+        body: body,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -31,7 +32,7 @@ const recipesApi = {
     uploadImage: newImage =>
         apiFetch(UPLOAD_IMAGE, {
             body: newImage,
-            headers: { 'Content-Type': 'multipart/form-data' }
+            headers: {}
         })
 };
 

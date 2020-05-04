@@ -1,10 +1,18 @@
 import React from 'react';
-import { CardHeader } from '@material-ui/core';
+import { CardHeader, makeStyles } from '@material-ui/core';
 
-const RecipeHeader = ({ classes, title, subtitle, action }) => {
+const useStyles = makeStyles({
+    header: {
+        paddingTop: 0
+    }
+});
+
+const RecipeHeader = ({ classes = '', title, subtitle, action }) => {
+    const classNames = useStyles();
+
     return (
         <CardHeader
-            className={classes}
+            className={`${classNames.header} ${classes}`}
             title={title}
             subheader={subtitle || '-'}
             action={action}

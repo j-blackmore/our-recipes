@@ -35,7 +35,7 @@ const ModalConductor = () => {
 
         if (newImage !== null) {
             await recipesAPI.uploadImage(newImage).then(
-                ({ data: { imageUrl, imageId } = {} }) => {
+                ({ imageUrl = '', imageId = '' }) => {
                     newRecipe.imageUrl = imageUrl;
                     newRecipe.imageId = imageId;
                 },

@@ -8,7 +8,7 @@ import recipesAPI from 'recipesAPI';
 const RecipesGrid = () => {
     const { state } = useContext(ViewContext);
     const [recipes, setRecipes] = useState([]);
-    const spacing = 2;
+    const spacing = 3;
 
     useEffect(() => {
         recipesAPI.getRecipes().then(

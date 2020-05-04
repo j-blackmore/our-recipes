@@ -10,7 +10,7 @@ const RecipesPage = () => {
         <ViewProvider>
             <Container maxWidth={'lg'}>
                 <Header />
-                <Box my={3}>
+                <Box py={3}>
                     <RecipesGrid />
                     <ModalConductor />
                 </Box>

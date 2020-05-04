@@ -6,8 +6,9 @@ import RecipeTimings from './RecipeTimings';
 
 const useStyles = makeStyles({
     content: {
-        height: 140,
-        overflow: 'scroll'
+        maxHeight: 126,
+        overflow: 'scroll',
+        paddingTop: 0
     }
 });
 

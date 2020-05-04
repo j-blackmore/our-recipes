@@ -102,18 +102,17 @@ export default class RecipeForm extends React.Component {
     }
 
     handleImageUpload(event) {
-        const files = Array.from(event.target.files);
-        const imageData = new FormData();
-        imageData.append('recipeImage', files[0]);
-        const imageName = files[0].name;
+        const uploadedImage = event.target.files[0];
+        const data = new FormData();
+        data.append('recipeImage', uploadedImage);
 
         this.setState({
-            imageData: imageData,
+            imageData: data,
             recipe: {
                 ...this.state.recipe,
-                imageUrl: '/images/' + imageName
+                imageUrl: '/images/' + uploadedImage.name
             },
-            imageName: imageName
+            imageName: uploadedImage.name
         });
     }
 

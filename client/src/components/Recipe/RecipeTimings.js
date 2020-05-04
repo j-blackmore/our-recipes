@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     },
     container: {
         display: 'flex',
-        marginBottom: '0.35em',
+        marginBottom: '0.5em',
         justifyContent: 'space-between'
     },
     timeContainer: {

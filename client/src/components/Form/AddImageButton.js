@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     input: {
@@ -35,7 +35,13 @@ const AddImageButton = ({ uploadedImageName, handleImageUpload }) => {
                     Upload image
                 </Button>
             </label>
-            <span className={classes.fileUploaded}>{fileUploadFeedback}</span>
+            <Typography
+                variant="subtitle2"
+                component="span"
+                className={classes.fileUploaded}
+            >
+                {fileUploadFeedback}
+            </Typography>
         </>
     );
 };
