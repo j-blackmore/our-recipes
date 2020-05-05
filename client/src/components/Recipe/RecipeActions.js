@@ -7,10 +7,10 @@ export default function RecipeActions({ deleteClick, editClick }) {
     return (
         <CardActions disableSpacing>
             <IconButton aria-label="delete" onClick={deleteClick}>
-                <Delete />
+                <Delete title="delete-icon" />
             </IconButton>
-            <IconButton aria-label="delete" onClick={editClick}>
-                <Edit />
+            <IconButton aria-label="edit" onClick={editClick}>
+                <Edit title="edit-icon" />
             </IconButton>
         </CardActions>
     );

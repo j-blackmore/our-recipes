@@ -16,19 +16,17 @@ const useStyles = makeStyles({
 });
 
 const defaultUrl = '/images/no-image.svg';
+const defaultTitle = 'Image of Recipe';
+const noImageTitle = 'No Image';
 
-const RecipeImage = ({
-    url = defaultUrl,
-    title = 'No Image',
-    large = false
-}) => {
+const RecipeImage = ({ url = '', title = defaultTitle, large = false }) => {
     const classes = useStyles();
 
     return (
         <CardMedia
             className={`${classes.media} ${large ? classes.mediaLarge : ''}`}
             image={url || defaultUrl}
-            title={title}
+            title={url ? title : noImageTitle}
         />
     );
 };

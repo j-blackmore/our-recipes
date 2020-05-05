@@ -31,7 +31,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
                 subtitle={recipe.subtitle}
                 action={
                     <IconButton onClick={handleClose}>
-                        <Clear />
+                        <Clear title="close-icon" />
                     </IconButton>
                 }
             />

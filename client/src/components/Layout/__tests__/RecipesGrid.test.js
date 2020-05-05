@@ -1,10 +1,9 @@
 import React from 'react';
-import { cleanup, render, screen, act } from 'test-utils';
+import { render, screen, act } from 'test-utils';
 import RecipesGrid from '../RecipesGrid';
 import recipesAPI from '../../../recipesAPI';
 
 afterEach(() => {
-    cleanup();
     jest.clearAllMocks();
 });
 

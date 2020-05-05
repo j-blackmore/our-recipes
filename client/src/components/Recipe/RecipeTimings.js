@@ -30,7 +30,7 @@ const RecipeTimings = ({ prepTime, cookTime }) => {
     return (
         <div className={classes.container}>
             <div className={classes.timeContainer}>
-                <Timelapse className={classes.icon} />
+                <Timelapse title="prep-time-clock" className={classes.icon} />
                 <div className={classes.textContainer}>
                     <Typography display="inline" variant="body1">
                         Prep: {getPluralTime(prepTime)}
@@ -38,7 +38,7 @@ const RecipeTimings = ({ prepTime, cookTime }) => {
                 </div>
             </div>
             <div className={classes.timeContainer}>
-                <Timelapse className={classes.icon} />
+                <Timelapse title="cook-time-clock" className={classes.icon} />
                 <div className={classes.textContainer}>
                     <Typography display="inline" variant="body1">
                         Cook: {getPluralTime(cookTime)}
