@@ -68,6 +68,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "test:coverage": "node scripts/test.js --coverage --watchAll=false",
+    "test:all": "node scripts/test.js --watchAll=false",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },

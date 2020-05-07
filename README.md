@@ -152,4 +152,76 @@ $ npm start
 
 # Tests
 
-_TODO_
+## Client
+
+Currently we have unit & integration tests, running on Jest using
+react-testing-library. Tests can be found inside `__tests__` folders which sit
+next to the react components the particular file is testing. See this structure
+for an example:
+
+```
+├ ...
+├── MyComponent
+│   ├── __tests__
+│   │   └── MyComponent.test.js
+│   └── MyComponent.js
+...
+```
+
+### Running unit & integration tests
+
+By default our test suite 'Jest', runs in an interactive watch mode. This means
+that whenever you make a change to a react component or test file, and tests
+affected will be automatically re-run. Run the suite with
+
+```bash
+$ npm test
+```
+
+You can type `w` to see all the options in the interactive shell.
+
+Typing `a` will re-run **all** tests.
+
+Alternatively you can just run all tests, without the watch mode with:
+
+```bash
+$ npm run test:all
+```
+
+### Test coverage
+
+Test coverage can be produced with running
+
+```bash
+$ npm run test:coverage
+```
+
+Results our output to the shell and a nice interactive webpage is also built,
+this can be found in `client/coverage/`. Open the `index.html` file inside
+`client/coverage/Icov-report/` in a browser to view this.
+
+### End to End tests
+
+In addition to unit & integration tests, we also have e2e tests which are built
+and run with cypress (an amazing testing tool). To run the e2e tests, you will
+need the database, server and client all running locally before you run them.
+
+These tests behave like a user interacting with the site, so it all needs to be
+up and running. Follow the steps above to get everything up and running. Once
+you have, navigate to the `client` directory and run
+
+```bash
+$ npm run cypress:run
+```
+
+Alternatively, Cypress comes with a great UI that you can interactive with,
+and this also runs in watch mode. Start this up with
+
+```bash
+$ npm run cypress:open
+```
+
+And click 'Run all specs' to run the tests.
+
+_Note: this will open a new Cypress window, and a Cypress controlled browser but
+interact with these!_
