@@ -7,6 +7,8 @@ node_modules
 
 # testing
 coverage
+client/cypress/videos
+client/cypress/integration/examples
 
 # production
 /build
