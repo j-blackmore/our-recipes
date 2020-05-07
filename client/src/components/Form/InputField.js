@@ -26,6 +26,7 @@ const InputField = props => {
             className={classes.input}
             helperText={helperText}
             label={props.name}
+            id={props.name}
             fullWidth
             required
             rows={props.multiline ? '3' : '1'}

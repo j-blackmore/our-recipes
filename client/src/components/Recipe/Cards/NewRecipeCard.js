@@ -30,8 +30,8 @@ const NewRecipeCard = ({ handleClose, saveRecipe }) => {
                 title="Create New Recipe"
                 subtitle="Enter your recipe below, add an image and save."
                 action={
-                    <IconButton onClick={handleClose}>
-                        <Clear />
+                    <IconButton aria-label="close" onClick={handleClose}>
+                        <Clear title="close-icon" />
                     </IconButton>
                 }
             />

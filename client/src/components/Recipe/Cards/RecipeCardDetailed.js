@@ -30,7 +30,7 @@ const RecipeCardDetailed = ({ recipe, handleClose, deleteRecipe }) => {
                 title={recipe.title}
                 subtitle={recipe.subtitle}
                 action={
-                    <IconButton onClick={handleClose}>
+                    <IconButton aria-label="close" onClick={handleClose}>
                         <Clear title="close-icon" />
                     </IconButton>
                 }
