@@ -21,13 +21,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formidable": "^1.2.2",
-    "mongoose": "^5.9.10"
+    "mongoose": "^5.9.12"
   },
   "engines": {
     "node": "10.13.0"
   },
   "devDependencies": {
-    "jest-cli": "^25.4.0",
+    "jest-cli": "^25.5.4",
     "multer": "^1.4.2",
     "nodemon": "^2.0.3"
   },

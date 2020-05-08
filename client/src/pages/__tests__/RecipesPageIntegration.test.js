@@ -96,18 +96,18 @@ describe('When user is on the RecipespPage', () => {
         expect(screen.getByText(createTitle)).toBeInTheDocument();
         expect(screen.getByText(createSubtitle)).toBeInTheDocument();
 
-        const titleInput = screen.getByRole('textbox', { name: 'title *' });
+        const titleInput = screen.getByRole('textbox', { name: 'title' });
         userEvent.type(titleInput, mockRecipe.title);
         expect(titleInput).toHaveAttribute('value', mockRecipe.title);
 
         const subtitleInput = screen.getByRole('textbox', {
-            name: 'subtitle *'
+            name: 'subtitle'
         });
         userEvent.type(subtitleInput, mockRecipe.subtitle);
         expect(subtitleInput).toHaveAttribute('value', mockRecipe.subtitle);
 
         const prepTimeInput = screen.getByRole('textbox', {
-            name: 'Preparation Time (mins) *'
+            name: 'Preparation Time (mins)'
         });
         userEvent.type(prepTimeInput, mockRecipe.prepTime.toString());
         expect(prepTimeInput).toHaveAttribute(
@@ -116,7 +116,7 @@ describe('When user is on the RecipespPage', () => {
         );
 
         const cookTimeInput = screen.getByRole('textbox', {
-            name: 'Cooking Time (mins) *'
+            name: 'Cooking Time (mins)'
         });
         userEvent.type(cookTimeInput, mockRecipe.cookTime.toString());
         expect(cookTimeInput).toHaveAttribute(
@@ -125,13 +125,13 @@ describe('When user is on the RecipespPage', () => {
         );
 
         const methodInput = screen.getByRole('textbox', {
-            name: 'method *'
+            name: 'method'
         });
         userEvent.type(methodInput, mockRecipe.method);
         expect(methodInput).toHaveTextContent(mockRecipe.method);
 
         const ingredientsInput = screen.getByRole('textbox', {
-            name: 'ingredients *'
+            name: 'ingredients'
         });
         const stringedIngredients = mockRecipe.ingredients.join('\n');
         userEvent.type(ingredientsInput, stringedIngredients, {
@@ -201,14 +201,14 @@ describe('When user is on the RecipespPage', () => {
         userEvent.click(editBtn);
         expect(editBtn).not.toBeInTheDocument();
 
-        const titleInput = screen.getByRole('textbox', { name: 'title *' });
+        const titleInput = screen.getByRole('textbox', { name: 'title' });
         expect(titleInput).toHaveAttribute('value', mockRecipe.title);
         userEvent.clear(titleInput);
         userEvent.type(titleInput, 'New Recipe Title');
         expect(titleInput).toHaveAttribute('value', 'New Recipe Title');
 
         const methodInput = screen.getByRole('textbox', {
-            name: 'method *'
+            name: 'method'
         });
         expect(methodInput).toHaveTextContent(mockRecipe.method);
         userEvent.clear(methodInput);
