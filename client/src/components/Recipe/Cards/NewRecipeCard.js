@@ -8,8 +8,10 @@ import RecipeForm from '../../Form/RecipeForm';
 const useStyles = makeStyles({
     card: {
         width: '90%',
+        maxWidth: 500,
         height: 'auto',
-        maxWidth: 500
+        maxHeight: '90%',
+        overflow: 'scroll'
     },
     header: {
         padding: '16px 16px 8px'

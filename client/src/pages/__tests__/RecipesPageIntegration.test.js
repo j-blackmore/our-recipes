@@ -14,10 +14,13 @@ const mockRecipe = {
     subtitle: 'some subtitle',
     method: 'lorem ipsum',
     ingredients: ['thingy', 'another'],
+    extras: [''],
     prepTime: 10,
     cookTime: 5,
+    serves: 0,
     imageId: '',
-    imageUrl: ''
+    imageUrl: '',
+    creator: 'Integration Tester'
 };
 
 jest.mock('recipesAPI');
@@ -124,11 +127,14 @@ describe('When user is on the RecipespPage', () => {
             mockRecipe.cookTime.toString()
         );
 
-        const methodInput = screen.getByRole('textbox', {
-            name: 'method'
+        const servesInput = screen.getByRole('textbox', {
+            name: 'serves'
         });
-        userEvent.type(methodInput, mockRecipe.method);
-        expect(methodInput).toHaveTextContent(mockRecipe.method);
+        userEvent.type(servesInput, mockRecipe.serves.toString());
+        expect(servesInput).toHaveAttribute(
+            'value',
+            mockRecipe.serves.toString()
+        );
 
         const ingredientsInput = screen.getByRole('textbox', {
             name: 'ingredients'
@@ -140,6 +146,18 @@ describe('When user is on the RecipespPage', () => {
         expect(ingredientsInput.textContent).toBe(
             mockRecipe.ingredients.join('\n')
         );
+
+        const methodInput = screen.getByRole('textbox', {
+            name: 'method'
+        });
+        userEvent.type(methodInput, mockRecipe.method);
+        expect(methodInput).toHaveTextContent(mockRecipe.method);
+
+        const creatorInput = screen.getByRole('textbox', {
+            name: 'Created By'
+        });
+        userEvent.type(creatorInput, mockRecipe.creator);
+        expect(creatorInput).toHaveAttribute('value', mockRecipe.creator);
 
         recipesAPI.getRecipes.mockImplementation(() =>
             Promise.resolve([mockRecipe])

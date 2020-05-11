@@ -36,31 +36,12 @@ router.route('/add').post((req, res) => {
 });
 
 router.route('/update/:id').post((req, res) => {
-    Recipe.findById(req.params.id, (err, recipe) => {
-        if (err || !recipe) {
-            res.status(404).json({ status: 'Recipe not found' });
+    Recipe.updateOne({ _id: req.params.id }, req.body, err => {
+        if (err) {
+            res.status(400).json({ status: 'Failed to update recipe' });
         }
 
-        newRecipe = req.body;
-        recipe.title = newRecipe.title;
-        recipe.subtitle = newRecipe.subtitle;
-        recipe.method = newRecipe.method;
-        recipe.ingredients = newRecipe.ingredients;
-        recipe.prepTime = newRecipe.prepTime;
-        recipe.cookTime = newRecipe.cookTime;
-
-        recipe
-            .save()
-            .then(recipe => {
-                res.status(200).json({
-                    status: 'recipe updated successfully',
-                    recipe: recipe
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(400).json({ status: 'Failed to update recipe' });
-            });
+        res.status(200).json({ status: 'Recipe updated successfully' });
     });
 });
 

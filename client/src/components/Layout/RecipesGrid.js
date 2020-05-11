@@ -21,12 +21,12 @@ const RecipesGrid = () => {
         <Grid container justify="center" spacing={spacing}>
             {recipes.map((recipe, i) => {
                 return (
-                    <Grid item key={i} xs={6} sm={4} md={4} lg={3}>
+                    <Grid item key={i} xs={12} sm={4} md={4} lg={3}>
                         <RecipeCard recipe={recipe} />
                     </Grid>
                 );
             })}
-            <Grid item xs={6} sm={4} md={4} lg={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3}>
                 <AddRecipeCard />
             </Grid>
         </Grid>

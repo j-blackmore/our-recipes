@@ -20,8 +20,9 @@ const ModalConductor = () => {
     };
 
     const updateRecipe = newRecipe => {
-        const { _id, ingredients } = newRecipe;
+        const { _id, ingredients, extras } = newRecipe;
         newRecipe.ingredients = ingredients.split(/\r?\n/);
+        newRecipe.extras = extras.split(/\r?\n/);
 
         recipesAPI.updateRecipe(_id, newRecipe).then(
             res => handleClose(true, newRecipe),

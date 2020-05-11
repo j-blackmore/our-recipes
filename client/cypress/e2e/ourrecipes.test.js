@@ -9,18 +9,21 @@ describe('basic user flow on our-recipes', () => {
         cy.contains(/Create New Recipe/);
         cy.contains(/Enter your recipe below, add an image and save\./);
 
-        cy.findByRole('textbox', { name: 'title *' }).type('Cypress Title');
-        cy.findByRole('textbox', { name: 'subtitle *' }).type(
-            'Cypress subtitle'
-        );
-        cy.findByRole('textbox', { name: 'Preparation Time (mins) *' }).type(1);
-        cy.findByRole('textbox', { name: 'Cooking Time (mins) *' }).type(45);
-        cy.findByRole('textbox', { name: 'method *' }).type(
-            'Cypress recipe method'
-        );
-        cy.findByRole('textbox', { name: 'ingredients *' }).type(
+        cy.findByRole('textbox', { name: 'title' }).type('Cypress Title');
+        cy.findByRole('textbox', { name: 'subtitle' }).type('Cypress subtitle');
+        cy.findByRole('textbox', { name: 'Preparation Time (mins)' }).type(1);
+        cy.findByRole('textbox', { name: 'Cooking Time (mins)' }).type(45);
+        cy.findByRole('textbox', { name: 'serves' }).type(4);
+        cy.findByRole('textbox', { name: 'ingredients' }).type(
             'cypress{enter}test runner{enter}end to end tests'
         );
+        cy.findByRole('textbox', { name: 'method' }).type(
+            'Cypress recipe method'
+        );
+        cy.findByRole('textbox', { name: 'extras' }).type(
+            'npm{enter}browser{enter}some good testing principles'
+        );
+        cy.findByRole('textbox', { name: 'Created By' }).type('cypress tester');
 
         // upload image
         // TODO: Improve when Cypress adds feature for uploading files easily
@@ -70,12 +73,10 @@ describe('basic user flow on our-recipes', () => {
     it('edit a recipe', () => {
         cy.findByRole('button', { name: /edit/i }).click();
 
-        cy.findByRole('textbox', { name: 'title *' }).clear();
-        cy.findByRole('textbox', { name: 'title *' }).type(
-            'New Cypress Recipe'
-        );
-        cy.findByRole('textbox', { name: 'method *' }).clear();
-        cy.findByRole('textbox', { name: 'method *' }).type(
+        cy.findByRole('textbox', { name: 'title' }).clear();
+        cy.findByRole('textbox', { name: 'title' }).type('New Cypress Recipe');
+        cy.findByRole('textbox', { name: 'method' }).clear();
+        cy.findByRole('textbox', { name: 'method' }).type(
             'lorem ipsum lorem ipsum'
         );
         cy.findByRole('button', { name: /save/i }).click();

@@ -1,7 +1,9 @@
 import React from 'react';
-import { CardContent, CardActions } from '@material-ui/core';
-import RecipeFormInputs from './RecipeFormInputs';
+import { CardContent, CardActions, FormControl } from '@material-ui/core';
+import InputField from './InputField';
+import AddImageButton from './AddImageButton';
 import SaveRecipeButton from './SaveRecipeButton';
+import { FormStructure } from './recipeform-config';
 
 const classes = {
     content: {
@@ -13,25 +15,13 @@ const classes = {
     }
 };
 
-const initRecipe = {
-    title: '',
-    subtitle: '',
-    method: '',
-    imageUrl: '',
-    imageId: '',
-    ingredients: '',
-    prepTime: '',
-    cookTime: ''
-};
+const initRecipe = {};
+const initErrors = {};
 
-const initErrors = {
-    title: false,
-    subtitle: false,
-    method: false,
-    ingredients: false,
-    prepTime: false,
-    cookTime: false
-};
+FormStructure.forEach(field => {
+    initRecipe[field.name] = '';
+    initErrors[field.name] = false;
+});
 
 export default class RecipeForm extends React.Component {
     constructor(props) {
@@ -47,12 +37,14 @@ export default class RecipeForm extends React.Component {
     }
 
     prepRecipeForEdit = recipe => {
-        const { ingredients, prepTime, cookTime } = recipe;
+        const { ingredients, extras, prepTime, cookTime, serves } = recipe;
         return {
             ...recipe,
             ingredients: ingredients.join('\n'),
+            extras: extras.join('\n'),
             prepTime: prepTime.toString(),
-            cookTime: cookTime.toString()
+            cookTime: cookTime.toString(),
+            serves: serves.toString()
         };
     };
 
@@ -68,25 +60,22 @@ export default class RecipeForm extends React.Component {
         return !isNaN(intInput) && !isNaN(input - 0) && intInput >= 0;
     }
 
-    errorsExist(errors) {
-        return (
-            errors.title ||
-            errors.subtitle ||
-            errors.prepTime ||
-            errors.cookTime ||
-            errors.method ||
-            errors.ingredients
+    errorsExist = errors => {
+        return Object.keys(errors).reduce(
+            (hasErrors, field) => hasErrors && errors[field]
         );
-    }
+    };
 
-    inputHasErrors(name) {
+    inputHasErrors = name => {
         var extraError = false;
-        if (name === 'prepTime' || name === 'cookTime') {
+        if (['prepTime', 'cookTime', 'serves'].includes(name)) {
             extraError = !this.isValidInteger(this.state.recipe[name]);
         }
 
+        if (name === 'extras') return false; // not a required field
+
         return this.state.recipe[name].trim().length <= 0 || extraError;
-    }
+    };
 
     handleInputChange(event) {
         const { value, name } = event.target;
@@ -116,19 +105,15 @@ export default class RecipeForm extends React.Component {
         });
     }
 
-    validateForm() {
-        const errors = {
-            title: this.inputHasErrors('title'),
-            subtitle: this.inputHasErrors('subtitle'),
-            method: this.inputHasErrors('method'),
-            ingredients: this.inputHasErrors('ingredients'),
-            cookTime: this.inputHasErrors('cookTime'),
-            prepTime: this.inputHasErrors('prepTime')
-        };
+    validateForm = () => {
+        let newErrors = {};
+        Object.keys(this.state.errors).forEach(field => {
+            newErrors[field] = this.inputHasErrors(field);
+        });
 
-        this.setState({ errors: errors });
-        return !this.errorsExist(errors);
-    }
+        this.setState({ errors: newErrors });
+        return !this.errorsExist(newErrors);
+    };
 
     onFormSubmit = () => {
         if (this.validateForm()) {
@@ -144,14 +129,25 @@ export default class RecipeForm extends React.Component {
         return (
             <form onSubmit={this.onFormSubmit} noValidate>
                 <CardContent style={classes.content}>
-                    <RecipeFormInputs
-                        noImage={noImage}
-                        errors={errors}
-                        recipe={recipe}
-                        handleInputChange={this.handleInputChange.bind(this)}
-                        handleImageUpload={this.handleImageUpload.bind(this)}
-                        uploadedImageName={imageName}
-                    />
+                    <FormControl fullWidth>
+                        {FormStructure.map((field, i) => (
+                            <InputField
+                                key={i}
+                                {...field}
+                                value={recipe[field.name]}
+                                error={errors[field.name]}
+                                onChange={this.handleInputChange.bind(this)}
+                            />
+                        ))}
+                        {!noImage && (
+                            <AddImageButton
+                                handleImageUpload={this.handleImageUpload.bind(
+                                    this
+                                )}
+                                uploadedImageName={imageName}
+                            />
+                        )}
+                    </FormControl>
                 </CardContent>
                 <CardActions style={classes.actions}>
                     <SaveRecipeButton
