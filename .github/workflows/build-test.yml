@@ -17,7 +17,7 @@ jobs:
         run: |
           cd server
           npm install
-          npm test
+          npm run test:run
       - name: Run client tests & build
         run: |
           cd client

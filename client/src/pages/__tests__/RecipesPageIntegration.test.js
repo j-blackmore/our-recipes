@@ -38,7 +38,9 @@ const renderPage = async () => {
 // Integration tests
 describe('When user is on the RecipespPage', () => {
     test('user can open & close add new recipe modal', async () => {
-        recipesAPI.getRecipes.mockImplementation(() => Promise.resolve([]));
+        recipesAPI.getRecipes.mockImplementation(() =>
+            Promise.resolve({ recipes: [] })
+        );
         await renderPage();
 
         const addRecipeCard = await screen.getByText(/\+/i);
@@ -63,7 +65,7 @@ describe('When user is on the RecipespPage', () => {
 
     test('user can open & close detailed recipe view modal', async () => {
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve([mockRecipe])
+            Promise.resolve({ recipes: [mockRecipe] })
         );
         await renderPage();
 
@@ -88,7 +90,9 @@ describe('When user is on the RecipespPage', () => {
     });
 
     test('user can create a new recipe', async () => {
-        recipesAPI.getRecipes.mockImplementation(() => Promise.resolve([]));
+        recipesAPI.getRecipes.mockImplementation(() =>
+            Promise.resolve({ recipes: [] })
+        );
         await renderPage();
 
         const addRecipeCard = await screen.getByText(/\+/i);
@@ -160,7 +164,7 @@ describe('When user is on the RecipespPage', () => {
         expect(creatorInput).toHaveAttribute('value', mockRecipe.creator);
 
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve([mockRecipe])
+            Promise.resolve({ recipes: [mockRecipe] })
         );
         recipesAPI.addRecipe.mockImplementation(async () =>
             Promise.resolve({ status: 'ok' })
@@ -179,7 +183,7 @@ describe('When user is on the RecipespPage', () => {
 
     test('user can delete a recipe', async () => {
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve([mockRecipe])
+            Promise.resolve({ recipes: [mockRecipe] })
         );
         await renderPage();
 
@@ -190,7 +194,9 @@ describe('When user is on the RecipespPage', () => {
         recipesAPI.deleteRecipe.mockImplementation(() =>
             Promise.resolve({ status: 'ok' })
         );
-        recipesAPI.getRecipes.mockImplementation(() => Promise.resolve([]));
+        recipesAPI.getRecipes.mockImplementation(() =>
+            Promise.resolve({ recipes: [] })
+        );
 
         const deleteBtn = screen.getByRole('button', { name: 'delete' });
         userEvent.click(deleteBtn);
@@ -207,7 +213,7 @@ describe('When user is on the RecipespPage', () => {
 
     test('user can edit a recipe', async () => {
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve([mockRecipe])
+            Promise.resolve({ recipes: [mockRecipe] })
         );
         await renderPage();
 
@@ -234,13 +240,15 @@ describe('When user is on the RecipespPage', () => {
         expect(methodInput).toHaveTextContent('new instructions');
 
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve([
-                {
-                    ...mockRecipe,
-                    title: 'New Recipe Title',
-                    method: 'new instructions'
-                }
-            ])
+            Promise.resolve({
+                recipes: [
+                    {
+                        ...mockRecipe,
+                        title: 'New Recipe Title',
+                        method: 'new instructions'
+                    }
+                ]
+            })
         );
         recipesAPI.updateRecipe.mockImplementation(() =>
             Promise.resolve({ status: 'ok' })

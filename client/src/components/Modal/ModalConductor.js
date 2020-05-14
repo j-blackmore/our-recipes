@@ -44,7 +44,7 @@ const ModalConductor = () => {
             );
         }
 
-        await recipesAPI.addRecipe(newRecipe).then(
+        await recipesAPI.addRecipe({ recipe: newRecipe }).then(
             res => handleClose(true),
             err => console.log(err)
         );

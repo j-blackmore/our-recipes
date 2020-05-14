@@ -44,13 +44,17 @@ const renderGrid = async () => {
 
 describe('RecipesGrid', () => {
     test('fetches recipes only once during render', async () => {
-        recipesAPI.getRecipes.mockImplementation(() => Promise.resolve([]));
+        recipesAPI.getRecipes.mockImplementation(() =>
+            Promise.resolve({ recipes: [] })
+        );
         await renderGrid();
         expect(recipesAPI.getRecipes).toHaveBeenCalledTimes(1);
     });
 
     test('renders correctly with no recipes', async () => {
-        recipesAPI.getRecipes.mockImplementation(() => Promise.resolve([]));
+        recipesAPI.getRecipes.mockImplementation(() =>
+            Promise.resolve({ recipes: [] })
+        );
         await renderGrid();
 
         const addCard = screen.getByText(/\+/i);
@@ -59,7 +63,7 @@ describe('RecipesGrid', () => {
 
     test('renders correctly with 1 recipe', async () => {
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve([mockRecipe])
+            Promise.resolve({ recipes: [mockRecipe] })
         );
         await renderGrid();
         const recipeTitle = screen.getByText(/Recipe Title/);
@@ -80,7 +84,7 @@ describe('RecipesGrid', () => {
 
     test('renders correctly with multiple recipes', async () => {
         recipesAPI.getRecipes.mockImplementation(() =>
-            Promise.resolve(mockRecipes)
+            Promise.resolve({ recipes: mockRecipes })
         );
         await renderGrid();
 

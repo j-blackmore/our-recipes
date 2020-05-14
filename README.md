@@ -185,7 +185,7 @@ Typing `a` will re-run **all** tests.
 Alternatively you can just run all tests, without the watch mode with:
 
 ```bash
-$ npm run test:all
+$ npm run test:run
 ```
 
 ### Test coverage
@@ -225,3 +225,23 @@ And click 'Run all specs' to run the tests.
 
 _Note: this will open a new Cypress window, and a Cypress controlled browser but
 interact with these!_
+
+### Run all before commits
+
+I recommend you run all tests before commiting, so I added an easy script for
+this. Just run
+
+```bash
+$ npm run test:all
+```
+
+## Server
+
+### Test Database
+
+We run server tests in a 'test' environment by setting `ENV=TEST` in the scripts
+if you want to run the tests in this environment, you will need to create
+a mongo database called `test_our_recipes`.
+
+If not, then change the test scripts to say `ENV=DEV` and this will use your
+current local database.

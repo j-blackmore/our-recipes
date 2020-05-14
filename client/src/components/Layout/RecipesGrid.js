@@ -12,7 +12,7 @@ const RecipesGrid = () => {
 
     useEffect(() => {
         recipesAPI.getRecipes().then(
-            res => setRecipes(res),
+            res => setRecipes(res.recipes),
             err => console.error(err)
         );
     }, [state.updateRecipes]);

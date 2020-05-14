@@ -17,20 +17,22 @@ async function apiFetch(endpoint, { body, ...customConfig } = {}) {
     return response.ok ? result : Promise.reject(result);
 }
 
-const GET_RECIPES = '/recipes';
-const ADD_RECIPE = '/recipes/add';
-const DELETE_RECIPE = '/recipes/delete/';
-const UPDATE_RECIPE = '/recipes/update/';
-const UPLOAD_IMAGE = '/recipes/uploadImage';
+const RECIPES_ENDPOINT = '/recipes';
+const RECIPE_ENDPOINT = '/recipe';
+const FILES_ENDPOINT = '/files';
 
 const recipesAPI = {
-    getRecipes: () => apiFetch(GET_RECIPES),
-    addRecipe: newRecipe => apiFetch(ADD_RECIPE, { body: newRecipe }),
-    updateRecipe: (id, newRecipe) =>
-        apiFetch(UPDATE_RECIPE + id, { body: newRecipe }),
-    deleteRecipe: id => apiFetch(DELETE_RECIPE + id, { method: 'POST' }),
+    getRecipes: () => apiFetch(RECIPES_ENDPOINT),
+    addRecipe: data => apiFetch(RECIPE_ENDPOINT, { body: data }),
+    updateRecipe: (id, data) =>
+        apiFetch(`${RECIPE_ENDPOINT}/${id}`, {
+            body: data,
+            method: 'PUT'
+        }),
+    deleteRecipe: id =>
+        apiFetch(`${RECIPE_ENDPOINT}/${id}`, { method: 'DELETE' }),
     uploadImage: newImage =>
-        apiFetch(UPLOAD_IMAGE, {
+        apiFetch(`${FILES_ENDPOINT}/upload`, {
             body: newImage,
             headers: {}
         })
