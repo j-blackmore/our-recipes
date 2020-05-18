@@ -13,15 +13,14 @@ afterAll(async () => {
     await mongoDB.disconnect((verbose = false));
 });
 
-describe.skip('recipesController', () => {
+describe('recipesController', () => {
     test('GET /recipes returns empty array when no recipes exist', async () => {
         await request(app)
             .get('/recipes')
             .then(res => {
                 // TODO: Test for no recipes but sucessful request
                 expect(res.statusCode).toEqual(200);
-                expect(res.body).toEqual([]);
-                console.log(res.body);
+                expect(res.body).toEqual({ recipes: [] });
             });
     });
 
