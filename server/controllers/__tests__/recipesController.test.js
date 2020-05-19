@@ -2,14 +2,18 @@ const request = require('supertest');
 const app = require('../../app');
 const mongoDB = require('../mongoDB');
 
-const { initEmptyDatabase } = require('../../test/utils');
+const { initEmptyDb, exampleRecipe1, cleanupDb } = require('../../test/utils');
 
 beforeAll(async () => {
     await mongoDB.connect((verbose = false));
-    await initEmptyDatabase();
+});
+
+beforeEach(async () => {
+    await initEmptyDb();
 });
 
 afterAll(async () => {
+    await cleanupDb();
     await mongoDB.disconnect((verbose = false));
 });
 

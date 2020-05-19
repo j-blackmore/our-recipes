@@ -1,17 +1,25 @@
 // * Helper functions for use ONLY in testing
 
 const mongoose = require('mongoose');
+const Recipe = require('../models/recipe.model');
 
-const initEmptyDatabase = async () => {
-    const { db } = mongoose.connection;
+const initEmptyDb = async () => {
+    await Recipe.createCollection();
+    await Recipe.deleteMany({});
+};
 
-    const currentCollections = await db.listCollections({ name: 'recipes' });
-    if (currentCollections.readableLength > 0) {
-        await mongoose.connection.db.dropCollection('recipes');
-    }
-    await mongoose.connection.db.createCollection('recipes');
+const cleanupDb = async () => {
+    const { connection } = mongoose;
+
+    await connection.dropDatabase().then(
+        _res => {},
+        _err => console.log('Error: could not drop database')
+    );
+};
 };
 
 module.exports = {
-    initEmptyDatabase: initEmptyDatabase
+    initEmptyDb: initEmptyDb,
+    cleanupDb: cleanupDb,
+    exampleRecipe1: exampleRecipe1
 };
