@@ -25,57 +25,61 @@ const initRecipes = async recipes => {
 };
 
 describe('recipesController', () => {
-    test('GET /recipes returns empty array when no recipes exist', async () => {
-        await request(app)
-            .get('/recipes')
-            .then(res => {
-                // TODO: Test for no recipes but sucessful request
-                expect(res.statusCode).toEqual(200);
-                expect(res.body).toEqual({ recipes: [] });
-            });
-    });
+    describe('/recipes', () => {
+        test('GET returns empty array when no recipes exist', async () => {
+            await request(app)
+                .get('/recipes')
+                .then(res => {
+                    expect(res.statusCode).toEqual(200);
+                    expect(res.body).toEqual({ recipes: [] });
+                });
+        });
 
-    test('GET /recipes returns array of 1 element when 1 exists', async () => {
-        await initRecipe(exampleRecipes[0]);
-        await request(app)
-            .get('/recipes')
-            .then(res => {
-                expect(res.statusCode).toEqual(200);
-                expect(res.body).toEqual({ recipes: [exampleRecipes[0]] });
-            });
-    });
+        test('GET returns array of 1 element when 1 exists', async () => {
+            await initRecipe(exampleRecipes[0]);
+            await request(app)
+                .get('/recipes')
+                .then(res => {
+                    expect(res.statusCode).toEqual(200);
+                    expect(res.body).toEqual({ recipes: [exampleRecipes[0]] });
+                });
+        });
 
-    test('GET /recipes returns array of multiple element when they exist', async () => {
-        await initRecipes(exampleRecipes);
-        await request(app)
-            .get('/recipes')
-            .then(res => {
-                expect(res.statusCode).toEqual(200);
-                expect(res.body).toEqual({ recipes: exampleRecipes });
-            });
-    });
+        test('GET returns array of multiple element when they exist', async () => {
+            await initRecipes(exampleRecipes);
+            await request(app)
+                .get('/recipes')
+                .then(res => {
+                    expect(res.statusCode).toEqual(200);
+                    expect(res.body).toEqual({ recipes: exampleRecipes });
+                });
+        });
 
-    test('POST /recipes fails and returns 404', async () => {
-        await request(app)
-            .post('/recipes')
-            .then(res => {
-                expect(res.statusCode).toEqual(404);
-            });
-    });
+        test('POST fails and returns 404', async () => {
+            await request(app)
+                .post('/recipes')
+                .then(res => {
+                    expect(res.statusCode).toEqual(404);
+                    // TODO - Check no changes to collection
+                });
+        });
 
-    test('PUT /recipes fails and returns 404', async () => {
-        await request(app)
-            .put('/recipes')
-            .then(res => {
-                expect(res.statusCode).toEqual(404);
-            });
-    });
+        test('PUT fails and returns 404', async () => {
+            await request(app)
+                .put('/recipes')
+                .then(res => {
+                    expect(res.statusCode).toEqual(404);
+                    // TODO - Check no changes to collection
+                });
+        });
 
-    test('DELETE /recipes fails and returns 404', async () => {
-        await request(app)
-            .delete('/recipes')
-            .then(res => {
-                expect(res.statusCode).toEqual(404);
-            });
+        test('DELETE fails and returns 404', async () => {
+            await request(app)
+                .delete('/recipes')
+                .then(res => {
+                    expect(res.statusCode).toEqual(404);
+                    // TODO - Check no changes to collection
+                });
+        });
     });
 });
