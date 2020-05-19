@@ -1,8 +1,9 @@
 const request = require('supertest');
 const app = require('../../app');
 const mongoDB = require('../mongoDB');
+const Recipe = require('../../models/recipe.model');
 
-const { initEmptyDb, exampleRecipe1, cleanupDb } = require('../../test/utils');
+const { initEmptyDb, exampleRecipes, cleanupDb } = require('../../test/utils');
 
 beforeAll(async () => {
     await mongoDB.connect((verbose = false));
@@ -17,6 +18,12 @@ afterAll(async () => {
     await mongoDB.disconnect((verbose = false));
 });
 
+const initRecipe = async recipe => await Recipe(recipe).save();
+
+const initRecipes = async recipes => {
+    await recipes.forEach(recipe => initRecipe(recipe));
+};
+
 describe('recipesController', () => {
     test('GET /recipes returns empty array when no recipes exist', async () => {
         await request(app)
@@ -29,20 +36,22 @@ describe('recipesController', () => {
     });
 
     test('GET /recipes returns array of 1 element when 1 exists', async () => {
+        await initRecipe(exampleRecipes[0]);
         await request(app)
             .get('/recipes')
             .then(res => {
-                // TODO: Test for 1 recipes in an array & sucessful request
                 expect(res.statusCode).toEqual(200);
+                expect(res.body).toEqual({ recipes: [exampleRecipes[0]] });
             });
     });
 
     test('GET /recipes returns array of multiple element when they exist', async () => {
+        await initRecipes(exampleRecipes);
         await request(app)
             .get('/recipes')
             .then(res => {
-                // TODO: Test for array of recipes & sucessful request
                 expect(res.statusCode).toEqual(200);
+                expect(res.body).toEqual({ recipes: exampleRecipes });
             });
     });
 
