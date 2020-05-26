@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const mongoDB = require('../../controllers/mongoDB');
 const Recipe = require('../recipe.model');
 
@@ -68,5 +69,27 @@ describe('Recipe Model', () => {
         expect(savedRecipe.cookTime).toBe(recipeData.cookTime);
         expect(savedRecipe.serves).toBe(recipeData.serves);
         expect(savedRecipe.creator).toBe(recipeData.creator);
+    });
+
+    test('errors when adding recipe without required fields', async () => {
+        const testData = {
+            subtitle: 'a test recipe subtitle description',
+            creator: 'Jest testing'
+        };
+        const newRecipe = new Recipe(testData);
+
+        let error;
+        try {
+            error = await newRecipe.save();
+        } catch (e) {
+            error = e;
+        }
+
+        expect(error).toBeInstanceOf(mongoose.Error.ValidationError);
+        expect(error.errors.title).toBeDefined();
+        expect(error.errors.method).toBeDefined();
+        expect(error.errors.prepTime).toBeDefined();
+        expect(error.errors.cookTime).toBeDefined();
+        expect(error.errors.serves).toBeDefined();
     });
 });
