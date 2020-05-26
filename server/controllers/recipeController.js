@@ -10,7 +10,7 @@ router.route('').post((req, res) => {
         .save()
         .then(() => {
             res.status(200).json({
-                status: 'recipe added successfully'
+                status: 'Recipe added successfully'
             });
         })
         .catch(err => {
@@ -52,7 +52,7 @@ router.route('/:id').delete(async (req, res) => {
             }
         }
 
-        res.status(200).json({ status: 'recipe deleted successfully' });
+        res.status(200).json({ status: 'Recipe deleted successfully' });
     });
 });
 
