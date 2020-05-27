@@ -26,9 +26,8 @@ afterAll(async () => {
 describe('recipeController', () => {
     describe('/recipe', () => {
         test('POST successfully adds recipe', async () => {
-            await Recipe.find((err, recipes) => {
-                expect(recipes).toEqual([]);
-            });
+            const recipes = await Recipe.find().exec();
+            expect(recipes).toEqual([]);
 
             await request(app)
                 .post('/recipe')
@@ -41,11 +40,10 @@ describe('recipeController', () => {
                         'Recipe added successfully'
                     );
 
-                    await Recipe.find((err, recipes) => {
-                        expect(recipes.length).toEqual(1);
-                        expect(recipes[0]._id).toBeDefined();
-                        expect(recipes[0].title).toEqual(recipeData.title);
-                    });
+                    const recipes = await Recipe.find().exec();
+                    expect(recipes.length).toEqual(1);
+                    expect(recipes[0]._id).toBeDefined();
+                    expect(recipes[0].title).toEqual(recipeData.title);
                 });
         });
     });
@@ -61,13 +59,12 @@ describe('recipeController', () => {
                 serves: 99
             };
 
-            // TODO: Check if find() method on model can return a promise - if not then custom?
-            await Recipe.find((err, recipes) => {
-                expect(recipes.length).toEqual(1);
-                expect(recipes[0]._id).toBeDefined();
-                expect(recipes[0].title).toEqual(recipeData.title);
-                expect(recipes[0].serves).toEqual(recipeData.serves);
-            });
+            // TODO: exec() on queries returns a Promise, potentially extract this logic
+            const recipes = await Recipe.find().exec();
+            expect(recipes.length).toEqual(1);
+            expect(recipes[0]._id).toBeDefined();
+            expect(recipes[0].title).toEqual(recipeData.title);
+            expect(recipes[0].serves).toEqual(recipeData.serves);
 
             await request(app)
                 .put(`/recipe/${ID}`)
@@ -80,15 +77,11 @@ describe('recipeController', () => {
                         'Recipe updated successfully'
                     );
 
-                    await Recipe.find((err, recipes) => {
-                        expect(recipes.length).toEqual(1);
-                        const updatedRecipe = recipes[0];
-                        expect(updatedRecipe._id).toBeDefined();
-                        expect(updatedRecipe.title).toEqual(
-                            'Updated recipe title'
-                        );
-                        expect(updatedRecipe.serves).toEqual(99);
-                    });
+                    const recipes = await Recipe.find().exec();
+                    expect(recipes.length).toEqual(1);
+                    expect(recipes[0]._id).toBeDefined();
+                    expect(recipes[0].title).toEqual('Updated recipe title');
+                    expect(recipes[0].serves).toEqual(99);
                 });
         });
 
@@ -96,11 +89,10 @@ describe('recipeController', () => {
             const savedRecipe = await Recipe(recipeData).save();
             const ID = savedRecipe._id;
 
-            await Recipe.find((err, recipes) => {
-                expect(recipes.length).toEqual(1);
-                expect(recipes[0]._id).toBeDefined();
-                expect(recipes[0].title).toEqual(recipeData.title);
-            });
+            const recipes = await Recipe.find().exec();
+            expect(recipes.length).toEqual(1);
+            expect(recipes[0]._id).toBeDefined();
+            expect(recipes[0].title).toEqual(recipeData.title);
 
             await request(app)
                 .delete(`/recipe/${ID}`)
@@ -111,9 +103,8 @@ describe('recipeController', () => {
                         'Recipe deleted successfully'
                     );
 
-                    await Recipe.find((err, recipes) => {
-                        expect(recipes).toEqual([]);
-                    });
+                    const recipes = await Recipe.find().exec();
+                    expect(recipes).toEqual([]);
                 });
         });
     });
