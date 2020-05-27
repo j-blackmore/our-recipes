@@ -4,14 +4,16 @@ const mongoose = require('mongoose');
 const Recipe = require('../models/recipe.model');
 
 const initEmptyDb = async () => {
-    await Recipe.createCollection();
-    await Recipe.deleteMany({});
+    return Promise.all([
+        await Recipe.createCollection(),
+        await Recipe.deleteMany()
+    ]);
 };
 
 const cleanupDb = async () => {
     const { connection } = mongoose;
 
-    await connection.dropDatabase().then(
+    return await connection.dropDatabase().then(
         _res => {},
         _err => console.log('Error: could not drop database')
     );

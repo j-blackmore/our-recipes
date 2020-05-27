@@ -6,16 +6,21 @@ const Recipe = require('../../models/recipe.model');
 const { initEmptyDb, cleanupDb, recipeData } = require('../../test/utils');
 
 beforeAll(async () => {
-    await mongoDB.connect((verbose = false));
+    return Promise.all([
+        await mongoDB.connect((verbose = false)),
+        await initEmptyDb()
+    ]);
 });
 
-beforeEach(async () => {
-    await initEmptyDb();
+afterEach(async () => {
+    return await initEmptyDb();
 });
 
 afterAll(async () => {
-    await cleanupDb();
-    await mongoDB.disconnect((verbose = false));
+    return Promise.all([
+        await cleanupDb(),
+        await mongoDB.disconnect((verbose = false))
+    ]);
 });
 
 describe('recipeController', () => {
